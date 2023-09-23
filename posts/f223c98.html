@@ -49,7 +49,7 @@
   /*End of Initial Variables*/
   </script>
   <script type="text/javascript">
-  var bg = "https://img.imgdb.cn/item/601d51193ffa7d37b30656ce.png,https://img.imgdb.cn/item/601d510c3ffa7d37b306506d.png,https://img.imgdb.cn/item/601d50c03ffa7d37b306322f.jpg,https://img.imgdb.cn/item/601d507a3ffa7d37b30612a0.jpg,https://img.imgdb.cn/item/601d50633ffa7d37b3060794.jpg,https://img.imgdb.cn/item/601d504c3ffa7d37b305ffe6.jpg,https://img.imgdb.cn/item/601d50373ffa7d37b305f66d.jpg".split(",");
+  var bg = "https://img.imgdb.cn/item/601d51193ffa7d37b30656ce.png,https://img.imgdb.cn/item/601d510c3ffa7d37b306506d.png,https://img.imgdb.cn/item/601d507a3ffa7d37b30612a0.jpg,https://img.imgdb.cn/item/601d50633ffa7d37b3060794.jpg,https://img.imgdb.cn/item/601d50373ffa7d37b305f66d.jpg".split(",");
   var bgindex = Math.floor(Math.random()*bg.length);
   if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
     alert('朋友，IE浏览器未适配哦~');
@@ -348,6 +348,30 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
 <div class="pattern-center-blank"></div>
 
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://article.biliimg.com/bfs/article/9f78c1038cf0e6bd6f4553e1ad62c7a1290349942.png);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://article.biliimg.com/bfs/article/9f78c1038cf0e6bd6f4553e1ad62c7a1290349942.png">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      div4 Codeforces Round 898</h1>
+      <p class="entry-census">
+        <span>
+          <a href="https://qiuyuyang.top/">
+            <img src="https://i0.hdslb.com/bfs/album/4ead03c55f18eb4851ce3b2e356d77fdd27677d5.png">
+          </a>
+        </span>
+        <span>
+          <a href="https://qiuyuyang.top/"></a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2023-8-12<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
@@ -355,15 +379,8 @@
         <div class="toc"></div>
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
-          <header class="entry-header">
-            <h1 class="entry-title">div4 Codeforces Round 898</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2023-8-12&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
-
-            <hr>
-          </header>
-        
         <div class="entry-content">
-          <p>#前言<br>这次是我第一次参加算法比赛，很多题也没做到，希望下次能多做一些。</p>
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这次是我第一次参加算法比赛，很多题也没做到，希望下次能多做一些。</p>
 <h1 id="A"><a href="#A" class="headerlink" title="A"></a>A</h1><p>打卡题，没啥好说的</p>
 <h1 id="B"><a href="#B" class="headerlink" title="B"></a>B</h1><h2 id="我的思路"><a href="#我的思路" class="headerlink" title="我的思路"></a>我的思路</h2><p>B在我思考了一下，发现+1对数组里面最小的加对整体收益是最大的，所以使用插入排序对整体进行排序，再对最小数+1。</p>
 <h2 id="bing-思路"><a href="#bing-思路" class="headerlink" title="bing 思路"></a>bing 思路</h2><pre><code>#include &lt;stdio.h&gt;
@@ -401,19 +418,7 @@ return 0;
 </code></pre>
 <p>bing的思路有点没看懂，他如是说到：</p>
 <blockquote>
-<p>这段代码是一个C语言程序，它的作用是读取一些整数，计算它们的乘积，然后输出乘积的最大值。程序首先读取一个整数t，表示测试用例的数量。接下来，对于每个测试用例，程序会读取一个整数n，表示数组a的大小。然后程序会读取n个整数，存储在数组a中。接下来，程序会计算每个元素加1后的乘积（除了当前元素），并将其与当前元素的乘积相比较。如果当前元素的乘积大于最大乘积，则更新最大乘积。最后，程序输出最大乘积。</p>
-</blockquote>
-<blockquote>
-<p>这段代码中使用了C语言标准库中的函数scanf和printf来读取和输出数据。scanf函数从标准输入流中读取数据，并将其存储在变量中。printf函数将数据格式化为字符串，并将其写入标准输出流中。</p>
-</blockquote>
-<blockquote>
-<p>在这段代码中，变量t、n、a、max_product、product、i和j都是整型变量。变量t、n和a分别存储测试用例数量、数组大小和数组元素。变量max_product存储最大乘积，变量product存储当前元素加1后的乘积。变量i和j是循环计数器。</p>
-</blockquote>
-<blockquote>
-<p>这段代码使用了两个for循环来遍历数组a中的所有元素，并计算它们的乘积。外部循环遍历数组a中的所有元素，内部循环计算每个元素加1后的乘积（除了当前元素），并将其与当前元素的乘积相比较。如果当前元素的乘积大于最大乘积，则更新最大乘积。</p>
-</blockquote>
-<blockquote>
-<p>请注意，在这段代码中，数组a的大小是在运行时动态分配的，因此它必须是一个变长数组（VLA）。这意味着它只能在C99或更高版本中使用。</p>
+<p>这段代码是一个C语言程序，它的作用是读取一些整数，计算它们的乘积，然后输出乘积的最大值。程序首先读取一个整数t，表示测试用例的数量。接下来，对于每个测试用例，程序会读取一个整数n，表示数组a的大小。然后程序会读取n个整数，存储在数组a中。接下来，程序会计算每个元素加1后的乘积（除了当前元素），并将其与当前元素的乘积相比较。如果当前元素的乘积大于最大乘积，则更新最大乘积。最后，程序输出最大乘积。<br>这段代码中使用了C语言标准库中的函数scanf和printf来读取和输出数据。scanf函数从标准输入流中读取数据，并将其存储在变量中。printf函数将数据格式化为字符串，并将其写入标准输出流中。<br>在这段代码中，变量t、n、a、max_product、product、i和j都是整型变量。变量t、n和a分别存储测试用例数量、数组大小和数组元素。变量max_product存储最大乘积，变量product存储当前元素加1后的乘积。变量i和j是循环计数器。<br>这段代码使用了两个for循环来遍历数组a中的所有元素，并计算它们的乘积。外部循环遍历数组a中的所有元素，内部循环计算每个元素加1后的乘积（除了当前元素），并将其与当前元素的乘积相比较。如果当前元素的乘积大于最大乘积，则更新最大乘积。<br>请注意，在这段代码中，数组a的大小是在运行时动态分配的，因此它必须是一个变长数组（VLA）。这意味着它只能在C99或更高版本中使用。</p>
 </blockquote>
 <p>最后发现有问题，当输入</p>
 <blockquote>
@@ -421,7 +426,38 @@ return 0;
 <p>0 0 0 5</p>
 </blockquote>
 <p>时得不到正确答案。</p>
-<h1 id="C"><a href="#C" class="headerlink" title="C"></a>C</h1><p>在做了的题目里面我耗时最长的就是C了，对于C组题，是一个算靶子中箭得分的题，</p>
+<h1 id="C"><a href="#C" class="headerlink" title="C"></a>C</h1><p>在做了的题目里面我耗时最长的就是C了，对于C组题，是一个算靶子中箭得分的题，我用的多个for 循环+if判断，实际可以取横纵坐标与边缘的最小值为分数，这样就会简单很多，例如</p>
+<pre><code>#inlcude&lt;stdio.h&gt;
+int min(int a, int b)&#123;
+if (a &lt; b)
+    return a;
+else
+    return b;
+&#125;
+char s[16][16];
+void solve()
+&#123;
+int i, j, n = 10;
+for (i = 0; i &lt; n; i++)
+    scanf(&quot;%s&quot;, s[i]);
+int ans = 0;
+for (i = 0; i &lt; n; i++)
+    for (j = 0; j &lt; n; j++)
+        if (s[i][j] == &#39;X&#39;)
+            ans += min(min(i + 1, 10 - i), min(j + 1, 10 - j));
+printf(&quot;%d\n&quot;, ans);
+return;
+&#125;
+int main()
+&#123;
+int t;
+scanf(&quot;%d&quot;, &amp;t);
+for (; t &gt; 0; t--)
+    solve();
+return 0;
+&#125;
+</code></pre>
+<h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><p><a href="https://codeforces.com/contest/1873/problem/D" title="题目">https://codeforces.com/contest/1873/problem/D</a><br>d就相对简单了，目标是将B变为W需要的次数，唯一要小心的是有肯能用a[]时有溢出，我是将遇到B后将后几位全部变为W再次从头搜索B。</p>
 
         </div>
         <!-- .entry-content -->
