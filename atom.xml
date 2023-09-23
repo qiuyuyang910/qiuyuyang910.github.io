@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>秋雨样的个人博客</title>
+  
+  <subtitle>qwq</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2023-09-23T05:02:50.615Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>qiuyuyang</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>div4 Codeforces Round 898</title>
+    <link href="http://example.com/posts/f223c98.html"/>
+    <id>http://example.com/posts/f223c98.html</id>
+    <published>2023-08-12T03:04:58.000Z</published>
+    <updated>2023-09-23T05:02:50.615Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;#前言&lt;br&gt;这次是我第一次参加算法比赛，很多题也没做到，希望下次能多做一些。&lt;/p&gt;
+&lt;h1 id=&quot;A&quot;&gt;&lt;a href=&quot;#A&quot; class=&quot;headerlink&quot; title=&quot;A&quot;&gt;&lt;/a&gt;A&lt;/h1&gt;&lt;p&gt;打卡题，没啥好说的&lt;/p&gt;
+&lt;h1</summary>
+        
+      
+    
+    
+    
+    <category term="资源" scheme="http://example.com/categories/%E8%B5%84%E6%BA%90/"/>
+    
+    
+    <category term="div4" scheme="http://example.com/tags/div4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IDM（Internet Download Manager）破解版分享</title>
+    <link href="http://example.com/posts/23072875.html"/>
+    <id>http://example.com/posts/23072875.html</id>
+    <published>2020-08-12T03:04:58.000Z</published>
+    <updated>2023-09-22T13:52:39.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;pre&gt;&lt;code&gt;IDM是一个超级好用的多线程下载器可以极大的提到下载速度，但有的时候网站会禁止这种行为
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;俄罗斯大佬破解后从新封装的IDM，使用起来没啥问题你可以去&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="资源" scheme="http://example.com/categories/%E8%B5%84%E6%BA%90/"/>
+    
+    
+    <category term="-IDM" scheme="http://example.com/tags/IDM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一个女孩</title>
+    <link href="http://example.com/posts/581a49ea.html"/>
+    <id>http://example.com/posts/581a49ea.html</id>
+    <published>2020-06-07T01:52:35.000Z</published>
+    <updated>2023-09-22T13:52:39.000Z</updated>
+    
+    
+    <summary type="html">.....</summary>
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>随想01</title>
+    <link href="http://example.com/posts/4c1b3376.html"/>
+    <id>http://example.com/posts/4c1b3376.html</id>
+    <published>2020-05-01T09:17:21.000Z</published>
+    <updated>2023-09-22T13:52:39.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;不知不觉，3年的初中生活也将进入尾声。在我看来，三年的初中生活让我成长了许多，思想上也有了很大的变化。&lt;br&gt;脱去了稚嫩换来了真实，敬佩世间的善良，也厌恶世间的黑暗。每当回头瞻望以前的所作所为是多么的可笑。“我会后悔以前做那些蠢事么？”我想不会。虽然很蠢但却是当时那个环境与</summary>
+        
+      
+    
+    
+    
+    <category term="随想" scheme="http://example.com/categories/%E9%9A%8F%E6%83%B3/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>qwq</title>
+    <link href="http://example.com/posts/ed0e75ee.html"/>
+    <id>http://example.com/posts/ed0e75ee.html</id>
+    <published>2020-04-01T02:58:39.000Z</published>
+    <updated>2023-09-22T13:52:39.000Z</updated>
+    
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>某些事</title>
+    <link href="http://example.com/posts/b57558e0.html"/>
+    <id>http://example.com/posts/b57558e0.html</id>
+    <published>2020-03-25T10:00:00.000Z</published>
+    <updated>2023-09-22T13:52:39.000Z</updated>
+    
+    
+    <summary type="html">你的生日，4位数</summary>
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>压箱底</title>
+    <link href="http://example.com/posts/af6e96a.html"/>
+    <id>http://example.com/posts/af6e96a.html</id>
+    <published>2020-02-05T11:48:40.000Z</published>
+    <updated>2023-09-22T13:52:39.000Z</updated>
+    
+    
+    <summary type="html">4位数</summary>
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="悦读" scheme="http://example.com/tags/%E6%82%A6%E8%AF%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>“第一篇文章”</title>
+    <link href="http://example.com/posts/679efaa8.html"/>
+    <id>http://example.com/posts/679efaa8.html</id>
+    <published>2020-02-03T12:37:10.000Z</published>
+    <updated>2023-09-22T13:52:39.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;第一篇博客&quot;&gt;&lt;a href=&quot;#第一篇博客&quot; class=&quot;headerlink&quot; title=&quot;第一篇博客&quot;&gt;&lt;/a&gt;第一篇博客&lt;/h2&gt;&lt;p&gt;内容qwq&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;第二篇博客&quot;&gt;&lt;a href=&quot;#第二篇博客&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
