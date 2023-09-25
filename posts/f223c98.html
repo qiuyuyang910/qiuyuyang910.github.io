@@ -458,6 +458,78 @@ return 0;
 &#125;
 </code></pre>
 <h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><p><a href="https://codeforces.com/contest/1873/problem/D" title="题目">https://codeforces.com/contest/1873/problem/D</a><br>d就相对简单了，目标是将B变为W需要的次数，唯一要小心的是有肯能用a[]时有溢出，我是将遇到B后将后几位全部变为W再次从头搜索B。</p>
+<h1 id="E"><a href="#E" class="headerlink" title="E"></a>E</h1><p><a href="https://codeforces.com/contest/1873/problem/E" title="题目">https://codeforces.com/contest/1873/problem/E</a><br>我用for 循环遍历，结果超时<br>用嵌套循环遇见数据量小的还好说，数据量大的就会直接超时，做不出来原因还是没有想出好的算法，我后面想用二分法解决，但没想到啥实现办法，贴一个我自己的错误代码</p>
+<pre><code>#include&lt;stdio.h&gt;
+void m(int b ,int c)&#123;
+int d[b];
+for(int i =0;i&lt;b;i++)&#123;
+    scanf(&quot;%d&quot;,&amp;d[i]);//存值
+&#125;
+int j=0;
+int k =0;
+for(int i=1;;i++)&#123;//for嵌套循环
+    k++;
+    for(int o = 0;o&lt;b;o++)&#123;
+        if(d[o]&lt;i)
+        j+=i-d[o];
+    &#125;
+    if(j&gt;c)
+    break;
+    else j =0;
+    
+&#125;
+printf(&quot;%d\n&quot;,k-1);
+return;
+&#125;
+
+int main()&#123;
+int p;
+scanf(&quot;%d&quot;,&amp;p);
+while (p--)
+&#123;
+    int b,c;
+scanf(&quot;%d%d&quot;,&amp;b,&amp;c);
+m(b,c);
+&#125;
+&#125;
+</code></pre>
+<p>我看ac有人用二分法做出来了，贴一个</p>
+<pre><code>#include&lt;stdio.h&gt;
+long long int a[200005];
+void solve()
+&#123;
+long long int n, x;
+scanf(&quot;%lld %lld&quot;, &amp;n, &amp;x);
+long long int i;
+for (i = 0; i &lt; n; i++)
+    scanf(&quot;%lld&quot;, &amp;a[i]);
+long long int min = -1, max = 1e10, mid;
+long long int sum;
+while (max - min &gt; 1)
+&#123;
+    mid = (max + min) / 2;
+    sum = 0;
+    for (i = 0; i &lt; n; i++)
+        if (a[i] &lt; mid)
+            sum += mid - a[i];
+    if (sum &lt;= x)
+        min = mid;
+    else
+        max = mid;
+&#125;
+printf(&quot;%lld\n&quot;, min);
+return;
+&#125;
+    int main()
+&#123;
+    int t;
+    scanf(&quot;%d&quot;, &amp;t);
+    for (; t &gt; 0; t--)
+    solve();
+return 0;
+&#125;
+</code></pre>
+<p>这就给我提供了一个二分法的思路，设极小值-1，极大值le10 用max-min&gt;1做判断也真理解到了什么叫不开long long见族宗了，真就学到了，然后我写了一遍，结果不对，看来还是没有完全理解</p>
 
         </div>
         <!-- .entry-content -->
@@ -486,9 +558,26 @@ return 0;
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/posts/4f5c6e7c.html" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                when2meet使用教程</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
         
           
-            <div class="post-nepre full next">
+            <div class="post-nepre half next">
           
             <a href="/posts/23072875.html" rel="next">
               <div class="background">
@@ -894,9 +983,9 @@ $(document).ready(function() {
 
     fixed="true"
 
-    mini="false"
+    mini="true"
 
-    autoplay="true"
+    autoplay="false"
 
     loop="all"
 

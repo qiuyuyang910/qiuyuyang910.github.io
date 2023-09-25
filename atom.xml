@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-09-23T12:50:24.529Z</updated>
+  <updated>2023-09-25T16:33:31.975Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>when2meet使用教程</title>
+    <link href="http://example.com/posts/4f5c6e7c.html"/>
+    <id>http://example.com/posts/4f5c6e7c.html</id>
+    <published>2023-09-25T15:55:06.000Z</published>
+    <updated>2023-09-25T16:33:31.975Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;什么是when2meet？&quot;&gt;&lt;a href=&quot;#什么是when2meet？&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>div4 Codeforces Round 898</title>
     <link href="http://example.com/posts/f223c98.html"/>
     <id>http://example.com/posts/f223c98.html</id>
     <published>2023-08-12T03:04:58.000Z</published>
-    <updated>2023-09-23T12:50:24.529Z</updated>
+    <updated>2023-09-25T15:12:56.581Z</updated>
     
     
       
