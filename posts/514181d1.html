@@ -395,9 +395,8 @@
 
     fclose(fp);
 </code></pre>
-<h2 id="fgets-用法"><a href="#fgets-用法" class="headerlink" title="fgets()用法"></a>fgets()用法</h2><blockquote>
-<p>char* fgets(char* str, int STRLEN, File* fp);</p>
-</blockquote>
+<h2 id="fgets-用法"><a href="#fgets-用法" class="headerlink" title="fgets()用法"></a>fgets()用法</h2><pre><code>char* fgets(char* str, int STRLEN, File* fp);
+</code></pre>
 <p>第一个参数<code>str</code>是一个字符串指针，用于存放读取的内容。第二个参数STRLEN指定读取的长度，第三个参数是一个 <code>FILE </code>指针，指向要读取的文件。</p>
 <p><code>fgets()</code>读取 <code>STRLEN - 1</code>个字符之后，或者遇到换行符与文件结尾，就会停止读取，然后在已经读取的内容末尾添加一个空字符<code>\0</code>，使之成为一个字符串。注意，<code>fgets()</code>会将换行符（<code>\n</code>）存储进字符串。–<a href="https://wangdoc.com/clang/file#fgets">form 网道</a>   2023-10-13</p>
 
