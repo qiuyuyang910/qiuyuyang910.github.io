@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-09-26T13:11:44.259Z</updated>
+  <updated>2023-10-13T06:12:46.378Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>c语言备忘录</title>
+    <link href="http://example.com/posts/514181d1.html"/>
+    <id>http://example.com/posts/514181d1.html</id>
+    <published>2023-10-13T05:46:38.000Z</published>
+    <updated>2023-10-13T06:12:46.378Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;在学习的过程中，我或多或少会遇到一些问题，当我解决后，希望留个方便的地方记录一下，方便以后查找，故写下此备忘录。</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="c语言" scheme="http://example.com/tags/c%E8%AF%AD%E8%A8%80/"/>
+    
+  </entry>
   
   <entry>
     <title>when2meet使用教程</title>
