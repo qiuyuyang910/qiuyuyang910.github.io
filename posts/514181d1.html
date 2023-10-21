@@ -399,6 +399,47 @@
 </code></pre>
 <p>第一个参数<code>str</code>是一个字符串指针，用于存放读取的内容。第二个参数STRLEN指定读取的长度，第三个参数是一个 <code>FILE </code>指针，指向要读取的文件。</p>
 <p><code>fgets()</code>读取 <code>STRLEN - 1</code>个字符之后，或者遇到换行符与文件结尾，就会停止读取，然后在已经读取的内容末尾添加一个空字符<code>\0</code>，使之成为一个字符串。注意，<code>fgets()</code>会将换行符（<code>\n</code>）存储进字符串。–<a href="https://wangdoc.com/clang/file#fgets">form 网道</a>   2023-10-13</p>
+<h1 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h1><pre><code>著作权归作者所有。
+商业转载请联系作者获得授权，非商业转载请注明出处。
+QQY
+链接：https://qiuyuyang.top/posts/f223c98.html
+来源：想玩电脑のQQY
+
+#include&lt;stdio.h&gt;
+long long int a[200005];
+void solve()
+&#123;
+long long int n, x;
+scanf(&quot;%lld %lld&quot;, &amp;n, &amp;x);
+long long int i;
+for (i = 0; i &lt; n; i++)
+    scanf(&quot;%lld&quot;, &amp;a[i]);
+long long int min = -1, max = 1e10, mid;
+long long int sum;
+while (max - min &gt; 1)//二分法的判断不可以写成max - min &gt; 0
+&#123;
+    mid = (max + min) / 2;
+    sum = 0;
+    for (i = 0; i &lt; n; i++)
+        if (a[i] &lt; mid)
+            sum += mid - a[i];
+    if (sum &lt;= x)
+        min = mid;
+    else
+        max = mid;
+&#125;
+printf(&quot;%lld\n&quot;, min);
+return;
+&#125;
+    int main()
+&#123;
+    int t;
+    scanf(&quot;%d&quot;, &amp;t);
+    for (; t &gt; 0; t--)
+    solve();
+return 0;
+&#125;
+</code></pre>
 
         </div>
         <!-- .entry-content -->
@@ -427,9 +468,26 @@
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/posts/1b45149e.html" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://article.biliimg.com/bfs/article/3cee74819a88070172a824f5b676a723290349942.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://article.biliimg.com/bfs/article/3cee74819a88070172a824f5b676a723290349942.jpg">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                mysql笔记+常用指令</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
         
           
-            <div class="post-nepre full next">
+            <div class="post-nepre half next">
           
             <a href="/posts/4f5c6e7c.html" rel="next">
               <div class="background">
