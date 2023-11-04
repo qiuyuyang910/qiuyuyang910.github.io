@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-10-21T03:09:42.811Z</updated>
+  <updated>2023-11-04T05:49:59.600Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vmware虚拟机从安装到卸载</title>
+    <link href="http://example.com/posts/ce002309.html"/>
+    <id>http://example.com/posts/ce002309.html</id>
+    <published>2023-11-03T11:37:40.000Z</published>
+    <updated>2023-11-04T05:49:59.600Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;VMware-的下载&quot;&gt;&lt;a href=&quot;#VMware-的下载&quot; class=&quot;headerlink&quot; title=&quot;VMware 的下载&quot;&gt;&lt;/a&gt;VMware 的下载&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>sql注入笔记</title>
+    <link href="http://example.com/posts/56dc4975.html"/>
+    <id>http://example.com/posts/56dc4975.html</id>
+    <published>2023-11-01T13:50:43.000Z</published>
+    <updated>2023-11-04T02:38:29.326Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;常见注入手段&quot;&gt;&lt;a href=&quot;#常见注入手段&quot; class=&quot;headerlink&quot; title=&quot;常见注入手段&quot;&gt;&lt;/a&gt;常见注入手段&lt;/h1&gt;&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="web" scheme="http://example.com/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>mysql笔记+常用指令</title>
@@ -44,7 +92,7 @@
     <link href="http://example.com/posts/514181d1.html"/>
     <id>http://example.com/posts/514181d1.html</id>
     <published>2023-10-13T05:46:38.000Z</published>
-    <updated>2023-10-28T13:25:49.120Z</updated>
+    <updated>2023-10-28T13:33:06.509Z</updated>
     
     
       
