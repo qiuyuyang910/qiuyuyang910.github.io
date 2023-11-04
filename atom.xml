@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-11-04T05:49:59.600Z</updated>
+  <updated>2023-11-04T16:30:52.617Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>网安day1+web基础</title>
+    <link href="http://example.com/posts/1327a661.html"/>
+    <id>http://example.com/posts/1327a661.html</id>
+    <published>2023-11-04T14:00:13.000Z</published>
+    <updated>2023-11-04T16:30:52.617Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;常见的服务器系统&quot;&gt;&lt;a href=&quot;#常见的服务器系统&quot; class=&quot;headerlink&quot; title=&quot;常见的服务器系统&quot;&gt;&lt;/a&gt;常见的服务器系统&lt;/h1&gt;&lt;p&gt;Windows</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>vmware虚拟机从安装到卸载</title>
     <link href="http://example.com/posts/ce002309.html"/>
     <id>http://example.com/posts/ce002309.html</id>
     <published>2023-11-03T11:37:40.000Z</published>
-    <updated>2023-11-04T05:49:59.600Z</updated>
+    <updated>2023-11-04T14:01:27.604Z</updated>
     
     
       
@@ -44,7 +67,7 @@
     <link href="http://example.com/posts/56dc4975.html"/>
     <id>http://example.com/posts/56dc4975.html</id>
     <published>2023-11-01T13:50:43.000Z</published>
-    <updated>2023-11-04T02:38:29.326Z</updated>
+    <updated>2023-11-04T14:03:08.400Z</updated>
     
     
       
