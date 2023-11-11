@@ -392,6 +392,7 @@
 <pre><code class="sql">select group_concat(xxxx) from xxx  
 </code></pre>
 <p><img src="https://article.biliimg.com/bfs/article/7bb9beccb8facd1afa7d854926581edd290349942.png"></p>
+<p>concat和group_concat都是用在sql语句中做拼接使用的，但是两者使用的方式不尽相同，concat是针对以行数据做的拼接，而group_concat是针对列做的数据拼接，且group_concat自动生成逗号</p>
 <h1 id="手注如何判断sql注入"><a href="#手注如何判断sql注入" class="headerlink" title="手注如何判断sql注入"></a>手注如何判断sql注入</h1><p><code>&#39;</code> 判断有没有对字符处理</p>
 <p><code>and 1=1</code> 判断</p>
 <h1 id="盲注常用函数"><a href="#盲注常用函数" class="headerlink" title="盲注常用函数"></a>盲注常用函数</h1><p><code>sleep(n)</code> &#x3D;– 返回0 命令中断返回1</p>
@@ -413,6 +414,12 @@
 </code></pre>
 <h2 id="变种ord"><a href="#变种ord" class="headerlink" title="变种ord"></a>变种ord</h2><h1 id="通过length-获取字符串长度"><a href="#通过length-获取字符串长度" class="headerlink" title="通过length()获取字符串长度"></a>通过length()获取字符串长度</h1><p>获取database长度</p>
 <pre><code class="sql">length(database()) = 1 and sleep(1);
+</code></pre>
+<h1 id="rand-随机数（伪"><a href="#rand-随机数（伪" class="headerlink" title="rand() 随机数（伪"></a>rand() 随机数（伪</h1><pre><code class="mysql">select rand() from user;
+</code></pre>
+<pre><code class="sql">rand(int) #只要int值相等，最后的随机数也相等
+</code></pre>
+<h1 id="floor-x-返回一个小于x的整数"><a href="#floor-x-返回一个小于x的整数" class="headerlink" title="floor(x) 返回一个小于x的整数"></a>floor(x) 返回一个小于x的整数</h1><pre><code class="sql">select floor(1.1)/*1*/,floor(0.99)/*0*/,floor(2.1)/*2*/
 </code></pre>
 
         </div>
