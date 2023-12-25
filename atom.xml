@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-11-17T07:06:49.775Z</updated>
+  <updated>2023-12-25T14:38:05.112Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,109 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>waf绕过</title>
+    <link href="http://example.com/posts/d754450d.html"/>
+    <id>http://example.com/posts/d754450d.html</id>
+    <published>2023-12-25T13:16:36.000Z</published>
+    <updated>2023-12-25T14:38:05.112Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://www.freebuf.com/articles/network/258676.html&quot;&gt;文章&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;空格绕过&quot;&gt;&lt;a href=&quot;#空格绕过&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ctf php 常用函数即其绕过</title>
+    <link href="http://example.com/posts/c86b92e2.html"/>
+    <id>http://example.com/posts/c86b92e2.html</id>
+    <published>2023-12-25T11:40:01.000Z</published>
+    <updated>2023-12-25T14:38:06.733Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;foreach&quot;&gt;&lt;a href=&quot;#foreach&quot; class=&quot;headerlink&quot; title=&quot;foreach()&quot;&gt;&lt;/a&gt;foreach()&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ctf php 常用函数即其绕过</title>
+    <link href="http://example.com/posts/c86b92e2.html"/>
+    <id>http://example.com/posts/c86b92e2.html</id>
+    <published>2023-12-25T11:40:01.000Z</published>
+    <updated>2023-12-25T12:43:20.273Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;foreach&quot;&gt;&lt;a href=&quot;#foreach&quot; class=&quot;headerlink&quot; title=&quot;foreach()&quot;&gt;&lt;/a&gt;foreach()&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>pop链构造</title>
+    <link href="http://example.com/posts/aa5c80ac.html"/>
+    <id>http://example.com/posts/aa5c80ac.html</id>
+    <published>2023-12-04T14:10:33.000Z</published>
+    <updated>2023-12-04T15:39:41.850Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;魔术方法&quot;&gt;&lt;a href=&quot;#魔术方法&quot; class=&quot;headerlink&quot; title=&quot;魔术方法&quot;&gt;&lt;/a&gt;魔术方法&lt;/h1&gt;&lt;pre&gt;&lt;code&gt; __wakeup() //------ 执行unserialize()时，先会调用这个函数
+</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>des算法加解密流程</title>
     <link href="http://example.com/posts/24df6ed8.html"/>
     <id>http://example.com/posts/24df6ed8.html</id>
     <published>2023-11-17T07:06:49.000Z</published>
-    <updated>2023-11-17T07:06:49.775Z</updated>
+    <updated>2023-12-01T11:30:54.008Z</updated>
     
     
     
@@ -128,7 +226,7 @@
     <link href="http://example.com/posts/56dc4975.html"/>
     <id>http://example.com/posts/56dc4975.html</id>
     <published>2023-11-01T13:50:43.000Z</published>
-    <updated>2023-12-01T11:30:13.210Z</updated>
+    <updated>2023-12-01T11:56:23.915Z</updated>
     
     
       
@@ -176,7 +274,7 @@
     <link href="http://example.com/posts/514181d1.html"/>
     <id>http://example.com/posts/514181d1.html</id>
     <published>2023-10-13T05:46:38.000Z</published>
-    <updated>2023-10-28T13:33:06.509Z</updated>
+    <updated>2023-12-10T11:58:38.418Z</updated>
     
     
       
@@ -360,29 +458,6 @@
     
     
     <category term="悦读" scheme="http://example.com/tags/%E6%82%A6%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>“第一篇文章”</title>
-    <link href="http://example.com/posts/679efaa8.html"/>
-    <id>http://example.com/posts/679efaa8.html</id>
-    <published>2020-02-03T12:37:10.000Z</published>
-    <updated>2023-09-22T13:52:39.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;第一篇博客&quot;&gt;&lt;a href=&quot;#第一篇博客&quot; class=&quot;headerlink&quot; title=&quot;第一篇博客&quot;&gt;&lt;/a&gt;第一篇博客&lt;/h2&gt;&lt;p&gt;内容qwq&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&quot;第二篇博客&quot;&gt;&lt;a href=&quot;#第二篇博客&quot;</summary>
-        
-      
-    
-    
-    
     
   </entry>
   

@@ -556,6 +556,46 @@ strcpy(str, &quot;Hello&quot;);
 <p>总之，字符串的可修改性取决于它存储的位置：字符串字面量是只读的，而在堆或栈上分配的字符串是可以修改的。</p>
 <h1 id="字符的输入"><a href="#字符的输入" class="headerlink" title="字符的输入"></a>字符的输入</h1><h2 id=""><a href="#" class="headerlink" title="%"></a>%</h2><pre><code class="c">printf(&quot;%%&quot;);
 </code></pre>
+<h1 id="三种方法把int-转为二进制数"><a href="#三种方法把int-转为二进制数" class="headerlink" title="三种方法把int 转为二进制数"></a>三种方法把int 转为二进制数</h1><h2 id="不补零"><a href="#不补零" class="headerlink" title="不补零"></a>不补零</h2><pre><code class="c">
+#include&lt;stdio.h&gt;
+#define uint32 unsigned int
+#define uint8 unsigned char
+int ShortDivOutPutBin(uint32 input)&#123;
+
+   uint8 temp[33]=&#123;0&#125;;
+   int i=0;
+   //用短除法的思想得到二进制，之后将数据从后往前读取
+   while (input)   
+   &#123;
+       temp[i]=input % 2; //取余数存放到数组中，此为得到的二进制数
+       input = (uint32)input/2; //短除，while中判断是否除尽
+       i++; //存储了一个二进制数，自加存储下一个
+   &#125;
+   for(i--;i&gt;=0;i--)&#123; //由于最后一次iput为无效，1还是自加了，因此最后一次自加的值是无用的，所以先自减，然后将余数从后往前读取
+       printf(&quot;%d&quot;,temp[i]);
+   &#125;
+   
+&#125;
+</code></pre>
+<p> 此方法可自行加0</p>
+<h2 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h2><pre><code class="c">#include&lt;stdio.h&gt;
+void bit(int n)&#123;
+   int i=0;
+   int arr[33]=&#123; 0 &#125;;
+   for ( i = 1; i &lt; sizeof(int)*8; i++)
+   &#123;
+       arr[i]=n&amp;1;
+       n=n &gt;&gt; 1;
+   &#125;
+   int k = 0;
+
+   for ( k = i-1; k &gt;=1 ; k--)
+   &#123;
+       printf(&quot;%d&quot;,arr[k]);
+   &#125;
+   
+&#125;
+</code></pre>
 
         </div>
         <!-- .entry-content -->
