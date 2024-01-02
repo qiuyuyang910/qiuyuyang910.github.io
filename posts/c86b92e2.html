@@ -451,6 +451,26 @@ foo::bar got three and four
 <pre><code class="php">system(string $command, int &amp;$result_code = null): string|false
 </code></pre>
 <p>执行 <code>command</code> 参数所指定的命令，并且输出执行结果<br><code>result_code</code> 外部命令执行后的返回状态将会被设置到此变量中<br>成功则返回命令输出的最后一行，失败则返回 <code>false</code></p>
+<h1 id="strcmp"><a href="#strcmp" class="headerlink" title="strcmp"></a>strcmp</h1><p><a href="https://www.php.net/manual/zh/function.strcmp.php">手册</a></p>
+<pre><code class="php">strcmp(string $string1, string $string2): int
+</code></pre>
+<p>该比较区分大小写</p>
+<p>如果 <code>string1</code> 小于 <code>string2</code> 返回 <code>-1</code>；如果 <code>string1</code> 大于 <code>string2</code> 返回 <code>1</code>；如果两者相等，返回 <code>0</code></p>
+<p>挨个比较ascii码</p>
+<h2 id="绕过-1"><a href="#绕过-1" class="headerlink" title="绕过"></a>绕过</h2><pre><code class="php">strcmp(&quot;foo&quot;, array()) =&gt; NULL + PHP Warning
+strcmp(&quot;foo&quot;, new stdClass) =&gt; NULL + PHP Warning
+strcmp(function()&#123;&#125;, &quot;&quot;) =&gt; NULL + PHP Warning
+</code></pre>
+<p>strcmp()函数传入数组会返回<code>NULL</code> 在php 中 <code>NULL==0</code></p>
+<h1 id="eregi-or-ereg"><a href="#eregi-or-ereg" class="headerlink" title="eregi or ereg"></a>eregi or ereg</h1><p><a href="http://php.adamharvey.name/manual/zh/function.eregi.php">手册</a></p>
+<p><code>eregi</code> — <strong>不区分</strong>大小写的正则表达式匹配</p>
+<pre><code class="php">eregi ( string $pattern , string $string [, array &amp;$regs ] ) : int
+</code></pre>
+<p>本函数和 <code>ereg()</code> 完全相同，只除了在匹配字母字符时忽略大小写的区别</p>
+<p>以(不)区分大小写的方式在 <code>string</code> 中寻找与给定的正则表达式 <code>pattern</code> 所匹配的子串</p>
+<p>如果找到与 <code>pattern</code> 中圆括号内的子模式相匹配的子串并且函数调用给出了第三个参数 <code>regs</code>，则匹配项将被存入 <code>regs</code> 数组中。<code>$regs[1]</code> 包含第一个左圆括号开始的子串，<code>$regs[2]</code> 包含第二个子串，以此类推。<code>$regs[0]</code> 包含整个匹配的字符串</p>
+<p>如果在 <code>string</code> 中找到 <code>pattern</code> 模式的匹配则返回 所匹配字符串的长度，如果没有找到匹配或出错则返回 <code>FALSE</code>。如果没有传递入可选参数 <code>regs</code> 或者所匹配的字符串长度为 <code>0</code>，则本函数返回 <code>1</code></p>
+<h2 id="绕过-2"><a href="#绕过-2" class="headerlink" title="绕过"></a>绕过</h2><p>两者存在<code>%00</code>截断类似于<code>\0</code>截断</p>
 
         </div>
         <!-- .entry-content -->
@@ -581,7 +601,7 @@ foo::bar got three and four
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2023 qiuyuyang<br>
+      &copy; 2024 qiuyuyang<br>
       powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
