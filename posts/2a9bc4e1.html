@@ -435,6 +435,9 @@ var_dump(intval($f*100));
 <p>具体详细的原理可以看这位<a href="http://www.haodaquan.com/12">师傅</a>的描述</p>
 <h1 id="上传漏洞"><a href="#上传漏洞" class="headerlink" title="上传漏洞"></a>上传漏洞</h1><p>上传漏洞继承Web应用的权限(权限不会很高)</p>
 <p>脚本文件要被访问后才有机会执行其中的恶意指令</p>
+<h2 id="htaccess-上传漏洞"><a href="#htaccess-上传漏洞" class="headerlink" title=".htaccess 上传漏洞"></a>.htaccess 上传漏洞</h2><p>使<code>jpg</code>当做<code>php</code>解析</p>
+<pre><code class="text">AddType application/x-httpd-php .jpg
+</code></pre>
 
         </div>
         <!-- .entry-content -->
