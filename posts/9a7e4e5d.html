@@ -390,135 +390,173 @@
 <tr>
 <th align="left">文件类型</th>
 <th align="center">文件头</th>
+<th align="center">文件尾</th>
 </tr>
 </thead>
 <tbody><tr>
 <td align="left">JPEG (jpg)</td>
 <td align="center">FFD8FFE1</td>
+<td align="center">FF D9</td>
 </tr>
 <tr>
 <td align="left">PNG (png)</td>
 <td align="center">89504E47</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">GIF (gif)</td>
 <td align="center">47494638</td>
+<td align="center">01 01 00 3B</td>
 </tr>
 <tr>
 <td align="left">TIFF (tif)</td>
 <td align="center">49492A00</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">Windows Bitmap (bmp)</td>
 <td align="center">424D</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">CAD (dwg)</td>
 <td align="center">41433130</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">Adobe Photoshop (psd)</td>
 <td align="center">38425053</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">Rich Text Format (rtf)</td>
 <td align="center">7B5C727466</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">XML (xml)</td>
 <td align="center">3C3F786D6C</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">HTML (html)</td>
 <td align="center">68746D6C3E</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">Email [thorough only] (eml)</td>
 <td align="center">44656C69766572792D646174653A</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">Outlook Express (dbx)</td>
 <td align="center">CFAD12FEC5FD746F</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">Outlook (pst)</td>
 <td align="center">2142444E</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">MS Word&#x2F;Excel (xls.or.doc)</td>
 <td align="center">D0CF11E0</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">MS Access (mdb)</td>
 <td align="center">5374616E64617264204A</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">WordPerfect (wpd)</td>
 <td align="center">FF575043</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">Postscript (eps.or.ps)</td>
 <td align="center">252150532D41646F6265</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">Adobe Acrobat (pdf)</td>
 <td align="center">255044462D312E</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">Quicken (qdf)</td>
 <td align="center">AC9EBD8F</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">Windows Password (pwl)</td>
 <td align="center">E3828596</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">ZIP Archive (zip)</td>
 <td align="center">504B0304</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">RAR Archive (rar)</td>
 <td align="center">52617221</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">Wave (wav)</td>
 <td align="center">57415645</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">AVI (avi)</td>
 <td align="center">41564920</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">Real Audio (ram)</td>
 <td align="center">2E7261FD</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">Real Media (rm)</td>
 <td align="center">2E524D46</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">MPEG (mpg)</td>
 <td align="center">000001BA</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">MPEG (mpg)</td>
 <td align="center">000001B3</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">Quicktime (mov)</td>
 <td align="center">6D6F6F76</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">Windows Media (asf)</td>
 <td align="center">3026B2758E66CF11</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">MIDI (mid)</td>
 <td align="center">4D546864</td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="left">MP3</td>
 <td align="center">FFFB</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">zlib</td>
+<td align="center">78 01 or 78 9C or 78 DA</td>
+<td align="center"></td>
 </tr>
 </tbody></table>
 <h1 id="mp3-文件隐写"><a href="#mp3-文件隐写" class="headerlink" title="mp3 文件隐写"></a>mp3 文件隐写</h1><h2 id="MP3Stego提取"><a href="#MP3Stego提取" class="headerlink" title="MP3Stego提取"></a>MP3Stego提取</h2><pre><code>.\Decode.exe -X -P 1111 hidden.WAV
@@ -552,13 +590,13 @@ for x in range(new_width):
 new_image.save(&quot;flag.png&quot;)
 </code></pre>
 <h2 id="zsteg一把梭"><a href="#zsteg一把梭" class="headerlink" title="zsteg一把梭"></a>zsteg一把梭</h2><p>zsteg可以检测PNG和BMP图片里的隐写数据</p>
-<pre><code class="shell">zsteg flag.png
+<pre><code class="powershell">zsteg flag.png
 
 zsteg -a flag.png #一把梭
 </code></pre>
 <h1 id="高度改写"><a href="#高度改写" class="headerlink" title="高度改写"></a>高度改写</h1><p><img src="https://i0.hdslb.com/bfs/article/f8aa44d26560b82126a2887cdf8cb752290349942.png"></p>
 <h1 id="内存取证"><a href="#内存取证" class="headerlink" title="内存取证"></a>内存取证</h1><p>使用volatility 对<code>raw</code>等格式进行分析</p>
-<pre><code class="shell">volatility -f &lt;文件名&gt; --profile=&lt;配置文件&gt; &lt;插件&gt; [插件参数]
+<pre><code class="powershell">volatility -f &lt;文件名&gt; --profile=&lt;配置文件&gt; &lt;插件&gt; [插件参数]
 
 eg: .\volatility_2.6_win64_standalone.exe -f E:\Desktop\放题\计算机取证\1.dmp --profile=Win7SP1x64 pslist
 </code></pre>
@@ -571,7 +609,7 @@ eg: .\volatility_2.6_win64_standalone.exe -f E:\Desktop\放题\计算机取证\1
 <h1 id="ntfs-数据流隐写"><a href="#ntfs-数据流隐写" class="headerlink" title="ntfs 数据流隐写"></a>ntfs 数据流隐写</h1><p><a href="https://www.nssctf.cn/problem/38">题</a></p>
 <p><a href="https://veritas501.github.io/2017_03_04-%E8%84%91%E6%B4%9E%E5%A4%A7%E5%BC%80_NTFS%E4%BA%A4%E6%8D%A2%E6%95%B0%E6%8D%AE%E6%B5%81ADS/">参考</a></p>
 <p>使用 labs.exe 进行检测<br>指令：</p>
-<pre><code class="shell">lads.exe /S #检测当前目录
+<pre><code class="powershell">lads.exe /S #检测当前目录
 
 lads.exe &lt;文件夹&gt; /S #检测这个目录和子目录
 
@@ -585,6 +623,40 @@ notepad 查看文件
 <h1 id="pdf-bmp-txt-htm-文件隐写"><a href="#pdf-bmp-txt-htm-文件隐写" class="headerlink" title="pdf bmp txt htm 文件隐写"></a>pdf bmp txt htm 文件隐写</h1><p>使用wbstego4.3open隐写，一般肉眼无法判断，只能靠试</p>
 <p>使用wbstego4.3open解码和加密</p>
 <h1 id="misc密码加密"><a href="#misc密码加密" class="headerlink" title="misc密码加密"></a>misc密码加密</h1><h2 id="仿射密码-affine"><a href="#仿射密码-affine" class="headerlink" title="仿射密码 affine"></a>仿射密码 affine</h2><p>仿射密码需要两个密码，并且其中一个为<code>1，3，5，7，9，11，15，17，19，21，23，25</code>中的一个，另一个0~25。且flag格式正确但是字母被替换，一般仿射密码的两个密码不会直接给出，可能以方程式等方式给出<br><a href="http://www.hiencode.com/affine.html">在线解密</a></p>
+<h1 id="zlib文件解压"><a href="#zlib文件解压" class="headerlink" title="zlib文件解压"></a>zlib文件解压</h1><p>三种文件头</p>
+<table>
+<thead>
+<tr>
+<th align="center">文件头</th>
+<th align="center">压缩方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">78 01</td>
+<td align="center">No Compression&#x2F;low</td>
+</tr>
+<tr>
+<td align="center">78 9C</td>
+<td align="center">Default Compression</td>
+</tr>
+<tr>
+<td align="center">78 DA</td>
+<td align="center">Best Compression</td>
+</tr>
+</tbody></table>
+<p>解压python脚本</p>
+<pre><code class="python">import zlib
+import binascii
+
+id = &#39;789cad50cb92a2500cfd2016c2151516bd08efdb80c54304d979012ff2101015e4eb1b6aa6bb66379b4ea59293e4544e2a3e078a24b900b383520e153bf6fc280a219d6b9587252ee184c432ce9c8c5ec0b997e92db7754489b05d8161b43eabdb9d7cf7c41e71c4e1d77e5767bdc534aede6cd8aa98f809278f6ec4fdc138a20dc3d50775f7d21291561b1c5c2fbb0bb7ba1bb835ba6a77eb4c8730c8dede3ceb39e4815093d5c04916b87805ffbb535e867f0cff20a920c8ab640af4bb01d20cb59742f9e8cc0eaa40a17ee4e2fd008737c86764a0872d056aaf49f42f7f5e7d5cb0312ce209680f378bbc86209eda577e1db9ace9143c83cd5cec0cd45ce65a71db20a9b5220e3ff313eaa9a973af64edd2a43ecebd0d8bf57d4ef481125d9b52b9dc2a6e43b11ab7440f282ec6218bf64d1c8e3d9e80c1d785573d631f464b965a7205818462998663e550d6c432d07fb5c3faf826acd7a675359d43f1e9459f6fb2c6db1fcef997b20f82e54bc329da4f2912dfb10c3bf3fb17001f5f8a8cc192&#39;
+result = binascii.unhexlify(id)
+print(result)
+result = zlib.decompress(result)
+print(result)
+</code></pre>
+<p>即可解压</p>
+<h1 id="常见编码"><a href="#常见编码" class="headerlink" title="常见编码"></a>常见编码</h1><h2 id="UUencode-编码"><a href="#UUencode-编码" class="headerlink" title="UUencode 编码"></a>UUencode 编码</h2><p><a href="http://www.hiencode.com/uu.html">解码</a> </p>
+<p>特征：所有字符看起来像乱码，但都是可打印字符；如果有多行，那么除了最后一行，都以“M”开头</p>
 
         </div>
         <!-- .entry-content -->

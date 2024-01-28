@@ -471,6 +471,39 @@ strcmp(function()&#123;&#125;, &quot;&quot;) =&gt; NULL + PHP Warning
 <p>如果找到与 <code>pattern</code> 中圆括号内的子模式相匹配的子串并且函数调用给出了第三个参数 <code>regs</code>，则匹配项将被存入 <code>regs</code> 数组中。<code>$regs[1]</code> 包含第一个左圆括号开始的子串，<code>$regs[2]</code> 包含第二个子串，以此类推。<code>$regs[0]</code> 包含整个匹配的字符串</p>
 <p>如果在 <code>string</code> 中找到 <code>pattern</code> 模式的匹配则返回 所匹配字符串的长度，如果没有找到匹配或出错则返回 <code>FALSE</code>。如果没有传递入可选参数 <code>regs</code> 或者所匹配的字符串长度为 <code>0</code>，则本函数返回 <code>1</code></p>
 <h2 id="绕过-2"><a href="#绕过-2" class="headerlink" title="绕过"></a>绕过</h2><p>两者存在<code>%00</code>截断类似于<code>\0</code>截断</p>
+<h1 id="preg-match"><a href="#preg-match" class="headerlink" title="preg_match()"></a>preg_match()</h1><p><a href="https://www.php.net/manual/zh/function.preg-match.php">php</a></p>
+<pre><code class="php">preg_match(
+    string $pattern,
+    string $subject,
+    array &amp;$matches = null,
+    int $flags = 0,
+    int $offset = 0
+): int|false
+</code></pre>
+<p>搜索<code>subject</code>与<code>pattern</code>给定的正则表达式的一个匹配<br><code>matches</code><br>如果提供了参数<code>matches</code>，它将被填充为搜索结果。 <code>$matches[0]</code>将包含完整模式匹配到的文本， <code>$matches[1]</code> 将包含第一个捕获子组匹配到的文本，以此类推</p>
+<h2 id="无字母数字webshell"><a href="#无字母数字webshell" class="headerlink" title="无字母数字webshell"></a>无字母数字webshell</h2><p><a href="https://xz.aliyun.com/t/8107">参考</a></p>
+<pre><code class="php">&lt;?php
+if(!preg_match(&#39;/[a-z0-9]/is&#39;,$_GET[&#39;shell&#39;])) &#123;
+  eval($_GET[&#39;shell&#39;]);
+&#125;
+</code></pre>
+<p>对于类似与以上正则匹配进行绕过</p>
+<h3 id="PHP中的短标签"><a href="#PHP中的短标签" class="headerlink" title="PHP中的短标签"></a>PHP中的短标签</h3><p><code>&lt;??&gt;</code>相当于对<code>&lt;?php&gt;</code>的替换。而<code>&lt;?=?&gt;</code>则是相当于<code>&lt;? echo&gt;</code></p>
+<pre><code class="php">&lt;?= &#39;111&#39;?&gt;
+</code></pre>
+<p>PHP中，反引号可以起到命令执行的效果</p>
+<pre><code class="php">&lt;?php
+$_=`whoami`;
+echo $_;
+</code></pre>
+<p>如果我们利用上面短标签的写法，可以把代码简写</p>
+<pre><code class="php">&lt;?= `whoami`?&gt;
+</code></pre>
+<h1 id="临时文件泄露"><a href="#临时文件泄露" class="headerlink" title="临时文件泄露"></a>临时文件泄露</h1><h2 id="vim-临时文件泄露"><a href="#vim-临时文件泄露" class="headerlink" title="vim 临时文件泄露"></a>vim 临时文件泄露</h2><pre><code>http://node4.anna.nssctf.cn:28196/.index.swp
+</code></pre>
+<p>得到之后使用<code>vim</code>即可恢复</p>
+<pre><code class="shell">vim -r .index.swp
+</code></pre>
 
         </div>
         <!-- .entry-content -->
