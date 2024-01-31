@@ -648,7 +648,7 @@ notepad 查看文件
 <pre><code class="python">import zlib
 import binascii
 
-id = &#39;789cad50cb92a2500cfd2016c2151516bd08efdb80c54304d979012ff2101015e4eb1b6aa6bb66379b4ea59293e4544e2a3e078a24b900b383520e153bf6fc280a219d6b9587252ee184c432ce9c8c5ec0b997e92db7754489b05d8161b43eabdb9d7cf7c41e71c4e1d77e5767bdc534aede6cd8aa98f809278f6ec4fdc138a20dc3d50775f7d21291561b1c5c2fbb0bb7ba1bb835ba6a77eb4c8730c8dede3ceb39e4815093d5c04916b87805ffbb535e867f0cff20a920c8ab640af4bb01d20cb59742f9e8cc0eaa40a17ee4e2fd008737c86764a0872d056aaf49f42f7f5e7d5cb0312ce209680f378bbc86209eda577e1db9ace9143c83cd5cec0cd45ce65a71db20a9b5220e3ff313eaa9a973af64edd2a43ecebd0d8bf57d4ef481125d9b52b9dc2a6e43b11ab7440f282ec6218bf64d1c8e3d9e80c1d785573d631f464b965a7205818462998663e550d6c432d07fb5c3faf826acd7a675359d43f1e9459f6fb2c6db1fcef997b20f82e54bc329da4f2912dfb10c3bf3fb17001f5f8a8cc192&#39;
+id=&#39;789cad50cb92a2500cfd2016c2151516bd08efdb80c54304d979012ff2101015e4eb1b6aa6bb66379b4ea59293e4544e2a3e078a24b900b383520e153bf6fc280a219d6b9587252ee184c432ce9c8c5ec0b997e92db7754489b05d8161b43eabdb9d7cf7c41e71c4e1d77e5767bdc534aede6cd8aa98f809278f6ec4fdc138a20dc3d50775f7d21291561b1c5c2fbb0bb7ba1bb835ba6a77eb4c8730c8dede3ceb39e4815093d5c04916b87805ffbb535e867f0cff20a920c8ab640af4bb01d20cb59742f9e8cc0eaa40a17ee4e2fd008737c86764a0872d056aaf49f42f7f5e7d5cb0312ce209680f378bbc86209eda577e1db9ace9143c83cd5cec0cd45ce65a71db20a9b5220e3ff313eaa9a973af64edd2a43ecebd0d8bf57d4ef481125d9b52b9dc2a6e43b11ab7440f282ec6218bf64d1c8e3d9e80c1d785573d631f464b965a7205818462998663e550d6c432d07fb5c3faf826acd7a675359d43f1e9459f6fb2c6db1fcef997b20f82e54bc329da4f2912dfb10c3bf3fb17001f5f8a8cc192&#39;
 result = binascii.unhexlify(id)
 print(result)
 result = zlib.decompress(result)
@@ -657,6 +657,58 @@ print(result)
 <p>即可解压</p>
 <h1 id="常见编码"><a href="#常见编码" class="headerlink" title="常见编码"></a>常见编码</h1><h2 id="UUencode-编码"><a href="#UUencode-编码" class="headerlink" title="UUencode 编码"></a>UUencode 编码</h2><p><a href="http://www.hiencode.com/uu.html">解码</a> </p>
 <p>特征：所有字符看起来像乱码，但都是可打印字符；如果有多行，那么除了最后一行，都以“M”开头</p>
+<h1 id="社工题"><a href="#社工题" class="headerlink" title="社工题"></a>社工题</h1><h2 id="经纬度转换"><a href="#经纬度转换" class="headerlink" title="经纬度转换"></a>经纬度转换</h2><p><a href="https://www.minigps.net/fc.html">网站</a></p>
+<h1 id="PNG-CRC-检验"><a href="#PNG-CRC-检验" class="headerlink" title="PNG CRC 检验"></a>PNG CRC 检验</h1><p>贴代码算就完了</p>
+<pre><code class="python">import binascii
+import struct
+
+# \x49\x48\x44\x52\x00\x00\x01\x00\x00\x00\x00\x00\x08\x02\x00\x00\x00
+crc32key = 0x121B804D
+
+for i in range(0, 65535):
+    for j in range(0, 65535):
+        width = struct.pack(&#39;&gt;i&#39;, j)
+        height = struct.pack(&#39;&gt;i&#39;, i)
+        data = b&#39;\x49\x48\x44\x52&#39; + width + height + b&#39;\x08\x02\x00\x00\x00&#39;
+        crc32result = binascii.crc32(data) &amp; 0xffffffff
+        if crc32result == crc32key:
+            print(&#39;&#39;.join(map(lambda c: &quot;%02X&quot; % c, width)))
+            print(&#39;&#39;.join(map(lambda c: &quot;%02X&quot; % c, height)))
+</code></pre>
+<h1 id="希尔密码"><a href="#希尔密码" class="headerlink" title="希尔密码"></a>希尔密码</h1><p><a href="https://ctf.bugku.com/tool/hill">解密在线网站</a><br><a href="http://www.atoolbox.net/Tool.php?Id=914">或者这个</a></p>
+<h1 id="jpg-隐写"><a href="#jpg-隐写" class="headerlink" title="jpg 隐写"></a>jpg 隐写</h1><h2 id="steghide-隐写"><a href="#steghide-隐写" class="headerlink" title="steghide 隐写"></a>steghide 隐写</h2><p><a href="https://seamiloak.github.io/2020/08/24/Steghide%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E5%8F%8A%E5%85%B6%E5%AF%86%E7%A0%81%E7%88%86%E7%A0%B4/">参考</a></p>
+<pre><code class="shell">steghide embed -cf test.jpg -ef secret.txt -p 123456 #加密
+steghide extract -sf test.jpg -p 123456 #解密
+</code></pre>
+<h2 id="F5隐写"><a href="#F5隐写" class="headerlink" title="F5隐写"></a>F5隐写</h2><p><a href="https://www.cnblogs.com/GTL-JU/p/16332586.html">参考</a></p>
+<p><a href="https://github.com/matthewgao/F5-steganography">工具</a></p>
+<pre><code class="shell">java Extract 1.jpg -p 123456 #解密
+</code></pre>
+<h1 id="tupper-塔珀自指公式"><a href="#tupper-塔珀自指公式" class="headerlink" title="tupper(塔珀自指公式)"></a>tupper(塔珀自指公式)</h1><p><a href="https://blog.csdn.net/ygys1234/article/details/109686348">参考</a></p>
+<p>一般这种题都会给提示有可能是英文提示或者中文提示，要不然就是顶级脑洞题</p>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+
+def Tupper_self_referential_formula(k): 
+    aa = np.zeros((17,106))
+    def f(x, y):
+        y += k
+        a1 = 2**-(-17*x - y%17)
+        a2 = (y // 17) // a1
+        return 1 if a2 % 2 &gt; 0.5 else 0
+ 
+    for y in range(17):
+        for x in range(106):
+            aa[y, x] = f(x, y)
+    
+    return aa[:,::-1]
+
+k = 14278193432728026049298574575557534321062349352543562656766469704092874688354679371212444382298821342093450398907096976002458807598535735172126657504131171684907173086659505143920300085808809647256790384378553780282894239751898620041143383317064727136903634770936398518547900512548419486364915399253941245911205262493591158497708219126453587456637302888701303382210748629800081821684283187368543601559778431735006794761542413006621219207322808449232050578852431361678745355776921132352419931907838205001184
+aa = Tupper_self_referential_formula(k)
+plt.figure(figsize=(15,10))
+plt.imshow(aa,origin=&#39;lower&#39;)
+input()
+</code></pre>
 
         </div>
         <!-- .entry-content -->
