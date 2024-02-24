@@ -446,6 +446,57 @@ var_dump(intval($f*100));
 </code></pre>
 <h1 id="sql注入waf绕过"><a href="#sql注入waf绕过" class="headerlink" title="sql注入waf绕过"></a>sql注入waf绕过</h1><h1 id="zip-bomb"><a href="#zip-bomb" class="headerlink" title="zip bomb"></a>zip bomb</h1><p><a href="https://www.nssctf.cn/problem/400">题</a></p>
 <p>不要尝试解压，而是用winrar打开或者改成<code>.rar</code></p>
+<h1 id="SSTI"><a href="#SSTI" class="headerlink" title="SSTI"></a>SSTI</h1><p><a href="https://www.bilibili.com/video/BV1tj411u7Bx">学习视频</a></p>
+<p>判断模板类型<br><img src="https://i0.hdslb.com/bfs/article/145549c0de56930fe0bf0b3f27d33225290349942.png"></p>
+<h2 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h2><table>
+<thead>
+<tr>
+<th align="center">魔术方法</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>__class__</code></td>
+<td align="center">查找当前类型的所属对象</td>
+</tr>
+<tr>
+<td align="center"><code>__base__</code></td>
+<td align="center">沿着父子类的关系往上走一个</td>
+</tr>
+<tr>
+<td align="center"><code>__mro__</code></td>
+<td align="center">查找当前类对象的所有继承类</td>
+</tr>
+<tr>
+<td align="center"><code>__subclasses__()</code></td>
+<td align="center">查找父类下的所有子类</td>
+</tr>
+<tr>
+<td align="center"><code>__init__</code></td>
+<td align="center">查看类是否重载,重载是指程序在运行时就已经加载好了这个模块到内存中,如果出现<code>wrapper</code>字眼，说明没有重载</td>
+</tr>
+<tr>
+<td align="center"><code>__globals__</code></td>
+<td align="center">函数会以字典的形式返回当前对象的全部全局变量</td>
+</tr>
+</tbody></table>
+<h1 id="上传解压接口软链接覆盖问题-软链接攻击"><a href="#上传解压接口软链接覆盖问题-软链接攻击" class="headerlink" title="上传解压接口软链接覆盖问题(软链接攻击)"></a>上传解压接口软链接覆盖问题(软链接攻击)</h1><p>例题:hgame2024 week 3 ZeroLink </p>
+<p>特点:上传一个zip压缩包，程序会进行解压，指定要读取的文件名，文件内容将被返回至网页(或者存在读取接口)。</p>
+<pre><code class="shell">
+//软链接
+ln -s /app she
+
+//压缩
+zip --symlinks she.zip she
+
+//建一个相同文件夹
+
+mkdir she
+
+//在文件里输入覆盖内容
+
+vim she/secret
+</code></pre>
 
         </div>
         <!-- .entry-content -->
