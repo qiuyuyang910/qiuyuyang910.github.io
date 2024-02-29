@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-02-09T06:52:12.361Z</updated>
+  <updated>2024-02-24T08:17:34.444Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/posts/6d2ef8e1.html"/>
     <id>http://example.com/posts/6d2ef8e1.html</id>
     <published>2024-02-09T06:01:21.000Z</published>
-    <updated>2024-02-09T06:52:12.361Z</updated>
+    <updated>2024-02-24T08:17:34.444Z</updated>
     
     
       
@@ -90,7 +90,7 @@
     <link href="http://example.com/posts/2a9bc4e1.html"/>
     <id>http://example.com/posts/2a9bc4e1.html</id>
     <published>2024-01-01T15:08:58.000Z</published>
-    <updated>2024-02-24T08:16:30.849Z</updated>
+    <updated>2024-02-29T14:19:15.494Z</updated>
     
     
       
@@ -278,14 +278,17 @@
     <link href="http://example.com/posts/56dc4975.html"/>
     <id>http://example.com/posts/56dc4975.html</id>
     <published>2023-11-01T13:50:43.000Z</published>
-    <updated>2024-01-21T12:09:55.931Z</updated>
+    <updated>2024-02-29T14:14:06.892Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;常见注入手段&quot;&gt;&lt;a href=&quot;#常见注入手段&quot; class=&quot;headerlink&quot; title=&quot;常见注入手段&quot;&gt;&lt;/a&gt;常见注入手段&lt;/h1&gt;&lt;p&gt;&lt;img</summary>
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://www.freebuf.com/sectool/164608.html&quot;&gt;sqlmap&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;shell&quot;&gt;sqlmap.py -u URL --forms
+
+sqlmap.py -u URL</summary>
         
       
     
