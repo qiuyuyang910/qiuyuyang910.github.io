@@ -382,7 +382,8 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h1 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h1><pre><code> __wakeup() //------ 执行unserialize()时，先会调用这个函数
+          <h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>php类名大小写不敏感</p>
+<h1 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h1><pre><code> __wakeup() //------ 执行unserialize()时，先会调用这个函数
  __sleep() //------- 执行serialize()时，先会调用这个函数
  __destruct() //---- 对象被销毁时触发
  __call() //-------- 在对象上下文中调用不可访问的方法时触发
@@ -508,7 +509,7 @@ echo urlencode(serialize($b));
 <p>结果</p>
 <pre><code class="php">O%3A4%3A%22Show%22%3A2%3A%7Bs%3A6%3A%22source%22%3Br%3A1%3Bs%3A3%3A%22str%22%3BO%3A4%3A%22Test%22%3A1%3A%7Bs%3A1%3A%22p%22%3BO%3A8%3A%22Modifier%22%3A1%3A%7Bs%3A13%3A%22%00Modifier%00var%22%3Bs%3A8%3A%22flag.php%22%3B%7D%7D%7D
 </code></pre>
-<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p><code>__construct()</code> <code>__sleep()</code> 可能会影响pop链的构造，如果影响了得删了<br><code>__wakeup</code> 可能是不需要的，需要绕过</p>
+<h1 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h1><p><code>__construct()</code> <code>__sleep()</code> 可能会影响pop链的构造，如果影响了得删了<br><code>__wakeup</code> 可能是不需要的，需要绕过</p>
 
         </div>
         <!-- .entry-content -->

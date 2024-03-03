@@ -68,7 +68,7 @@
     <link href="http://example.com/posts/9a7e4e5d.html"/>
     <id>http://example.com/posts/9a7e4e5d.html</id>
     <published>2024-01-18T04:35:01.000Z</published>
-    <updated>2024-02-01T08:07:45.197Z</updated>
+    <updated>2024-03-03T14:35:23.544Z</updated>
     
     
       
@@ -114,7 +114,7 @@
     <link href="http://example.com/posts/2a9bc4e1.html"/>
     <id>http://example.com/posts/2a9bc4e1.html</id>
     <published>2024-01-01T15:08:58.000Z</published>
-    <updated>2024-03-01T04:21:42.184Z</updated>
+    <updated>2024-03-03T13:20:52.939Z</updated>
     
     
       
@@ -186,15 +186,15 @@
     <link href="http://example.com/posts/aa5c80ac.html"/>
     <id>http://example.com/posts/aa5c80ac.html</id>
     <published>2023-12-04T14:10:33.000Z</published>
-    <updated>2023-12-25T14:38:29.109Z</updated>
+    <updated>2024-03-03T13:37:51.971Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;魔术方法&quot;&gt;&lt;a href=&quot;#魔术方法&quot; class=&quot;headerlink&quot; title=&quot;魔术方法&quot;&gt;&lt;/a&gt;魔术方法&lt;/h1&gt;&lt;pre&gt;&lt;code&gt; __wakeup() //------ 执行unserialize()时，先会调用这个函数
-</summary>
+    <summary type="html">&lt;h1 id=&quot;注意&quot;&gt;&lt;a href=&quot;#注意&quot; class=&quot;headerlink&quot; title=&quot;注意&quot;&gt;&lt;/a&gt;注意&lt;/h1&gt;&lt;p&gt;php类名大小写不敏感&lt;/p&gt;
+&lt;h1 id=&quot;魔术方法&quot;&gt;&lt;a href=&quot;#魔术方法&quot; class=&quot;headerlink&quot;</summary>
         
       
     

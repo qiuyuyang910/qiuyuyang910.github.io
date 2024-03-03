@@ -383,7 +383,7 @@
         
         <div class="entry-content">
           <h1 id="注意-index-php-重定向，打开网页都是访问index文件"><a href="#注意-index-php-重定向，打开网页都是访问index文件" class="headerlink" title="注意 &#x2F;index.php 重定向，打开网页都是访问index文件"></a>注意 &#x2F;index.php 重定向，打开网页都是访问index文件</h1><p><a href="https://www.nssctf.cn/problem/958">题</a></p>
-<h1 id="0要时刻注意-robots-txt-www-zip-等"><a href="#0要时刻注意-robots-txt-www-zip-等" class="headerlink" title="0要时刻注意&#x2F;robots.txt www.zip 等"></a>0要时刻注意&#x2F;robots.txt <a href="http://www.zip/">www.zip</a> 等</h1><h1 id="科学计数法和MD5值比较"><a href="#科学计数法和MD5值比较" class="headerlink" title="科学计数法和MD5值比较"></a>科学计数法和MD5值比较</h1><h2 id="弱比较"><a href="#弱比较" class="headerlink" title="弱比较"></a>弱比较</h2><p>php 对<code>0e+纯数字</code>当作科学计数法而绕过<br>以0e开头的字符串只能是纯数字，这样php在进行科学计算法的时候才会将它转化为0</p>
+<h1 id="0要时刻注意-robots-txt-www-zip-等"><a href="#0要时刻注意-robots-txt-www-zip-等" class="headerlink" title="0要时刻注意&#x2F;robots.txt www.zip 等"></a>0要时刻注意&#x2F;robots.txt <a href="http://www.zip/">www.zip</a> 等</h1><h1 id="科学计数法和MD5值sha1值比较"><a href="#科学计数法和MD5值sha1值比较" class="headerlink" title="科学计数法和MD5值sha1值比较"></a>科学计数法和MD5值sha1值比较</h1><h2 id="弱比较"><a href="#弱比较" class="headerlink" title="弱比较"></a>弱比较</h2><p>php 对<code>0e+纯数字</code>当作科学计数法而绕过<br>以0e开头的字符串只能是纯数字，这样php在进行科学计算法的时候才会将它转化为0</p>
 <pre><code class="txt">s1502113478a
 0e861580163291561247404381396064
   
@@ -409,6 +409,10 @@ url编码 1%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00
 二进制md5加密 8e4ef6c69a337c0de0208455ee69a416
 
 url编码 1%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%A3njn%FD%1A%CB%3A%29Wr%02En%CE%89%9A%E3%8E%C6%F1%BE%E9%EE3%0E%82%2A%95%23%0D%FA%CE%1C%F2%C4P%C2%B7s%0F%C8t%F28zV%AD%2C%EB%1D%D8%D2%00%8C%3B%FCN%C9%E24%DB%AC%17%A8%BF%3Fh%84i%F4%1E%B5Q%7B%FC%B9RuJ%60%B4%0D%B7%F9%F9%00%1E%C1%1B%16%C9M%2A%7D%B2%BBoW%02%7D%8F%7F%C0qT%D0%CF%3A%1DFH%F1%25%AC%DF%FA%C4G%27uW%CF%CEB%E7%EF%B0
+</code></pre>
+<p>对于<code>sha1</code>强碰撞基本不可能，但sha1函数传入为数组时会返回<code>flase</code>,两个flase会相等<br><a href="https://www.nssctf.cn/problem/2296">[极客大挑战 2020]welcome</a></p>
+<p>pyload:</p>
+<pre><code>roam1[]=1&amp;roam2[]=2
 </code></pre>
 <h2 id="数组绕过"><a href="#数组绕过" class="headerlink" title="数组绕过"></a>数组绕过</h2><p>md5() 函数中如果传入的不是字符串而是数组，不但md5()函数不会报错，结果还会返回null，在强比较里面null&#x3D;null为 True 绕过</p>
 <pre><code class="url">str1[]=1&amp;str2[]=2
