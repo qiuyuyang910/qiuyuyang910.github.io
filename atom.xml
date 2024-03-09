@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-08T15:26:29.944Z</updated>
+  <updated>2024-03-09T17:30:59.197Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>HSCCTF 2024 WP</title>
+    <link href="http://example.com/posts/c2bf04f9.html"/>
+    <id>http://example.com/posts/c2bf04f9.html</id>
+    <published>2024-03-09T12:40:43.000Z</published>
+    <updated>2024-03-09T17:30:59.197Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;SIGN-IN&quot;&gt;&lt;a href=&quot;#SIGN-IN&quot; class=&quot;headerlink&quot; title=&quot;SIGN_IN&quot;&gt;&lt;/a&gt;SIGN_IN&lt;/h1&gt;&lt;p&gt;&lt;code&gt;binwalk&lt;/code&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>ctf-ssti模板注入</title>
     <link href="http://example.com/posts/81825c14.html"/>
     <id>http://example.com/posts/81825c14.html</id>
     <published>2024-02-29T15:20:13.000Z</published>
-    <updated>2024-03-08T15:26:29.944Z</updated>
+    <updated>2024-03-09T18:13:09.031Z</updated>
     
     
       
@@ -68,7 +91,7 @@
     <link href="http://example.com/posts/9a7e4e5d.html"/>
     <id>http://example.com/posts/9a7e4e5d.html</id>
     <published>2024-01-18T04:35:01.000Z</published>
-    <updated>2024-03-03T14:35:23.544Z</updated>
+    <updated>2024-03-09T17:18:26.449Z</updated>
     
     
       
@@ -462,29 +485,6 @@ sqlmap.py -u URL</summary>
     
     
     <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>随想01</title>
-    <link href="http://example.com/posts/4c1b3376.html"/>
-    <id>http://example.com/posts/4c1b3376.html</id>
-    <published>2020-05-01T09:17:21.000Z</published>
-    <updated>2023-09-22T13:52:39.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;不知不觉，3年的初中生活也将进入尾声。在我看来，三年的初中生活让我成长了许多，思想上也有了很大的变化。&lt;br&gt;脱去了稚嫩换来了真实，敬佩世间的善良，也厌恶世间的黑暗。每当回头瞻望以前的所作所为是多么的可笑。“我会后悔以前做那些蠢事么？”我想不会。虽然很蠢但却是当时那个环境与</summary>
-        
-      
-    
-    
-    
-    <category term="随想" scheme="http://example.com/categories/%E9%9A%8F%E6%83%B3/"/>
     
     
   </entry>

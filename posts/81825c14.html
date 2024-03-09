@@ -36,8 +36,8 @@
   mashiro_option.email_name = "";
   mashiro_option.cookie_version_control = "";
   mashiro_option.qzone_autocomplete = false;
-  mashiro_option.site_name = "想玩电脑のQQY";
-  mashiro_option.author_name = "QQY";
+  mashiro_option.site_name = "想玩电脑のQYY";
+  mashiro_option.author_name = "QYY";
   mashiro_option.site_url = "https://qiuyuyang.top";
   mashiro_option.v_appId = "WhLPjDYKzsAx2BzsScNjTPs1-gzGzoHsz";
   mashiro_option.v_appKey = "WXSeTt9SPmKWgPlGQ0XwNXxt";
@@ -148,7 +148,7 @@
         <span class="logolink moe-mashiro">
           <a href="/">
             <span class="sakurasono">想玩电脑の</span>
-            <span class="shironeko">QQY</span>
+            <span class="shironeko">QYY</span>
           </a>
         </span>
       </span>
@@ -384,6 +384,7 @@
         <div class="entry-content">
           <p><a href="https://www.bilibili.com/video/BV1tj411u7Bx">学习视频</a></p>
 <p>判断模板类型<br><img src="https://i0.hdslb.com/bfs/article/145549c0de56930fe0bf0b3f27d33225290349942.png"></p>
+<p>php常见模板：twig，smarty，blade<br>python常见的模板：Jinja2，tornado，Django<br>java常见的模板：FreeMarker，velocity</p>
 <h1 id="ssti漏洞成因"><a href="#ssti漏洞成因" class="headerlink" title="ssti漏洞成因"></a>ssti漏洞成因</h1><p><a href="https://blog.csdn.net/qq_61955196/article/details/132237648">参考</a></p>
 <p>SSTI(Server-Side Template Injection)从名字可以看出即是服务器端模板注入。比如python中的flask、php的thinkphp、java的spring等框架一般都采用MVC的模式，用户的输入先进入Controller控制器，然后根据请求类型和请求的指令发送给对应Model业务模型进行业务逻辑判断，数据库存取，最后把结果返回给View视图层，经过模板渲染展示给用户。</p>
 <p>模板可以被认为是一段固定好格式，等着开发人员或者用户来填充信息的文件。通过这种方法，可以做到逻辑与视图分离，更容易、清楚且相对安全地编写前后端不同的逻辑。</p>
@@ -569,6 +570,9 @@ code=&#123;&#123;()['__cla'+'ss__']['__ba'+'se__']['__subcl'+'asses__']()[117]['
 
 &#123;&#123;get_flashed_messages.__globals__['current_app'].config&#125;&#125;
 </code></pre>
+<h1 id="tornado模板中获取"><a href="#tornado模板中获取" class="headerlink" title="tornado模板中获取"></a>tornado模板中获取</h1><p>在tornado模板中，存在一些可以访问的快速对象,这里用到的是handler.settings，handler 指向RequestHandler，而RequestHandler.settings又指向self.application.settings，所以handler.settings就指向RequestHandler.application.settings了</p>
+<pre><code>&#123;&#123;handler.settings&#125;&#125;
+</code></pre>
 
         </div>
         <!-- .entry-content -->
@@ -597,9 +601,26 @@ code=&#123;&#123;()['__cla'+'ss__']['__ba'+'se__']['__subcl'+'asses__']()[117]['
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/posts/c2bf04f9.html" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://jsd.onmicrosoft.cn/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://i0.hdslb.com/bfs/article/e247a821663c61d993ef32c5cabaf8ef290349942.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://i0.hdslb.com/bfs/article/e247a821663c61d993ef32c5cabaf8ef290349942.png">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                HSCCTF 2024 WP</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
         
           
-            <div class="post-nepre full next">
+            <div class="post-nepre half next">
           
             <a href="/posts/6d2ef8e1.html" rel="next">
               <div class="background">
@@ -766,7 +787,7 @@ $(document).ready(function() {
   <div class="m-avatar">
     <img src="https://article.biliimg.com/bfs/article/b4144522e96608adb59936edcda4bb4a290349942.png">
   </div>
-  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">想玩电脑のQQY</p>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">想玩电脑のQYY</p>
   <p style="text-align: center; word-spacing: 20px;">
     
       
