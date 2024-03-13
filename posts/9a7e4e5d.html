@@ -382,11 +382,44 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h1 id="零宽隐写"><a href="#零宽隐写" class="headerlink" title="零宽隐写"></a>零宽隐写</h1><p>当给一个txt文件，或者题目有0&#x2F;零之类的词就要开始考虑零宽隐写了，零宽隐写主要考虑的是使用的字符，在cyber里面，通过<code>escape unicode characters</code>可以查看unicode编码<br><img src="https://i0.hdslb.com/bfs/article/7c973d958aca50eba7967f762c33826b290349942.png"></p>
+          <h1 id="零宽隐写和base64隐写"><a href="#零宽隐写和base64隐写" class="headerlink" title="零宽隐写和base64隐写"></a>零宽隐写和base64隐写</h1><h2 id="零宽隐写"><a href="#零宽隐写" class="headerlink" title="零宽隐写"></a>零宽隐写</h2><p>当给一个txt文件，或者题目有0&#x2F;零之类的词就要开始考虑零宽隐写了，零宽隐写主要考虑的是使用的字符，在cyber里面，通过<code>escape unicode characters</code>可以查看unicode编码<br><img src="https://i0.hdslb.com/bfs/article/7c973d958aca50eba7967f762c33826b290349942.png"></p>
 <ul>
 <li>可用的在线工具<br><a href="https://www.mzy0.com/ctftools/zerowidth1/">https://www.mzy0.com/ctftools/zerowidth1/</a><br><a href="http://330k.github.io/misc_tools/unicode_steganography.html">http://330k.github.io/misc_tools/unicode_steganography.html</a><br><a href="https://offdev.net/demos/zwsp-steg-js">https://offdev.net/demos/zwsp-steg-js</a><br><a href="https://yuanfux.github.io/zero-width-web/">https://yuanfux.github.io/zero-width-web/</a><br><a href="http://www.atoolbox.net/Tool.php?Id=829">http://www.atoolbox.net/Tool.php?Id=829</a></li>
 </ul>
+<p><a href="https://yuanfux.github.io/zero-width-web/">推荐这个</a></p>
 <p>通过观察编码即可确定需要勾选的项</p>
+<h2 id="base64隐写"><a href="#base64隐写" class="headerlink" title="base64隐写"></a>base64隐写</h2><pre><code class="python">
+import base64
+def get_base64_diff_value(s1, s2):
+    base64chars = &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&#39;
+    res = 0
+    for i in range(len(s1)):
+        if s1[i] != s2[i]:
+            return abs(base64chars.index(s1[i]) - base64chars.index(s2[i]))
+    return res
+
+def solve_stego():
+    with open(&#39;.\字频统计.txt&#39;, &#39;rb&#39;) as f:
+        file_lines = f.readlines()
+    bin_str=&#39;&#39;
+    for line in file_lines:
+        steg_line = line.decode().replace(&#39;\r\n&#39;, &#39;&#39;)#看具体情况，可能是\r\n也可能是\n
+        norm_line = base64.b64encode((base64.b64decode(line))).decode()
+        diff = get_base64_diff_value(steg_line, norm_line)
+        pads_num = steg_line.count(&#39;=&#39;)
+        if diff:
+            bin_str += bin(diff)[2:].zfill(pads_num * 2)
+        else:
+            bin_str += &#39;0&#39; * pads_num * 2
+    print (bin_str)
+    res_str = &#39;&#39;
+    for i in range(0, len(bin_str), 8):
+        res_str += chr(int(bin_str[i:i+8], 2))
+    print (res_str)
+
+if __name__==&#39;__main__&#39;:
+    solve_stego()
+</code></pre>
 <h1 id="常见文件头"><a href="#常见文件头" class="headerlink" title="常见文件头"></a>常见文件头</h1><table>
 <thead>
 <tr>
@@ -660,7 +693,8 @@ print(result)
 <h1 id="常见编码"><a href="#常见编码" class="headerlink" title="常见编码"></a>常见编码</h1><h2 id="UUencode-编码"><a href="#UUencode-编码" class="headerlink" title="UUencode 编码"></a>UUencode 编码</h2><p><a href="http://www.hiencode.com/uu.html">解码</a> </p>
 <p>特征：所有字符看起来像乱码，但都是可打印字符；如果有多行，那么除了最后一行，都以“M”开头</p>
 <h1 id="社工题"><a href="#社工题" class="headerlink" title="社工题"></a>社工题</h1><h2 id="经纬度转换"><a href="#经纬度转换" class="headerlink" title="经纬度转换"></a>经纬度转换</h2><p><a href="https://www.minigps.net/fc.html">网站</a></p>
-<h1 id="PNG-CRC-检验"><a href="#PNG-CRC-检验" class="headerlink" title="PNG CRC 检验"></a>PNG CRC 检验</h1><p>贴代码算就完了</p>
+<h1 id="PNG-CRC-检验"><a href="#PNG-CRC-检验" class="headerlink" title="PNG CRC 检验"></a>PNG CRC 检验</h1><p><img src="https://i0.hdslb.com/bfs/article/7d48319e09238ab2d15209e756f67698290349942.png"></p>
+<p>贴代码算就完了</p>
 <pre><code class="python">import binascii
 import struct
 
