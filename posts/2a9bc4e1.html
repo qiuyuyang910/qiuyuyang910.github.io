@@ -384,7 +384,8 @@
         <div class="entry-content">
           <h1 id="注意-index-php-重定向，打开网页都是访问index文件"><a href="#注意-index-php-重定向，打开网页都是访问index文件" class="headerlink" title="注意 &#x2F;index.php 重定向，打开网页都是访问index文件"></a>注意 &#x2F;index.php 重定向，打开网页都是访问index文件</h1><p><a href="https://www.nssctf.cn/problem/958">题</a></p>
 <h1 id="0要时刻注意-robots-txt-www-zip-等"><a href="#0要时刻注意-robots-txt-www-zip-等" class="headerlink" title="0要时刻注意&#x2F;robots.txt www.zip 等"></a>0要时刻注意&#x2F;robots.txt <a href="http://www.zip/">www.zip</a> 等</h1><h1 id="科学计数法和MD5值sha1值比较"><a href="#科学计数法和MD5值sha1值比较" class="headerlink" title="科学计数法和MD5值sha1值比较"></a>科学计数法和MD5值sha1值比较</h1><h2 id="弱比较"><a href="#弱比较" class="headerlink" title="弱比较"></a>弱比较</h2><p>php 对<code>0e+纯数字</code>当作科学计数法而绕过<br>以0e开头的字符串只能是纯数字，这样php在进行科学计算法的时候才会将它转化为0</p>
-<pre><code class="txt">s1502113478a
+<pre><code class="txt">
+s1502113478a
 0e861580163291561247404381396064
   
 s1885207154a
@@ -398,6 +399,9 @@ s155964671a
   
 s1184209335a
 0e072485820392773389523109082030
+
+0e215962017
+0e291242476940776845150308577824
   
 </code></pre>
 <h2 id="强比较"><a href="#强比较" class="headerlink" title="强比较"></a>强比较</h2><pre><code>二进制md5加密 8e4ef6c69a337c0de0208455ee69a416

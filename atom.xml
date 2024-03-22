@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-13T05:54:54.395Z</updated>
+  <updated>2024-03-21T16:20:05.343Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,35 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>刷题-isctf-wp</title>
+    <link href="http://example.com/posts/d1fd0925.html"/>
+    <id>http://example.com/posts/d1fd0925.html</id>
+    <published>2024-03-21T15:39:30.000Z</published>
+    <updated>2024-03-21T16:20:05.343Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;小白小黑&quot;&gt;&lt;a href=&quot;#小白小黑&quot; class=&quot;headerlink&quot; title=&quot;小白小黑&quot;&gt;&lt;/a&gt;小白小黑&lt;/h1&gt;&lt;p&gt;把题下下来缩小就能发现是二维码，再根据提示发现01239代表白色剩下的代表黑色&lt;/p&gt;
+&lt;pre&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>刷题-SWPUCTF 2022 新生赛</title>
     <link href="http://example.com/posts/68b6bccd.html"/>
     <id>http://example.com/posts/68b6bccd.html</id>
     <published>2024-03-11T15:46:50.000Z</published>
-    <updated>2024-03-13T05:54:54.395Z</updated>
+    <updated>2024-03-13T06:33:30.114Z</updated>
     
     
       
@@ -160,7 +184,7 @@
     <link href="http://example.com/posts/2a9bc4e1.html"/>
     <id>http://example.com/posts/2a9bc4e1.html</id>
     <published>2024-01-01T15:08:58.000Z</published>
-    <updated>2024-03-13T06:33:17.653Z</updated>
+    <updated>2024-03-13T12:24:52.341Z</updated>
     
     
       
@@ -465,33 +489,6 @@ sqlmap.py -u URL</summary>
     
     
     <category term="div4" scheme="http://example.com/tags/div4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IDM（Internet Download Manager）破解版分享</title>
-    <link href="http://example.com/posts/23072875.html"/>
-    <id>http://example.com/posts/23072875.html</id>
-    <published>2020-08-12T03:04:58.000Z</published>
-    <updated>2023-09-22T13:52:39.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;pre&gt;&lt;code&gt;IDM是一个超级好用的多线程下载器可以极大的提到下载速度，但有的时候网站会禁止这种行为
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;俄罗斯大佬破解后从新封装的IDM，使用起来没啥问题你可以去&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="资源" scheme="http://example.com/categories/%E8%B5%84%E6%BA%90/"/>
-    
-    
-    <category term="-IDM" scheme="http://example.com/tags/IDM/"/>
     
   </entry>
   
