@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-21T16:20:05.343Z</updated>
+  <updated>2024-03-26T00:00:41.298Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>nkctf2024-wp</title>
+    <link href="http://example.com/posts/d79890eb.html"/>
+    <id>http://example.com/posts/d79890eb.html</id>
+    <published>2024-03-23T03:20:14.000Z</published>
+    <updated>2024-03-26T00:00:41.298Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Webshell-pro&quot;&gt;&lt;a href=&quot;#Webshell-pro&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>刷题-isctf-wp</title>
     <link href="http://example.com/posts/d1fd0925.html"/>
     <id>http://example.com/posts/d1fd0925.html</id>
     <published>2024-03-21T15:39:30.000Z</published>
-    <updated>2024-03-21T16:20:05.343Z</updated>
+    <updated>2024-03-23T07:35:18.326Z</updated>
     
     
       
@@ -463,32 +486,6 @@ sqlmap.py -u URL</summary>
     
     <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>div4 Codeforces Round 898</title>
-    <link href="http://example.com/posts/f223c98.html"/>
-    <id>http://example.com/posts/f223c98.html</id>
-    <published>2023-08-12T03:04:58.000Z</published>
-    <updated>2023-09-25T15:12:56.581Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;这次是我第一次参加算法比赛，很多题也没做到，希望下次能多做一些。&lt;/p&gt;
-&lt;h1 id=&quot;A&quot;&gt;&lt;a href=&quot;#A&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="资源" scheme="http://example.com/categories/%E8%B5%84%E6%BA%90/"/>
-    
-    
-    <category term="div4" scheme="http://example.com/tags/div4/"/>
     
   </entry>
   
