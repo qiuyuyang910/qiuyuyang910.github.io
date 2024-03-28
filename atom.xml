@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-26T00:00:41.298Z</updated>
+  <updated>2024-03-27T07:42:32.427Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/posts/d79890eb.html"/>
     <id>http://example.com/posts/d79890eb.html</id>
     <published>2024-03-23T03:20:14.000Z</published>
-    <updated>2024-03-26T00:00:41.298Z</updated>
+    <updated>2024-03-27T07:42:32.427Z</updated>
     
     
       
@@ -161,14 +161,15 @@
     <link href="http://example.com/posts/9a7e4e5d.html"/>
     <id>http://example.com/posts/9a7e4e5d.html</id>
     <published>2024-01-18T04:35:01.000Z</published>
-    <updated>2024-03-12T12:20:26.816Z</updated>
+    <updated>2024-03-28T07:30:57.863Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;零宽隐写和base64隐写&quot;&gt;&lt;a href=&quot;#零宽隐写和base64隐写&quot; class=&quot;headerlink&quot; title=&quot;零宽隐写和base64隐写&quot;&gt;&lt;/a&gt;零宽隐写和base64隐写&lt;/h1&gt;&lt;h2 id=&quot;零宽隐写&quot;&gt;&lt;a</summary>
+    <summary type="html">&lt;p&gt;ctrl+shift+c 打开禁用f12的网页的devtools&lt;/p&gt;
+&lt;h1 id=&quot;零宽隐写和base64隐写&quot;&gt;&lt;a href=&quot;#零宽隐写和base64隐写&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -207,14 +208,15 @@
     <link href="http://example.com/posts/2a9bc4e1.html"/>
     <id>http://example.com/posts/2a9bc4e1.html</id>
     <published>2024-01-01T15:08:58.000Z</published>
-    <updated>2024-03-13T12:24:52.341Z</updated>
+    <updated>2024-03-28T07:31:13.130Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;注意-index-php-重定向，打开网页都是访问index文件&quot;&gt;&lt;a href=&quot;#注意-index-php-重定向，打开网页都是访问index文件&quot; class=&quot;headerlink&quot; title=&quot;注意 &amp;#x2F;index.php</summary>
+    <summary type="html">&lt;p&gt;ctrl+shift+c 打开禁用f12的网页的devtools&lt;/p&gt;
+&lt;h1 id=&quot;注意-index-php-重定向，打开网页都是访问index文件&quot;&gt;&lt;a href=&quot;#注意-index-php-重定向，打开网页都是访问index文件&quot;</summary>
         
       
     
