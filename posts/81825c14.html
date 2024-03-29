@@ -589,6 +589,35 @@ code=&#123;&#123;()['__cla'+'ss__']['__ba'+'se__']['__subcl'+'asses__']()[117]['
 </code></pre>
 <h1 id="tornado模板中获取"><a href="#tornado模板中获取" class="headerlink" title="tornado模板中获取"></a>tornado模板中获取</h1><p>在tornado模板中，存在一些可以访问的快速对象,这里用到的是handler.settings，handler 指向RequestHandler，而RequestHandler.settings又指向self.application.settings，所以handler.settings就指向RequestHandler.application.settings了</p>
 <pre><code>&#123;&#123;handler.settings&#125;&#125;
+
+</code></pre>
+<h1 id="pin码计算"><a href="#pin码计算" class="headerlink" title="pin码计算"></a>pin码计算</h1><h2 id="生成原理"><a href="#生成原理" class="headerlink" title="生成原理"></a>生成原理</h2><ol>
+<li>获取用户名username</li>
+</ol>
+<pre><code>import getpass
+
+username=getpass.getuser()
+</code></pre>
+<ol start="2">
+<li>获取app对象name属性</li>
+</ol>
+<p>默认为Flask</p>
+<p>3.获取app对象module属性</p>
+<p>默认为flask.app</p>
+<p>4.获取app.py文件所在路径</p>
+<ol start="5">
+<li>uuid</li>
+</ol>
+<p>6.get_machine_id获取</p>
+<pre><code>
+linux:cat /etc/machine-id
+
+docker中还得cat /proc/self/cgroup把第一行的拼接上去
+
+macOS: ioeg -c IOPlatformExpertDevice -d 2
+
+
+windows:HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/Cryptography/MachineGuid
 </code></pre>
 
         </div>
