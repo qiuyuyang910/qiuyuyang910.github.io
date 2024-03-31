@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-27T07:42:32.427Z</updated>
+  <updated>2024-03-30T16:08:12.742Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ctf-ssti-labs</title>
+    <link href="http://example.com/posts/da9d76f1.html"/>
+    <id>http://example.com/posts/da9d76f1.html</id>
+    <published>2024-03-30T05:38:32.000Z</published>
+    <updated>2024-03-30T16:08:12.742Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;本文有些地方疯狂抄&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>nkctf2024-wp</title>
@@ -114,7 +137,7 @@
     <link href="http://example.com/posts/81825c14.html"/>
     <id>http://example.com/posts/81825c14.html</id>
     <published>2024-02-29T15:20:13.000Z</published>
-    <updated>2024-03-29T15:19:33.660Z</updated>
+    <updated>2024-03-30T16:07:30.894Z</updated>
     
     
       
@@ -208,7 +231,7 @@
     <link href="http://example.com/posts/2a9bc4e1.html"/>
     <id>http://example.com/posts/2a9bc4e1.html</id>
     <published>2024-01-01T15:08:58.000Z</published>
-    <updated>2024-03-28T07:31:13.130Z</updated>
+    <updated>2024-03-31T16:03:48.166Z</updated>
     
     
       
@@ -465,29 +488,6 @@ sqlmap.py -u URL</summary>
     
     
     <category term="c语言" scheme="http://example.com/tags/c%E8%AF%AD%E8%A8%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>when2meet使用教程</title>
-    <link href="http://example.com/posts/4f5c6e7c.html"/>
-    <id>http://example.com/posts/4f5c6e7c.html</id>
-    <published>2023-09-25T15:55:06.000Z</published>
-    <updated>2023-09-26T13:11:44.259Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;什么是when2meet？&quot;&gt;&lt;a href=&quot;#什么是when2meet？&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
     
   </entry>
   
