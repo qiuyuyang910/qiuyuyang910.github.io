@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-30T16:08:12.742Z</updated>
+  <updated>2024-04-23T13:43:59.919Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,57 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>源码泄露</title>
+    <link href="http://example.com/posts/d16073cf.html"/>
+    <id>http://example.com/posts/d16073cf.html</id>
+    <published>2024-04-18T04:24:23.000Z</published>
+    <updated>2024-04-23T13:43:59.919Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;git源码泄露&quot;&gt;&lt;a href=&quot;#git源码泄露&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>BUUCTF</title>
+    <link href="http://example.com/posts/ccc6fa83.html"/>
+    <id>http://example.com/posts/ccc6fa83.html</id>
+    <published>2024-03-31T16:07:57.000Z</published>
+    <updated>2024-04-23T13:43:59.916Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;HCTF-2018-WarmUp&quot;&gt;&lt;a href=&quot;#HCTF-2018-WarmUp&quot; class=&quot;headerlink&quot; title=&quot;[HCTF 2018]WarmUp&quot;&gt;&lt;/a&gt;[HCTF</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>ctf-ssti-labs</title>
     <link href="http://example.com/posts/da9d76f1.html"/>
     <id>http://example.com/posts/da9d76f1.html</id>
     <published>2024-03-30T05:38:32.000Z</published>
-    <updated>2024-03-30T16:08:12.742Z</updated>
+    <updated>2024-04-03T10:54:05.981Z</updated>
     
     
       
@@ -184,7 +230,7 @@
     <link href="http://example.com/posts/9a7e4e5d.html"/>
     <id>http://example.com/posts/9a7e4e5d.html</id>
     <published>2024-01-18T04:35:01.000Z</published>
-    <updated>2024-03-28T07:30:57.863Z</updated>
+    <updated>2024-04-22T09:01:47.599Z</updated>
     
     
       
@@ -231,7 +277,7 @@
     <link href="http://example.com/posts/2a9bc4e1.html"/>
     <id>http://example.com/posts/2a9bc4e1.html</id>
     <published>2024-01-01T15:08:58.000Z</published>
-    <updated>2024-03-31T16:03:48.166Z</updated>
+    <updated>2024-04-16T15:32:57.092Z</updated>
     
     
       
@@ -420,7 +466,7 @@
     <link href="http://example.com/posts/56dc4975.html"/>
     <id>http://example.com/posts/56dc4975.html</id>
     <published>2023-11-01T13:50:43.000Z</published>
-    <updated>2024-03-13T06:13:01.277Z</updated>
+    <updated>2024-04-17T23:13:31.890Z</updated>
     
     
       
@@ -440,54 +486,6 @@ sqlmap.py -u URL</summary>
     
     
     <category term="web" scheme="http://example.com/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mysql笔记+常用指令</title>
-    <link href="http://example.com/posts/1b45149e.html"/>
-    <id>http://example.com/posts/1b45149e.html</id>
-    <published>2023-10-19T06:43:14.000Z</published>
-    <updated>2023-10-21T03:09:42.811Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;写写学习笔记，绝大多数的内容都可以在&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>c语言备忘录</title>
-    <link href="http://example.com/posts/514181d1.html"/>
-    <id>http://example.com/posts/514181d1.html</id>
-    <published>2023-10-13T05:46:38.000Z</published>
-    <updated>2023-12-10T11:58:38.418Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;在学习的过程中，我或多或少会遇到一些问题，当我解决后，希望留个方便的地方记录一下，方便以后查找，故写下此备忘录。</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-    <category term="c语言" scheme="http://example.com/tags/c%E8%AF%AD%E8%A8%80/"/>
     
   </entry>
   

