@@ -404,12 +404,13 @@
 <p>既这个类中存在这个函数，却调用他就会触发</p>
 <h2 id="callStatic"><a href="#callStatic" class="headerlink" title="__callStatic()"></a>__callStatic()</h2><p>触发时机：静态调用或调用成员常量时使用的方法不存在</p>
 <p><img src="https://article.biliimg.com/bfs/article/059f106a1158c4776e925f97633913b4290349942.png"></p>
-<h2 id="get"><a href="#get" class="headerlink" title="__get()"></a>__get()</h2><p>触发时机：调用的成员属性不存在<br>参数：传参$arg1<br>返回值：不存在的成员属性的名称</p>
+<h2 id="get"><a href="#get" class="headerlink" title="__get()"></a>__get()</h2><p>当有__get()函数时，每次调用属性都将调用这个魔术方法，所以每次调用都会触发<br>触发时机：调用的成员属性不存在<br>参数：传参$arg1<br>返回值：不存在的成员属性的名称</p>
 <p><img src="https://article.biliimg.com/bfs/article/e42209219be3f09a12045c28eb3b0dfd290349942.png"></p>
 <h2 id="set"><a href="#set" class="headerlink" title="__set()"></a>__set()</h2><p><img src="https://article.biliimg.com/bfs/article/7651dc536e2a7b1d6922412d26a49626290349942.png"><br>触发时机：给不存在的成员属性赋值</p>
 <h2 id="isset"><a href="#isset" class="headerlink" title="__isset()"></a>__isset()</h2><p><img src="https://article.biliimg.com/bfs/article/ce2c20e04d0dccf7590cd0e36ae89995290349942.png"></p>
 <h2 id="unset"><a href="#unset" class="headerlink" title="__unset()"></a>__unset()</h2><p><img src="https://article.biliimg.com/bfs/article/4584ffc19e0ad73b4eb0300bed776077290349942.png"></p>
 <h2 id="clone"><a href="#clone" class="headerlink" title="__clone()"></a>__clone()</h2><p><img src="https://article.biliimg.com/bfs/article/cae326f193dca3a05a505187e8da803d290349942.png"></p>
+<h2 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="__toString()"></a>__toString()</h2><p>当<code>echo</code> 或者<code>.</code>拼接对象时会调用这个魔术方法</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="https://article.biliimg.com/bfs/article/3a4f3c43dbe7551b63d1ba0acb9644b2290349942.png"></p>
 <p><img src="https://article.biliimg.com/bfs/article/378faea7aae4a78746ce142000513a65290349942.png"></p>
 <h1 id="构造pop链"><a href="#构造pop链" class="headerlink" title="构造pop链"></a>构造pop链</h1><p>如果存在私有属性，则需要url加密</p>

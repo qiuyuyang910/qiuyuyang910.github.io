@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-04-23T13:43:59.919Z</updated>
+  <updated>2024-04-24T13:51:43.322Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,58 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>无参数rce</title>
+    <link href="http://example.com/posts/80ce2980.html"/>
+    <id>http://example.com/posts/80ce2980.html</id>
+    <published>2024-04-24T13:18:14.000Z</published>
+    <updated>2024-04-24T13:51:43.322Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>php伪协议</title>
+    <link href="http://example.com/posts/5a47ecbe.html"/>
+    <id>http://example.com/posts/5a47ecbe.html</id>
+    <published>2024-04-24T09:32:27.000Z</published>
+    <updated>2024-04-30T04:46:59.760Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://segmentfault.com/a/1190000018991087#item-4&quot;&gt;抄的这篇&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;file-协议&quot;&gt;&lt;a href=&quot;#file-协议&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>源码泄露</title>
     <link href="http://example.com/posts/d16073cf.html"/>
     <id>http://example.com/posts/d16073cf.html</id>
     <published>2024-04-18T04:24:23.000Z</published>
-    <updated>2024-04-23T13:43:59.919Z</updated>
+    <updated>2024-04-30T09:14:57.184Z</updated>
     
     
       
@@ -44,7 +91,7 @@
     <link href="http://example.com/posts/ccc6fa83.html"/>
     <id>http://example.com/posts/ccc6fa83.html</id>
     <published>2024-03-31T16:07:57.000Z</published>
-    <updated>2024-04-23T13:43:59.916Z</updated>
+    <updated>2024-04-30T12:45:18.247Z</updated>
     
     
       
@@ -183,7 +230,7 @@
     <link href="http://example.com/posts/81825c14.html"/>
     <id>http://example.com/posts/81825c14.html</id>
     <published>2024-02-29T15:20:13.000Z</published>
-    <updated>2024-03-30T16:07:30.894Z</updated>
+    <updated>2024-04-30T12:38:56.005Z</updated>
     
     
       
@@ -277,7 +324,7 @@
     <link href="http://example.com/posts/2a9bc4e1.html"/>
     <id>http://example.com/posts/2a9bc4e1.html</id>
     <published>2024-01-01T15:08:58.000Z</published>
-    <updated>2024-04-16T15:32:57.092Z</updated>
+    <updated>2024-04-30T05:18:32.716Z</updated>
     
     
       
@@ -325,7 +372,7 @@
     <link href="http://example.com/posts/c86b92e2.html"/>
     <id>http://example.com/posts/c86b92e2.html</id>
     <published>2023-12-25T11:40:01.000Z</published>
-    <updated>2024-01-25T05:34:53.665Z</updated>
+    <updated>2024-04-24T13:52:25.559Z</updated>
     
     
       
@@ -350,7 +397,7 @@
     <link href="http://example.com/posts/aa5c80ac.html"/>
     <id>http://example.com/posts/aa5c80ac.html</id>
     <published>2023-12-04T14:10:33.000Z</published>
-    <updated>2024-03-04T14:49:42.617Z</updated>
+    <updated>2024-04-30T15:47:32.718Z</updated>
     
     
       
@@ -435,57 +482,6 @@
     
     <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>vmware虚拟机从安装到卸载</title>
-    <link href="http://example.com/posts/ce002309.html"/>
-    <id>http://example.com/posts/ce002309.html</id>
-    <published>2023-11-03T11:37:40.000Z</published>
-    <updated>2023-11-05T03:09:56.459Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;VMware-的下载&quot;&gt;&lt;a href=&quot;#VMware-的下载&quot; class=&quot;headerlink&quot; title=&quot;VMware 的下载&quot;&gt;&lt;/a&gt;VMware 的下载&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>sql注入笔记</title>
-    <link href="http://example.com/posts/56dc4975.html"/>
-    <id>http://example.com/posts/56dc4975.html</id>
-    <published>2023-11-01T13:50:43.000Z</published>
-    <updated>2024-04-17T23:13:31.890Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://www.freebuf.com/sectool/164608.html&quot;&gt;sqlmap&lt;/a&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;shell&quot;&gt;sqlmap.py -u URL --forms
-
-sqlmap.py -u URL</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-    <category term="web" scheme="http://example.com/tags/web/"/>
     
   </entry>
   

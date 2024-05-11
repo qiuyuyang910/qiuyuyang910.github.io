@@ -506,6 +506,41 @@ echo $_;
 <p>得到之后使用<code>vim</code>即可恢复</p>
 <pre><code class="shell">vim -r .index.swp
 </code></pre>
+<h1 id="preg-replace与代码执行"><a href="#preg-replace与代码执行" class="headerlink" title="preg_replace与代码执行"></a>preg_replace与代码执行</h1><pre><code class="php">preg_replace(
+    string|array $pattern,
+    string|array $replacement,
+    string|array $subject,
+    int $limit = -1,
+    int &amp;$count = null
+): string|array|null
+</code></pre>
+<p>搜索 <code>subject</code> 中匹配 <code>pattern</code> 的部分，以 <code>replacement</code> 进行替换。</p>
+<p><code>replacement</code> 中可以包含后向引用<code>\\n</code>或<code> $n</code>，语法上首选后者。 每个这样的引用将被匹配到的第 <code>n </code>个捕获子组捕获到的文本替换。 <code>n </code>可以是<code>0-99</code>，<code>\\0</code> 和 <code>$0</code> 代表完整的模式匹配文本。捕获子组的序号计数方式为：代表捕获子组的左括号从左到右， 从1开始数。如果要在 <code>replacement</code> 中使用反斜线，必须使用 4 个(“\\“，译注：因为这首先是 PHP 的字符串，经过转义后，是两个，再经过正则表达式引擎后才被认为是一个原文反斜线)。</p>
+<p><a href="https://err0r.top/article/preg_replace/">参考</a></p>
+<p>preg_replace &#x2F;e 模式下的代码执行问题</p>
+<pre><code class="php">function complex($re, $str) &#123;
+    return preg_replace(&#39;/(&#39; . $re . &#39;)/ei&#39;,&#39;strtolower(&quot;\\1&quot;)&#39;,$str);
+&#125;
+
+
+foreach($_GET as $re =&gt; $str) &#123;
+    echo complex($re, $str). &quot;\n&quot;;
+&#125;
+</code></pre>
+<p>preg_replace 函数在匹配到符号正则的字符串时，会将替换字符串（也就是上图 preg_replace 函数的第二个参数）当做代码来执行</p>
+<p>而这里面第二个参数含有<code>\1</code>那么他会将被匹配到的第 1 个捕获子组捕获到的文本替换,总之就是<code>\1</code>也被替换了，导致的命令执行<br>又因为特殊字符<code>.</code>会被替换成<code>_</code>所以我们这里传参是<code>\S*=</code>别问为啥是<code>\S</code>我不到啊<br>payload ： <code>\S*=$&#123;phpinfo()&#125;</code></p>
+<p>什么要匹配到<code> &#123;$&#123;phpinfo()&#125;&#125;</code> 或者 <code>$&#123;phpinfo()&#125;</code> ，才能执行 phpinfo 函数，这是一个小坑。这实际上是 PHP可变变量 的原因。在PHP中双引号包裹的字符串中可以解析变量，而单引号则不行。<code> $&#123;phpinfo()&#125;</code> 中的 <code>phpinfo()</code> 会被当做变量先执行，执行后，即变成 <code>$&#123;1&#125;</code> (phpinfo()成功执行返回true)。</p>
+<h1 id="escapeshellarg-和escapeshellcmd-同时使用导致的绕过"><a href="#escapeshellarg-和escapeshellcmd-同时使用导致的绕过" class="headerlink" title="escapeshellarg()和escapeshellcmd()同时使用导致的绕过"></a>escapeshellarg()和escapeshellcmd()同时使用导致的绕过</h1><p>escapeshellarg() 将给字符串增加一个单引号并且能引用或者转义任何已经存在的单引号，这样以确保能够直接将一个字符串传入 shell 函数，并且还是确保安全的</p>
+<p>escapeshellcmd() 对字符串中可能会欺骗 shell 命令执行任意命令的字符进行转义。 此函数保证用户输入的数据在传送到 exec() 或 system() 函数，或者 执行操作符 之前进行转义。</p>
+<p>反斜线（\）会在以下字符之前插入：&amp;#;&#96;|*?~&lt;&gt;^()[]{}$\、\x0A 和 \xFF。 ‘ 和 “ 仅在不配对儿的时候被转义。在 Windows 平台上，所有这些字符以及 % 和 ! 字符前面都有一个插入符号（^）。</p>
+<p>它们组合使用时就会造成漏洞(顺序不能改变)，就借用一个大佬的例子，通俗易懂。</p>
+<pre><code>传入的参数是：172.17.0.2&#39; -v -d a=1
+经过escapeshellarg处理后变成了&#39;172.17.0.2&#39;\&#39;&#39; -v -d a=1&#39;，即先对单引号转义，再用单引号将左右两部分括起来从而起到连接的作用。
+经过escapeshellcmd处理后变成&#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;，这是因为escapeshellcmd对\以及最后那个不配对儿的引号进行了转义：http://php.net/manual/zh/function.escapeshellcmd.php
+最后执行的命令是curl &#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;，由于中间的\\被解释为\而不再是转义字符，所以后面的&#39;没有被转义，与再后面的&#39;配对儿成了一个空白连接符。所以可以简化为curl 172.17.0.2\ -v -d a=1&#39;，即向172.17.0.2\发起请求，POST 数据为a=1&#39;。
+</code></pre>
+<p>也就是说，escapeshellcmd()函数转义了用于转义单引号的斜杠，导致这个单引号与后面的单引号形成了空白连接符就能执行命令了。</p>
+<h2 id="nmap构造命令"><a href="#nmap构造命令" class="headerlink" title="nmap构造命令"></a>nmap构造命令</h2><p>system函数里拼接了nmap的指令字符串。nmap中的-oG参数可以将代码与命令写到文件中，比如<code>nmap &lt;?php phpinfo();?&gt; -oG 1.php</code>，就是将这个<code>phpinfo()</code>;语句写在了1.php里内了。</p>
 
         </div>
         <!-- .entry-content -->

