@@ -5,7 +5,7 @@
   <meta name="referrer" content="no-referrer"/>
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">刷题-SWPUCTF 2022 新生赛 | 秋雨样的个人博客</title>
+  <title itemprop="name">NSSCTF | 秋雨样的个人博客</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -356,7 +356,7 @@
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      刷题-SWPUCTF 2022 新生赛</h1>
+      NSSCTF</h1>
       <p class="entry-census">
         <span>
           <a href="https://qiuyuyang.top/">
@@ -491,7 +491,26 @@ intval()函数用于字符串转整数，可以使十六进制转十进制用于
 
 intval()函数绕过，可以凭借字符串拼接绕过
 payload:?num=12345a
+
+# [GWCTF 2019]枯燥的抽奖
+
+PHP随机数预测
+
+使用php_mt_seed
+
+首先查看源码发现/check,可以发现生成逻辑,简单分析后就可以知道生成的前几位是什么,再生成php_mt_seed能识别的格式`match_min matchmax 0 range_max`,再用在线网站的生成即可
+
+```python
+str1=&quot;TWKZDu268g&quot;
+key=&quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
+finall=&quot;&quot;
+for i in str1:
+    num = key.index(i)
+    finall+=(str(num)+&quot; &quot;)*2+&#39;0&#39;+&quot; &quot;+str(len(key)-1)+&quot; &quot;
+print(finall)
 </code></pre>
+<p><img src="https://i0.hdslb.com/bfs/article/bb2310e924d13567478a5abdf7566fff290349942.png"></p>
+<p>再在在线网站运行就行，版本要求<code>PHP 7.1.0+</code></p>
 
         </div>
         <!-- .entry-content -->
