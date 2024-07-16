@@ -1047,7 +1047,7 @@ var home = location.href,
   s = $('#bgvideo')[0],
   Siren = {
     BSZ: function () {
-      $.getScript('https://busuanzi.icodeq.com/busuanzi.pure.mini.js')
+      $.getScript('//npm.elemecdn.com/penndu@1.0.0/bsz.js')
     },
     TOC: function () {
       if ($('.toc').length > 0 && document.body.clientWidth > 1200) {
@@ -1085,7 +1085,7 @@ var home = location.href,
             $('.toc').removeClass('toc-fixed')
           }
         }
-        $.getScript('https://busuanzi.icodeq.com/busuanzi.pure.mini.js');
+        $.getScript('//npm.elemecdn.com/penndu@1.0.0/bsz.js');
       }
     },
     AB: function () {
