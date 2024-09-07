@@ -504,8 +504,7 @@ while (t--) &#123;
 &#125;
 return 0;
 &#125;
-</code></pre>
-<p>bing的思路有点没看懂，他如是说到：</p>
+</code></pre><p>bing的思路有点没看懂，他如是说到：</p>
 <blockquote>
 <p>这段代码是一个C语言程序，它的作用是读取一些整数，计算它们的乘积，然后输出乘积的最大值。程序首先读取一个整数t，表示测试用例的数量。接下来，对于每个测试用例，程序会读取一个整数n，表示数组a的大小。然后程序会读取n个整数，存储在数组a中。接下来，程序会计算每个元素加1后的乘积（除了当前元素），并将其与当前元素的乘积相比较。如果当前元素的乘积大于最大乘积，则更新最大乘积。最后，程序输出最大乘积。<br>这段代码中使用了C语言标准库中的函数scanf和printf来读取和输出数据。scanf函数从标准输入流中读取数据，并将其存储在变量中。printf函数将数据格式化为字符串，并将其写入标准输出流中。<br>在这段代码中，变量t、n、a、max_product、product、i和j都是整型变量。变量t、n和a分别存储测试用例数量、数组大小和数组元素。变量max_product存储最大乘积，变量product存储当前元素加1后的乘积。变量i和j是循环计数器。<br>这段代码使用了两个for循环来遍历数组a中的所有元素，并计算它们的乘积。外部循环遍历数组a中的所有元素，内部循环计算每个元素加1后的乘积（除了当前元素），并将其与当前元素的乘积相比较。如果当前元素的乘积大于最大乘积，则更新最大乘积。<br>请注意，在这段代码中，数组a的大小是在运行时动态分配的，因此它必须是一个变长数组（VLA）。这意味着它只能在C99或更高版本中使用。</p>
 </blockquote>
@@ -545,8 +544,7 @@ for (; t &gt; 0; t--)
     solve();
 return 0;
 &#125;
-</code></pre>
-<h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><p><a href="https://codeforces.com/contest/1873/problem/D" title="题目">https://codeforces.com/contest/1873/problem/D</a><br>d就相对简单了，目标是将B变为W需要的次数，唯一要小心的是有肯能用a[]时有溢出，我是将遇到B后将后几位全部变为W再次从头搜索B。</p>
+</code></pre><h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><p><a href="https://codeforces.com/contest/1873/problem/D" title="题目">https://codeforces.com/contest/1873/problem/D</a><br>d就相对简单了，目标是将B变为W需要的次数，唯一要小心的是有肯能用a[]时有溢出，我是将遇到B后将后几位全部变为W再次从头搜索B。</p>
 <h1 id="E"><a href="#E" class="headerlink" title="E"></a>E</h1><p><a href="https://codeforces.com/contest/1873/problem/E" title="题目">https://codeforces.com/contest/1873/problem/E</a><br>我用for 循环遍历，结果超时<br>用嵌套循环遇见数据量小的还好说，数据量大的就会直接超时，做不出来原因还是没有想出好的算法，我后面想用二分法解决，但没想到啥实现办法，贴一个我自己的错误代码</p>
 <pre><code>#include&lt;stdio.h&gt;
 void m(int b ,int c)&#123;
@@ -565,7 +563,7 @@ for(int i=1;;i++)&#123;//for嵌套循环
     if(j&gt;c)
     break;
     else j =0;
-    
+
 &#125;
 printf(&quot;%d\n&quot;,k-1);
 return;
@@ -581,8 +579,7 @@ scanf(&quot;%d%d&quot;,&amp;b,&amp;c);
 m(b,c);
 &#125;
 &#125;
-</code></pre>
-<p>我看ac有人用二分法做出来了，贴一个</p>
+</code></pre><p>我看ac有人用二分法做出来了，贴一个</p>
 <pre><code>#include&lt;stdio.h&gt;
 long long int a[200005];
 void solve()
@@ -617,8 +614,7 @@ return;
     solve();
 return 0;
 &#125;
-</code></pre>
-<p>这就给我提供了一个二分法的思路，设极小值-1，极大值le10 用max-min&gt;1做判断也真理解到了什么叫不开long long见族宗了，真就学到了，然后我写了一遍，结果不对，看来还是没有完全理解</p>
+</code></pre><p>这就给我提供了一个二分法的思路，设极小值-1，极大值le10 用max-min&gt;1做判断也真理解到了什么叫不开long long见族宗了，真就学到了，然后我写了一遍，结果不对，看来还是没有完全理解</p>
 
         </div>
         <!-- .entry-content -->

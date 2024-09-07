@@ -473,12 +473,11 @@
 <p>Problem: <a href="https://www.nssctf.cn/problem/2629">[SWPUCTF 2022 新生赛]Capture!</a></p>
 </blockquote>
 <p>[[toc]]</p>
-<p><img src="https://i0.hdslb.com/bfs/article/4cfe06d444e7fa90e5aac08630682e30290349942.png"></p>
-<p>修改高度得part1<br><img src="https://i0.hdslb.com/bfs/article/5da467b53c39aea81fab1e34c7a476a3290349942.png"></p>
+<p><img src="https://i0.hdslb.com/bfs/article/4cfe06d444e7fa90e5aac08630682e30290349942.png" alt=""></p>
+<p>修改高度得part1<br><img src="https://i0.hdslb.com/bfs/article/5da467b53c39aea81fab1e34c7a476a3290349942.png" alt=""></p>
 <p>再LSB隐写一把梭</p>
 <pre><code>zsteg -a flag.png #一把梭
-</code></pre>
-<p><img src="https://i0.hdslb.com/bfs/article/f8a81a54a36f279b1e06820b7443db88290349942.png"></p>
+</code></pre><p><img src="https://i0.hdslb.com/bfs/article/f8a81a54a36f279b1e06820b7443db88290349942.png" alt=""></p>
 <p>猜测base64，无果</p>
 <p>再颠倒顺序即可解出</p>
 <h1 id="SWPUCTF-2022-新生赛-Cycle-Again"><a href="#SWPUCTF-2022-新生赛-Cycle-Again" class="headerlink" title="[SWPUCTF 2022 新生赛]Cycle Again"></a>[SWPUCTF 2022 新生赛]Cycle Again</h1><blockquote>
@@ -486,7 +485,7 @@
 </blockquote>
 <p>先用010查看图片发现图片的宽和高为零即可知是crc爆破</p>
 <p>再用脚本crc爆破</p>
-<pre><code class="python">
+<pre><code class="lang-python">
 import binascii
 import struct
 
@@ -512,20 +511,18 @@ output:
 <p>再用crc爆破压缩包即可获得part2</p>
 <p><a href="https://github.com/AabyssZG/CRC32-Tools">crc脚本</a></p>
 <h1 id="SWPUCTF-2022-新生赛-Coffee-Please"><a href="#SWPUCTF-2022-新生赛-Coffee-Please" class="headerlink" title="[SWPUCTF 2022 新生赛]Coffee Please"></a>[SWPUCTF 2022 新生赛]Coffee Please</h1><p>解压文档</p>
-<p>使用vscode 搜索<br><img src="https://i0.hdslb.com/bfs/article/e2215a82e35c0af1863a4edc082e76cd290349942.png"></p>
-<p><img src="https://i0.hdslb.com/bfs/article/5301aa53887af72f1ca8a250c781fe83290349942.png"></p>
-<p><img src="https://i0.hdslb.com/bfs/article/3a4aad266214e1f640863876b7e61ce6290349942.png"></p>
+<p>使用vscode 搜索<br><img src="https://i0.hdslb.com/bfs/article/e2215a82e35c0af1863a4edc082e76cd290349942.png" alt=""></p>
+<p><img src="https://i0.hdslb.com/bfs/article/5301aa53887af72f1ca8a250c781fe83290349942.png" alt=""></p>
+<p><img src="https://i0.hdslb.com/bfs/article/3a4aad266214e1f640863876b7e61ce6290349942.png" alt=""></p>
 <p>即可得到flag</p>
 <blockquote>
 <p>NSSCTF{8ff8a53a-9378-4e78-b54a-ef86e8c84432}</p>
-</blockquote>
-<blockquote>
 <p>Problem: <a href="https://www.nssctf.cn/problem/2632">[SWPUCTF 2022 新生赛]Convert Something</a></p>
 </blockquote>
 <h1 id="SWPUCTF-2022-新生赛-Convert-Something"><a href="#SWPUCTF-2022-新生赛-Convert-Something" class="headerlink" title="[SWPUCTF 2022 新生赛]Convert Something"></a>[SWPUCTF 2022 新生赛]Convert Something</h1><p>零宽隐写+base64隐写</p>
 <p>零宽隐写<br><a href="https://yuanfux.github.io/zero-width-web/">网站</a></p>
 <p>base64隐写脚本</p>
-<pre><code class="python">import base64
+<pre><code class="lang-python">import base64
 def get_base64_diff_value(s1, s2):
     base64chars = &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&#39;
     res = 0
@@ -555,40 +552,21 @@ def solve_stego():
 
 if __name__==&#39;__main__&#39;:
     solve_stego()
-    ```
-    
-# [SWPUCTF 2022 新生赛]Does your nc work？
-
-
-&gt;https://www.nssctf.cn/problem/2633
-
-
-nc 连接签到题，注意不要用windows连接就行
-
-
-# [SWPUCTF 2022 新生赛]funny_web
-&gt; Problem: [[SWPUCTF 2022 新生赛]funny_web](https://www.nssctf.cn/problem/2637)
-
-账号NSS
-密码2122693401
-
-
-intval()函数用于字符串转整数，可以使十六进制转十进制用于绕过数字过滤
-
-
-intval()函数绕过，可以凭借字符串拼接绕过
-payload:?num=12345a
-
-# [GWCTF 2019]枯燥的抽奖
-
-PHP随机数预测
-
-使用php_mt_seed
-
-首先查看源码发现/check,可以发现生成逻辑,简单分析后就可以知道生成的前几位是什么,再生成php_mt_seed能识别的格式`match_min matchmax 0 range_max`,再用在线网站的生成即可
-
-```python
-str1=&quot;TWKZDu268g&quot;
+</code></pre>
+<h1 id="SWPUCTF-2022-新生赛-Does-your-nc-work？"><a href="#SWPUCTF-2022-新生赛-Does-your-nc-work？" class="headerlink" title="[SWPUCTF 2022 新生赛]Does your nc work？"></a>[SWPUCTF 2022 新生赛]Does your nc work？</h1><blockquote>
+<p><a href="https://www.nssctf.cn/problem/2633">https://www.nssctf.cn/problem/2633</a></p>
+</blockquote>
+<p>nc 连接签到题，注意不要用windows连接就行</p>
+<h1 id="SWPUCTF-2022-新生赛-funny-web"><a href="#SWPUCTF-2022-新生赛-funny-web" class="headerlink" title="[SWPUCTF 2022 新生赛]funny_web"></a>[SWPUCTF 2022 新生赛]funny_web</h1><blockquote>
+<p>Problem: <a href="https://www.nssctf.cn/problem/2637">[SWPUCTF 2022 新生赛]funny_web</a></p>
+</blockquote>
+<p>账号NSS<br>密码2122693401</p>
+<p>intval()函数用于字符串转整数，可以使十六进制转十进制用于绕过数字过滤</p>
+<p>intval()函数绕过，可以凭借字符串拼接绕过<br>payload:?num=12345a</p>
+<h1 id="GWCTF-2019-枯燥的抽奖"><a href="#GWCTF-2019-枯燥的抽奖" class="headerlink" title="[GWCTF 2019]枯燥的抽奖"></a>[GWCTF 2019]枯燥的抽奖</h1><p>PHP随机数预测</p>
+<p>使用php_mt_seed</p>
+<p>首先查看源码发现/check,可以发现生成逻辑,简单分析后就可以知道生成的前几位是什么,再生成php_mt_seed能识别的格式<code>match_min matchmax 0 range_max</code>,再用在线网站的生成即可</p>
+<pre><code class="lang-python">str1=&quot;TWKZDu268g&quot;
 key=&quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
 finall=&quot;&quot;
 for i in str1:
@@ -596,7 +574,7 @@ for i in str1:
     finall+=(str(num)+&quot; &quot;)*2+&#39;0&#39;+&quot; &quot;+str(len(key)-1)+&quot; &quot;
 print(finall)
 </code></pre>
-<p><img src="https://i0.hdslb.com/bfs/article/bb2310e924d13567478a5abdf7566fff290349942.png"></p>
+<p><img src="https://i0.hdslb.com/bfs/article/bb2310e924d13567478a5abdf7566fff290349942.png" alt=""></p>
 <p>再在在线网站运行就行，版本要求<code>PHP 7.1.0+</code></p>
 
         </div>

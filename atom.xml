@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-05-11T14:25:00.766Z</updated>
+  <updated>2024-09-07T09:41:49.755Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test</title>
+    <link href="http://example.com/posts/d87f7e0c.html"/>
+    <id>http://example.com/posts/d87f7e0c.html</id>
+    <published>2024-09-07T09:40:20.000Z</published>
+    <updated>2024-09-07T09:41:49.755Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+i&#92;hbar&#92;frac{&#92;partial}{&#92;partial</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>无参数rce</title>
@@ -68,7 +92,7 @@
     <link href="http://example.com/posts/d16073cf.html"/>
     <id>http://example.com/posts/d16073cf.html</id>
     <published>2024-04-18T04:24:23.000Z</published>
-    <updated>2024-04-30T09:14:57.184Z</updated>
+    <updated>2024-09-04T09:29:53.274Z</updated>
     
     
       
@@ -277,7 +301,7 @@
     <link href="http://example.com/posts/9a7e4e5d.html"/>
     <id>http://example.com/posts/9a7e4e5d.html</id>
     <published>2024-01-18T04:35:01.000Z</published>
-    <updated>2024-04-22T09:01:47.599Z</updated>
+    <updated>2024-08-21T07:48:38.733Z</updated>
     
     
       
@@ -452,29 +476,6 @@
         
         
     <summary type="html">&lt;h1 id=&quot;2023-dxs-web1&quot;&gt;&lt;a href=&quot;#2023-dxs-web1&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>网安day1+web基础</title>
-    <link href="http://example.com/posts/1327a661.html"/>
-    <id>http://example.com/posts/1327a661.html</id>
-    <published>2023-11-04T14:00:13.000Z</published>
-    <updated>2023-11-06T12:11:59.851Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;常见的服务器系统&quot;&gt;&lt;a href=&quot;#常见的服务器系统&quot; class=&quot;headerlink&quot; title=&quot;常见的服务器系统&quot;&gt;&lt;/a&gt;常见的服务器系统&lt;/h1&gt;&lt;p&gt;Windows</summary>
         
       
     

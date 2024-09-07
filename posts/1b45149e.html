@@ -475,22 +475,15 @@
 mysqladmin -uroot -p password #修改密码
 USE test;#选择数据库
 CREATE DATABASE test;#创建一个已知不存在的数据库
-</code></pre>
-<p>为了不产生错误，在创建数据库的时候可以加上一些简单的逻辑判断，判断数据库是否存在，不存在也不产生错误。会产生一个警告</p>
+</code></pre><p>为了不产生错误，在创建数据库的时候可以加上一些简单的逻辑判断，判断数据库是否存在，不存在也不产生错误。会产生一个警告</p>
 <pre><code>CREATE DATABASE if not  exists test;
-</code></pre>
-<p>使用普通用户登陆 MySQL 服务器，你可能需要特定的权限来创建或者删除 MySQL 数据库。所以我们这边使用root用户登录，root用户拥有最高权限，可以使用 mysql mysqladmin 命令来创建数据库。</p>
+</code></pre><p>使用普通用户登陆 MySQL 服务器，你可能需要特定的权限来创建或者删除 MySQL 数据库。所以我们这边使用root用户登录，root用户拥有最高权限，可以使用 mysql mysqladmin 命令来创建数据库。</p>
 <pre><code>mysqladmin -uroot -p create test
-</code></pre>
-<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><h4 id="删除一个已经确定存在的数据库"><a href="#删除一个已经确定存在的数据库" class="headerlink" title="删除一个已经确定存在的数据库"></a>删除一个已经确定存在的数据库</h4><pre><code>DROP DATABASE test2;
-</code></pre>
-<h4 id="删除一个不确定存在的数据库"><a href="#删除一个不确定存在的数据库" class="headerlink" title="删除一个不确定存在的数据库"></a>删除一个不确定存在的数据库</h4><pre><code>drop database if exists test2;
-</code></pre>
-<h4 id="管理工具删除"><a href="#管理工具删除" class="headerlink" title="管理工具删除"></a>管理工具删除</h4><pre><code>mysqladmin -uroot -p drop test
-</code></pre>
-<h3 id="查看存储引擎"><a href="#查看存储引擎" class="headerlink" title="查看存储引擎"></a>查看存储引擎</h3><pre><code>SHOW VARIABLES LIKE &#39;%storage_engine%&#39;;
-</code></pre>
-<h3 id="创建table"><a href="#创建table" class="headerlink" title="创建table"></a>创建table</h3><pre><code>-- 如果数据库中存在user_accounts表，就把它从数据库中drop掉
+</code></pre><h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><h4 id="删除一个已经确定存在的数据库"><a href="#删除一个已经确定存在的数据库" class="headerlink" title="删除一个已经确定存在的数据库"></a>删除一个已经确定存在的数据库</h4><pre><code>DROP DATABASE test2;
+</code></pre><h4 id="删除一个不确定存在的数据库"><a href="#删除一个不确定存在的数据库" class="headerlink" title="删除一个不确定存在的数据库"></a>删除一个不确定存在的数据库</h4><pre><code>drop database if exists test2;
+</code></pre><h4 id="管理工具删除"><a href="#管理工具删除" class="headerlink" title="管理工具删除"></a>管理工具删除</h4><pre><code>mysqladmin -uroot -p drop test
+</code></pre><h3 id="查看存储引擎"><a href="#查看存储引擎" class="headerlink" title="查看存储引擎"></a>查看存储引擎</h3><pre><code>SHOW VARIABLES LIKE &#39;%storage_engine%&#39;;
+</code></pre><h3 id="创建table"><a href="#创建table" class="headerlink" title="创建table"></a>创建table</h3><pre><code>-- 如果数据库中存在user_accounts表，就把它从数据库中drop掉
 DROP TABLE IF EXISTS `user_accounts`;
 CREATE TABLE `user_accounts` (
   `id`             int(100) unsigned NOT NULL AUTO_INCREMENT primary key,
@@ -504,15 +497,13 @@ CREATE TABLE `user_accounts` (
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8
 COMMENT=&#39;用户表信息&#39;;
-</code></pre>
-<p>需要注意的是，在我用的版本5.5.xx中，current_timestamp在一个表中是不能有第二的，这个大坑让我排了很久…..</p>
+</code></pre><p>需要注意的是，在我用的版本5.5.xx中，current_timestamp在一个表中是不能有第二的，这个大坑让我排了很久…..</p>
 <p>数据类型的属性解释</p>
 <p><code>NULL</code>：数据列可包含NULL值；<br><code>NOT NULL</code>：数据列不允许包含NULL值；<br><code>DEFAULT</code>：默认值；<br><code>PRIMARY KEY</code>：主键；<br><code>AUTO_INCREMENT</code>：自动递增，适用于整数类型；<br><code>UNSIGNED</code>：是指数值类型只能为正数；<br><code>CHARACTER SET name</code>：指定一个字符集；<br><code>COMMENT</code>：对表或者字段说明；</p>
 <h3 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h3><h4 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h4><p><code>SELECT</code> 语法 语句用于从表中<del>选取数据</del>。也就是查看数据</p>
 <pre><code>SELECT 列名称1, 列名称2, ... FROM 表名称;
 SELECT * FROM 表名称;
-</code></pre>
-<pre><code>-- 从 Customers 表中选择 CustomerName 和 City 列：
+</code></pre><pre><code>-- 从 Customers 表中选择 CustomerName 和 City 列：
 SELECT CustomerName, City FROM Customers;
 -- 从 Customers 表中选择所有列：
 SELECT * FROM Customers;
@@ -530,21 +521,17 @@ SELECT p.LastName, p.FirstName, o.OrderNo FROM Persons p, Orders o WHERE p.Id_P 
 -- ci是 case insensitive, 即 “大小写不敏感”
 SELECT tag, COUNT(tag) from news GROUP BY tag order by convert(tag using gbk) collate gbk_chinese_ci;
 SELECT tag, COUNT(tag) from news GROUP BY tag order by convert(tag using utf8) collate utf8_unicode_ci;
-</code></pre>
-<h4 id="UPDATE"><a href="#UPDATE" class="headerlink" title="UPDATE"></a>UPDATE</h4><p><code>Update</code> 语法 语句用于修改表中的数据。</p>
+</code></pre><h4 id="UPDATE"><a href="#UPDATE" class="headerlink" title="UPDATE"></a>UPDATE</h4><p><code>Update</code> 语法 语句用于修改表中的数据。</p>
 <pre><code>UPDATE 表名称 SET 列名称1 = 值1, 列名称2 = 值2, ... WHERE 条件;
-</code></pre>
-<pre><code>-- update语句设置字段值为另一个结果取出来的字段
+</code></pre><pre><code>-- update语句设置字段值为另一个结果取出来的字段
 UPDATE user set name = (SELECT name from user1 WHERE user1 .id = 1 )
 WHERE id = (SELECT id from user2 WHERE user2 .name=&#39;小苏&#39;);
 -- 更新表 orders 中 id=1 的那一行数据更新它的 title 字段
 UPDATE `orders` set title=&#39;这里是标题&#39; WHERE id=1;
-</code></pre>
-<h4 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h4><p><code>INSERT</code> 语法 用于向表格中插入新的行。</p>
+</code></pre><h4 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h4><p><code>INSERT</code> 语法 用于向表格中插入新的行。</p>
 <pre><code>INSERT INTO 表名称 (列名称1, 列名称2, 列名称3, ...) VALUES (值1, 值2, 值3, ...);
 INSERT INTO 表名称 VALUES (值1, 值2, 值3, ...);
-</code></pre>
-<pre><code>-- 向表 Persons 插入一条字段 LastName = JSLite 字段 Address = shanghai
+</code></pre><pre><code>-- 向表 Persons 插入一条字段 LastName = JSLite 字段 Address = shanghai
 INSERT INTO Persons (LastName, Address) VALUES (&#39;JSLite&#39;, &#39;shanghai&#39;);
 -- 向表 meeting 插入 字段 a=1 和字段 b=2
 INSERT INTO meeting SET a=1,b=2;
@@ -556,99 +543,103 @@ INSERT INTO orders (user_account_id, title) SELECT m.user_id, m.title FROM meeti
 
 -- 向表 charger 插入一条数据，已存在就对表 charger 更新 `type`,`update_at` 字段；
 INSERT INTO `charger` (`id`,`type`,`create_at`,`update_at`) VALUES (3,2,&#39;2017-05-18 11:06:17&#39;,&#39;2017-05-18 11:06:17&#39;) ON DUPLICATE KEY UPDATE `id`=VALUES(`id`), `type`=VALUES(`type`), `update_at`=VALUES(`update_at`);
-</code></pre>
-<h4 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h4><p><code>DELETE</code> 语法 语句用于删除表中的现有记录</p>
+</code></pre><h4 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h4><p><code>DELETE</code> 语法 语句用于删除表中的现有记录</p>
 <pre><code>DELETE FROM 表名称 WHERE 条件;
-</code></pre>
-<pre><code class="--">DELETE FROM table_name
--- 或者
-DELETE * FROM table_name
--- 删除 Person 表字段 LastName = &#39;JSLite&#39; 
-DELETE FROM Person WHERE LastName = &#39;JSLite&#39; 
--- 删除 表meeting id 为2和3的两条数据
-DELETE from meeting where id in (2,3);
-</code></pre>
-<h4 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h4><p><code>WHERE</code> 语法 用于仅提取满足指定条件的记录</p>
-<pre><code>SELECT 列名称, 列名称, ... FROM 表名称 WHERE 条件1;
-</code></pre>
-<pre><code>-- 从表 Persons 中选出 Year 字段大于 1965 的数据
-SELECT * FROM Persons WHERE Year&gt;1965
--- 从 Customers 表中选择 Country = Mexico 的所有数据：
-SELECT * FROM Customers WHERE Country=&#39;Mexico&#39;;
--- 从 Customers 表中选择 CustomerID = 1 的所有数据：
-SELECT * FROM Customers WHERE CustomerID=1;
-</code></pre>
-<h3 id="AND-OR-和-NOT"><a href="#AND-OR-和-NOT" class="headerlink" title="AND, OR 和 NOT"></a>AND, OR 和 NOT</h3><p>就和不同and or not 没啥区别</p>
-<h3 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h3><p><code>ORDER BY</code> 语法 用于按升序或降序对结果集进行排序</p>
-<p>默认按 <code>ASC</code> 升序对记录进行排序。要按降序对记录进行排序，请使用 <code>DESC</code> 关键字</p>
-<p><a href="https://wangchujiang.com/mysql-tutorial/21-minutes-MySQL-basic-entry.html#order-by">不会点这里</a></p>
-<h3 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h3><p>暂时没搞懂~</p>
-<p><code>GROUP BY</code> 语法 将具有相同值的行分组到汇总行中</p>
-<pre><code>SELECT 列名称(s)
-FROM 表名称
-WHERE 条件
-GROUP BY 列名称(s)
-ORDER BY 列名称(s);
-</code></pre>
-<h3 id="IN"><a href="#IN" class="headerlink" title="IN"></a>IN</h3><p><code>IN 语法</code> 是多个 OR 条件的简写</p>
-<h3 id="UNION"><a href="#UNION" class="headerlink" title="UNION"></a>UNION</h3><p><code>UNION</code> 语法 操作符用于合并两个或多个 SELECT 语句的结果集</p>
-<pre><code>SELECT 列名称(s) FROM 表名称1
-UNION
-SELECT 列名称(s) FROM 表名称2;
-</code></pre>
-<h3 id="BETWEEN"><a href="#BETWEEN" class="headerlink" title="BETWEEN"></a>BETWEEN</h3><p>每错，就是between and</p>
-<pre><code>SELECT 列名称(s) FROM 表名称 WHERE 列名称 BETWEEN 值1 AND 值2;
-</code></pre>
-<h3 id="AS"><a href="#AS" class="headerlink" title="AS"></a>AS</h3><p><code>AS 语法</code> 用于为表或表中的列(字段)提供临时名称(别名)。</p>
-<pre><code>SELECT 列名称 AS 别名 FROM 表名称;
-SELECT 列名称(s) FROM 表名称 AS 别名;
-</code></pre>
-<h3 id="JOIN"><a href="#JOIN" class="headerlink" title="JOIN"></a>JOIN</h3><p><code>JOIN</code> 子句用于根据两个或多个表之间的相关列组合来自两个或多个表的行</p>
-<p><code>JOIN</code>: 如果表中有至少一个匹配，则返回行<br><code>INNER JOIN</code>:在表中存在至少一个匹配时，<code>INNER JOIN</code> 关键字返回行。<br><code>LEFT JOIN</code>: 即使右表中没有匹配，也从左表返回所有的行<br><code>RIGHT JOIN</code>: 即使左表中没有匹配，也从右表返回所有的行<br><code>FULL JOIN</code>: 只要其中一个表中存在匹配，就返回行(MySQL 是不支持的，通过 <code>LEFT JOIN + UNION + RIGHT JOIN</code> 的方式 来实现)</p>
-<h4 id="INNER-JOIN"><a href="#INNER-JOIN" class="headerlink" title="INNER JOIN"></a>INNER JOIN</h4><pre><code>SELECT 列名称(s)
-FROM 表1
-INNER JOIN 表2
-ON 表1.列名称 = 表2.列名称;
-</code></pre>
-<h4 id="LEFT-JOIN"><a href="#LEFT-JOIN" class="headerlink" title="LEFT JOIN"></a>LEFT JOIN</h4><p><code>LEFT JOIN</code> 语法 返回左表 (表1) 中的所有记录，以及右表 (表2) 中的匹配记录</p>
-<pre><code>SELECT 列名称(s)
-FROM 表1
-LEFT JOIN 表2
-ON 表1.列名称 = 表2.列名称;
-</code></pre>
-<h4 id="RIGHT-JOIN"><a href="#RIGHT-JOIN" class="headerlink" title="RIGHT JOIN"></a>RIGHT JOIN</h4><p><code>RIGHT JOIN</code> 语法 返回右表 (表2) 中的所有记录，以及左表 (表1) 中的匹配记录</p>
-<pre><code>SELECT 列名称(s)
-FROM 表1
-RIGHT JOIN 表2
-ON 表1.列名称 = 表2.列名称;
-</code></pre>
-<h4 id="FULL-OUTER-JOIN"><a href="#FULL-OUTER-JOIN" class="headerlink" title="FULL OUTER JOIN"></a>FULL OUTER JOIN</h4><p><code>FULL OUTER JOIN</code> 语法 当左（表1）或右（表2）表记录中存在匹配时，关键字返回所有记录</p>
-<h3 id="SQL-函数"><a href="#SQL-函数" class="headerlink" title="SQL 函数"></a>SQL 函数</h3><p>感觉很少用到，不懂看<a href="https://wangchujiang.com/mysql-tutorial/21-minutes-MySQL-basic-entry.html#sql-%E5%87%BD%E6%95%B0">这个</a></p>
-<h2 id="MyCli替代MySQL的mysql命令行工具"><a href="#MyCli替代MySQL的mysql命令行工具" class="headerlink" title="MyCli替代MySQL的mysql命令行工具"></a>MyCli替代MySQL的mysql命令行工具</h2><p>根据我看的教程，非常对剑mycli，所以就准备将mysql命令行工具改为mysql</p>
-<h3 id="安装python3"><a href="#安装python3" class="headerlink" title="安装python3"></a>安装python3</h3><p>centos7自带了python2，下面贴一个安装python3的指令</p>
-<pre><code>wget https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tar.xz
-tar -xvJf  Python-3.7.2.tar.xz
-mkdir /usr/local/python3 
-cd Python-3.7.2
-./configure --prefix=/usr/local/python3 --enable-optimizations --with-ssl 
-make &amp;&amp; make install
-ln -s /usr/local/python3/bin/python3 /usr/local/bin/python3
-ln -s /usr/local/python3/bin/pip3 /usr/local/bin/pip3
-</code></pre>
-<h3 id="安装mycli"><a href="#安装mycli" class="headerlink" title="安装mycli"></a>安装mycli</h3><pre><code>#安装pip，然后用pip安装mycli
-yum install -y python-pip python-devel libffi-devel openssl-devel
-pip3 install --upgrade pip
-pip3 install --ignore-installed mycli
-pip3 install pymysql											
+</code></pre><p>```— 在不删除table_name表的情况下删除所有的行，清空表。<br>DELETE FROM table_name<br>— 或者<br>DELETE * FROM table_name<br>— 删除 Person 表字段 LastName = ‘JSLite’<br>DELETE FROM Person WHERE LastName = ‘JSLite’<br>— 删除 表meeting id 为2和3的两条数据<br>DELETE from meeting where id in (2,3);</p>
+<pre><code>
+#### WHERE ####
 
-#配置将安装好的mycli拷贝到 /bin/
-cp /usr/local/python3/bin/mycli  /bin/
+`WHERE` 语法 用于仅提取满足指定条件的记录
+</code></pre><p>SELECT 列名称, 列名称, … FROM 表名称 WHERE 条件1;</p>
+<pre><code>
 
-#启用mycli
-mycli --version
+</code></pre><p>— 从表 Persons 中选出 Year 字段大于 1965 的数据<br>SELECT <em> FROM Persons WHERE Year&gt;1965<br>— 从 Customers 表中选择 Country = Mexico 的所有数据：<br>SELECT </em> FROM Customers WHERE Country=’Mexico’;<br>— 从 Customers 表中选择 CustomerID = 1 的所有数据：<br>SELECT * FROM Customers WHERE CustomerID=1;</p>
+<pre><code>
+### AND, OR 和 NOT ###
 
-mycli -uroot -proot
-</code></pre>
+就和不同and or not 没啥区别
+
+### ORDER BY ###
+
+`ORDER BY` 语法 用于按升序或降序对结果集进行排序
+
+默认按 `ASC` 升序对记录进行排序。要按降序对记录进行排序，请使用 `DESC` 关键字
+
+[不会点这里](https://wangchujiang.com/mysql-tutorial/21-minutes-MySQL-basic-entry.html#order-by)
+
+### GROUP BY ###
+
+暂时没搞懂~
+
+`GROUP BY` 语法 将具有相同值的行分组到汇总行中
+</code></pre><p>SELECT 列名称(s)<br>FROM 表名称<br>WHERE 条件<br>GROUP BY 列名称(s)<br>ORDER BY 列名称(s);</p>
+<pre><code>### IN ###
+
+`IN 语法` 是多个 OR 条件的简写
+
+### UNION ###
+
+`UNION` 语法 操作符用于合并两个或多个 SELECT 语句的结果集
+</code></pre><p>SELECT 列名称(s) FROM 表名称1<br>UNION<br>SELECT 列名称(s) FROM 表名称2;</p>
+<pre><code>
+### BETWEEN ###
+
+每错，就是between and
+</code></pre><p>SELECT 列名称(s) FROM 表名称 WHERE 列名称 BETWEEN 值1 AND 值2;</p>
+<pre><code>
+### AS ###
+
+`AS 语法` 用于为表或表中的列(字段)提供临时名称(别名)。
+</code></pre><p>SELECT 列名称 AS 别名 FROM 表名称;<br>SELECT 列名称(s) FROM 表名称 AS 别名;</p>
+<pre><code>
+### JOIN ###
+
+`JOIN` 子句用于根据两个或多个表之间的相关列组合来自两个或多个表的行
+
+`JOIN`: 如果表中有至少一个匹配，则返回行
+`INNER JOIN`:在表中存在至少一个匹配时，`INNER JOIN` 关键字返回行。
+`LEFT JOIN`: 即使右表中没有匹配，也从左表返回所有的行
+`RIGHT JOIN`: 即使左表中没有匹配，也从右表返回所有的行
+`FULL JOIN`: 只要其中一个表中存在匹配，就返回行(MySQL 是不支持的，通过 `LEFT JOIN + UNION + RIGHT JOIN` 的方式 来实现)
+
+#### INNER JOIN ####
+</code></pre><p>SELECT 列名称(s)<br>FROM 表1<br>INNER JOIN 表2<br>ON 表1.列名称 = 表2.列名称;</p>
+<pre><code>
+
+
+#### LEFT JOIN ####
+
+`LEFT JOIN` 语法 返回左表 (表1) 中的所有记录，以及右表 (表2) 中的匹配记录
+</code></pre><p>SELECT 列名称(s)<br>FROM 表1<br>LEFT JOIN 表2<br>ON 表1.列名称 = 表2.列名称;</p>
+<pre><code>
+#### RIGHT JOIN ####
+
+`RIGHT JOIN` 语法 返回右表 (表2) 中的所有记录，以及左表 (表1) 中的匹配记录
+</code></pre><p>SELECT 列名称(s)<br>FROM 表1<br>RIGHT JOIN 表2<br>ON 表1.列名称 = 表2.列名称;</p>
+<pre><code>
+#### FULL OUTER JOIN ####
+
+`FULL OUTER JOIN` 语法 当左（表1）或右（表2）表记录中存在匹配时，关键字返回所有记录
+
+### SQL 函数 ###
+
+感觉很少用到，不懂看[这个](https://wangchujiang.com/mysql-tutorial/21-minutes-MySQL-basic-entry.html#sql-%E5%87%BD%E6%95%B0)
+
+
+
+## MyCli替代MySQL的mysql命令行工具 ##
+
+根据我看的教程，非常对剑mycli，所以就准备将mysql命令行工具改为mysql
+
+### 安装python3 ###
+
+centos7自带了python2，下面贴一个安装python3的指令
+</code></pre><p>wget <a href="https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tar.xz">https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tar.xz</a><br>tar -xvJf  Python-3.7.2.tar.xz<br>mkdir /usr/local/python3<br>cd Python-3.7.2<br>./configure —prefix=/usr/local/python3 —enable-optimizations —with-ssl<br>make &amp;&amp; make install<br>ln -s /usr/local/python3/bin/python3 /usr/local/bin/python3<br>ln -s /usr/local/python3/bin/pip3 /usr/local/bin/pip3</p>
+<pre><code>### 安装mycli ###
+</code></pre><h1 id="安装pip，然后用pip安装mycli"><a href="#安装pip，然后用pip安装mycli" class="headerlink" title="安装pip，然后用pip安装mycli"></a>安装pip，然后用pip安装mycli</h1><p>yum install -y python-pip python-devel libffi-devel openssl-devel<br>pip3 install —upgrade pip<br>pip3 install —ignore-installed mycli<br>pip3 install pymysql                                            </p>
+<h1 id="配置将安装好的mycli拷贝到-bin"><a href="#配置将安装好的mycli拷贝到-bin" class="headerlink" title="配置将安装好的mycli拷贝到 /bin/"></a>配置将安装好的mycli拷贝到 /bin/</h1><p>cp /usr/local/python3/bin/mycli  /bin/</p>
+<h1 id="启用mycli"><a href="#启用mycli" class="headerlink" title="启用mycli"></a>启用mycli</h1><p>mycli —version</p>
+<p>mycli -uroot -proot<br>```</p>
 
         </div>
         <!-- .entry-content -->

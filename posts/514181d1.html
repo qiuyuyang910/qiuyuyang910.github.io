@@ -483,11 +483,9 @@
     &#125;
 
     fclose(fp);
-</code></pre>
-<h2 id="fgets-用法"><a href="#fgets-用法" class="headerlink" title="fgets()用法"></a>fgets()用法</h2><pre><code>char* fgets(char* str, int STRLEN, File* fp);
-</code></pre>
-<p>第一个参数<code>str</code>是一个字符串指针，用于存放读取的内容。第二个参数STRLEN指定读取的长度，第三个参数是一个 <code>FILE </code>指针，指向要读取的文件。</p>
-<p><code>fgets()</code>读取 <code>STRLEN - 1</code>个字符之后，或者遇到换行符与文件结尾，就会停止读取，然后在已经读取的内容末尾添加一个空字符<code>\0</code>，使之成为一个字符串。注意，<code>fgets()</code>会将换行符（<code>\n</code>）存储进字符串。–<a href="https://wangdoc.com/clang/file#fgets">form 网道</a>   2023-10-13</p>
+</code></pre><h2 id="fgets-用法"><a href="#fgets-用法" class="headerlink" title="fgets()用法"></a>fgets()用法</h2><pre><code>char* fgets(char* str, int STRLEN, File* fp);
+</code></pre><p>第一个参数<code>str</code>是一个字符串指针，用于存放读取的内容。第二个参数STRLEN指定读取的长度，第三个参数是一个 <code>FILE</code>指针，指向要读取的文件。</p>
+<p><code>fgets()</code>读取 <code>STRLEN - 1</code>个字符之后，或者遇到换行符与文件结尾，就会停止读取，然后在已经读取的内容末尾添加一个空字符<code>\0</code>，使之成为一个字符串。注意，<code>fgets()</code>会将换行符（<code>\n</code>）存储进字符串。—<a href="https://wangdoc.com/clang/file#fgets">form 网道</a>   2023-10-13</p>
 <h1 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h1><pre><code>
 #include&lt;stdio.h&gt;
 long long int a[200005];
@@ -523,29 +521,26 @@ return;
     solve();
 return 0;
 &#125;
-</code></pre>
-<h1 id="数组存中文问题"><a href="#数组存中文问题" class="headerlink" title="数组存中文问题"></a>数组存中文问题</h1><p><del>写作业的时候经常会遇到数组存中文的情况wwww,将中文字符存入文件里面简直就是天坑，在我的编译环境里面。用<code>utf-8</code>存是死活存不进去，最后直接问ai告诉你得用<code>utf-16le</code>存，搞了一下午+一早上这才搞好，贴个例子</del></p>
+</code></pre><h1 id="数组存中文问题"><a href="#数组存中文问题" class="headerlink" title="数组存中文问题"></a>数组存中文问题</h1><p><del>写作业的时候经常会遇到数组存中文的情况wwww,将中文字符存入文件里面简直就是天坑，在我的编译环境里面。用<code>utf-8</code>存是死活存不进去，最后直接问ai告诉你得用<code>utf-16le</code>存，搞了一下午+一早上这才搞好，贴个例子</del></p>
 <p><del>上面代码在vscode里还得用外置的终端打开….宽字符的处理是真的麻烦….</del></p>
 <p>天坑vscode打开格式是utf-8，而你打字输入的中文是gbk导致编码不一样，得改编码。。。<br>参考<a href="https://www.cnblogs.com/breezefaith/p/17343242.html">这篇</a><br>已经存在的文件全部使用gbk编码重新保存。<br>settings.json文件添加以下内容，使文件全部变成gbk编码：</p>
 <pre><code>
 &#123;
     &quot;files.encoding&quot;: &quot;gbk&quot;
 &#125;
-</code></pre>
-<p> launch.json中修改以下内容，使用外置控制台运行编译后程序：</p>
-<pre><code>&#123;
-   &quot;configurations&quot;: [
-       &#123;
-           ...
-           &quot;externalConsole&quot;: true,
-           ...
-       &#125;
-   ],
-   &quot;version&quot;: &quot;2.0.0&quot;
+</code></pre><p> launch.json中修改以下内容，使用外置控制台运行编译后程序：</p>
+<pre><code> &#123;
+    &quot;configurations&quot;: [
+        &#123;
+            ...
+            &quot;externalConsole&quot;: true,
+            ...
+        &#125;
+    ],
+    &quot;version&quot;: &quot;2.0.0&quot;
 &#125;
-</code></pre>
-<h1 id="内存的动态分配"><a href="#内存的动态分配" class="headerlink" title="内存的动态分配"></a>内存的动态分配</h1><p>用字符指针存数据。</p>
-<pre><code class="c">#include &lt;stdio.h&gt;
+</code></pre><h1 id="内存的动态分配"><a href="#内存的动态分配" class="headerlink" title="内存的动态分配"></a>内存的动态分配</h1><p>用字符指针存数据。</p>
+<pre><code class="lang-c">#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 #include &lt;stdlib.h&gt;
 
@@ -627,62 +622,62 @@ int main() &#123;
 <h2 id="那为什么赋值后的字符串不能修改，而上述问题的可以修改"><a href="#那为什么赋值后的字符串不能修改，而上述问题的可以修改" class="headerlink" title="那为什么赋值后的字符串不能修改，而上述问题的可以修改"></a>那为什么赋值后的字符串不能修改，而上述问题的可以修改</h2><p>这个问题涉及到字符串字面量和动态分配的内存的不同。</p>
 <ol>
 <li><p><strong>字符串字面量</strong>: 当我们使用字符串字面量，例如：</p>
-<pre><code class="c">char *str = &quot;Hello&quot;;
+<pre><code class="lang-c">char *str = &quot;Hello&quot;;
 </code></pre>
 <p><code>str</code> 指向的是程序的常量区域（或称为文本段），其中存储的数据是只读的。因此，尝试修改通过字符串字面量初始化的指针指向的内容会导致未定义的行为（通常是程序崩溃）。</p>
 </li>
 <li><p><strong>动态分配的内存</strong>: 当我们使用<code>malloc</code>（或<code>calloc</code>）为字符串分配内存，例如：</p>
-<pre><code class="c">char *str = (char *)malloc(6 * sizeof(char));
+<pre><code class="lang-c">char *str = (char *)malloc(6 * sizeof(char));
 strcpy(str, &quot;Hello&quot;);
 </code></pre>
 <p>这种情况下，<code>str</code> 指向的是堆上的一块内存，这块内存是可以读写的。因此，你可以修改<code>str</code>指向的内容，例如<code>str[0] = &#39;h&#39;;</code>。</p>
 </li>
 </ol>
 <p>另一种情况是当我们使用字符数组来存储字符串时：</p>
-<pre><code class="c">char str[] = &quot;Hello&quot;;
+<pre><code class="lang-c">   char str[] = &quot;Hello&quot;;
 </code></pre>
 <p>   在这种情况下，<code>str</code> 是一个数组，并在栈上为其分配了内存。这块内存是可以读写的，所以我们可以修改字符串内容。</p>
 <p>总之，字符串的可修改性取决于它存储的位置：字符串字面量是只读的，而在堆或栈上分配的字符串是可以修改的。</p>
-<h1 id="字符的输入"><a href="#字符的输入" class="headerlink" title="字符的输入"></a>字符的输入</h1><h2 id=""><a href="#" class="headerlink" title="%"></a>%</h2><pre><code class="c">printf(&quot;%%&quot;);
+<h1 id="字符的输入"><a href="#字符的输入" class="headerlink" title="字符的输入"></a>字符的输入</h1><h2 id=""><a href="#" class="headerlink" title="%"></a>%</h2><pre><code class="lang-c"> printf(&quot;%%&quot;);
 </code></pre>
-<h1 id="三种方法把int-转为二进制数"><a href="#三种方法把int-转为二进制数" class="headerlink" title="三种方法把int 转为二进制数"></a>三种方法把int 转为二进制数</h1><h2 id="不补零"><a href="#不补零" class="headerlink" title="不补零"></a>不补零</h2><pre><code class="c">
+<h1 id="三种方法把int-转为二进制数"><a href="#三种方法把int-转为二进制数" class="headerlink" title="三种方法把int 转为二进制数"></a>三种方法把int 转为二进制数</h1><h2 id="不补零"><a href="#不补零" class="headerlink" title="不补零"></a>不补零</h2><pre><code class="lang-c">
 #include&lt;stdio.h&gt;
 #define uint32 unsigned int
 #define uint8 unsigned char
 int ShortDivOutPutBin(uint32 input)&#123;
 
-   uint8 temp[33]=&#123;0&#125;;
-   int i=0;
-   //用短除法的思想得到二进制，之后将数据从后往前读取
-   while (input)   
-   &#123;
-       temp[i]=input % 2; //取余数存放到数组中，此为得到的二进制数
-       input = (uint32)input/2; //短除，while中判断是否除尽
-       i++; //存储了一个二进制数，自加存储下一个
-   &#125;
-   for(i--;i&gt;=0;i--)&#123; //由于最后一次iput为无效，1还是自加了，因此最后一次自加的值是无用的，所以先自减，然后将余数从后往前读取
-       printf(&quot;%d&quot;,temp[i]);
-   &#125;
-   
+    uint8 temp[33]=&#123;0&#125;;
+    int i=0;
+    //用短除法的思想得到二进制，之后将数据从后往前读取
+    while (input)   
+    &#123;
+        temp[i]=input % 2; //取余数存放到数组中，此为得到的二进制数
+        input = (uint32)input/2; //短除，while中判断是否除尽
+        i++; //存储了一个二进制数，自加存储下一个
+    &#125;
+    for(i--;i&gt;=0;i--)&#123; //由于最后一次iput为无效，1还是自加了，因此最后一次自加的值是无用的，所以先自减，然后将余数从后往前读取
+        printf(&quot;%d&quot;,temp[i]);
+    &#125;
+
 &#125;
 </code></pre>
 <p> 此方法可自行加0</p>
-<h2 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h2><pre><code class="c">#include&lt;stdio.h&gt;
+<h2 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h2><pre><code class="lang-c"> #include&lt;stdio.h&gt;
 void bit(int n)&#123;
-   int i=0;
-   int arr[33]=&#123; 0 &#125;;
-   for ( i = 1; i &lt; sizeof(int)*8; i++)
-   &#123;
-       arr[i]=n&amp;1;
-       n=n &gt;&gt; 1;
-   &#125;
-   int k = 0;
+    int i=0;
+    int arr[33]=&#123; 0 &#125;;
+    for ( i = 1; i &lt; sizeof(int)*8; i++)
+    &#123;
+        arr[i]=n&amp;1;
+        n=n &gt;&gt; 1;
+    &#125;
+    int k = 0;
 
-   for ( k = i-1; k &gt;=1 ; k--)
-   &#123;
-       printf(&quot;%d&quot;,arr[k]);
-   &#125;
-   
+    for ( k = i-1; k &gt;=1 ; k--)
+    &#123;
+        printf(&quot;%d&quot;,arr[k]);
+    &#125;
+
 &#125;
 </code></pre>
 

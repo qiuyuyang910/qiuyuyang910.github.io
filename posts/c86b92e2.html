@@ -470,13 +470,13 @@
         
         <div class="entry-content">
           <h1 id="foreach"><a href="#foreach" class="headerlink" title="foreach()"></a>foreach()</h1><p><a href="https://www.php.net/manual/zh/control-structures.foreach.php">手册</a><br>用于遍历数组，一共有两种格式</p>
-<pre><code class="php">foreach (iterable_expression as $value)
+<pre><code class="lang-php">foreach (iterable_expression as $value)
     statement
 foreach (iterable_expression as $key =&gt; $value)
     statement
 </code></pre>
 <p>第二种会把当前单元的键名也赋给变量<code>$key</code><br><code>foreach</code>可以通过在<code>$value</code>之前加上 &amp; 来修改数组的元素。此方法将以引用赋值而不是拷贝一个值</p>
-<pre><code class="php">&lt;?php
+<pre><code class="lang-php">&lt;?php
 $arr = array(1, 2, 3, 4);
 foreach ($arr as &amp;$value) &#123;
     $value = $value * 2;
@@ -487,7 +487,7 @@ unset($value); // 最后取消掉引用
 </code></pre>
 <p>数组最后一个元素的 <code>$value</code> 引用在 <code>foreach</code> 循环之后仍会保留。建议使用 <code>unset()</code> 来将其销毁</p>
 <h1 id="preg-match-all"><a href="#preg-match-all" class="headerlink" title="preg_match_all"></a>preg_match_all</h1><p><a href="https://www.php.net/manual/zh/function.preg-match-all.php">手册</a></p>
-<pre><code class="php">preg_match_all(
+<pre><code class="lang-php">preg_match_all(
     string $pattern,//要搜索的模式，字符串形式
     string $subject,//输入字符串
     array &amp;$matches = null,//多维数组，作为输出参数输出所有匹配结果, 数组排序通过flags指定
@@ -497,16 +497,16 @@ unset($value); // 最后取消掉引用
 </code></pre>
 <p>搜索<code>subject</code>中所有匹配<code>pattern</code>给定正则表达式 的匹配结果并且将它们以<code>flag</code>指定顺序输出到<code>matches</code>中<br>在第一个匹配找到后, 子序列继续从最后一次匹配位置搜索<br><a href="https://regex101.com/">正则表达式网站</a></p>
 <h1 id="in-array"><a href="#in-array" class="headerlink" title="in_array"></a>in_array</h1><p><a href="https://www.php.net/manual/zh/function.in-array.php">手册</a></p>
-<pre><code class="php">in_array(mixed $needle, array $haystack, bool $strict = false): bool
+<pre><code class="lang-php">in_array(mixed $needle, array $haystack, bool $strict = false): bool
 </code></pre>
 <p>大海捞针，在大海（<code>haystack</code>）中搜索针（ <code>needle</code>），如果没有设置 <code>strict</code> 则使用宽松的比较。</p>
 <h2 id="绕过"><a href="#绕过" class="headerlink" title="绕过"></a>绕过</h2><p>在宽松比较中，字符串开头为数字可以将整个比较变为数字的比较从而导致绕过</p>
 <h1 id="call-user-func-array"><a href="#call-user-func-array" class="headerlink" title="call_user_func_array"></a>call_user_func_array</h1><p><a href="https://www.php.net/manual/zh/function.call-user-func-array.php">手册</a></p>
 <p>调用回调函数，并把一个数组参数作为回调函数的参数</p>
-<pre><code class="php">call_user_func_array(callable $callback, array $args): mixed
+<pre><code class="lang-php">call_user_func_array(callable $callback, array $args): mixed
 </code></pre>
 <p>把第一个参数作为回调函数（<code>callback</code>）调用，把参数数组作（<code>args</code>）为回调函数的的参数传入<br><code>callback</code>为函数名，而<code>array $args</code>则是函数参数</p>
-<pre><code class="php">&lt;?php
+<pre><code class="lang-php">&lt;?php
 function foobar($arg, $arg2) &#123;
     echo __FUNCTION__, &quot; got $arg and $arg2\n&quot;;
 &#125;
@@ -528,32 +528,31 @@ call_user_func_array(array($foo, &quot;bar&quot;), array(&quot;three&quot;, &quo
 <p>输出：</p>
 <pre><code>foobar got one and two
 foo::bar got three and four
-</code></pre>
-<h1 id="exec"><a href="#exec" class="headerlink" title="exec"></a>exec</h1><p><a href="https://www.php.net/manual/zh/function.exec">手册</a></p>
+</code></pre><h1 id="exec"><a href="#exec" class="headerlink" title="exec"></a>exec</h1><p><a href="https://www.php.net/manual/zh/function.exec">手册</a></p>
 <p>执行一个外部程序</p>
-<pre><code class="php">exec(string $command, array &amp;$output = null, int &amp;$result_code = null): string|false
+<pre><code class="lang-php">exec(string $command, array &amp;$output = null, int &amp;$result_code = null): string|false
 </code></pre>
 <p><code>exec()</code> 执行 <code>command</code>参数所指定的命令</p>
 <p><code>result_code</code> 外部命令执行后的返回状态将会被设置到此变量中</p>
 <p>类似于<code>system()</code></p>
 <h1 id="system"><a href="#system" class="headerlink" title="system"></a>system</h1><p>执行外部程序，并且显示输出</p>
-<pre><code class="php">system(string $command, int &amp;$result_code = null): string|false
+<pre><code class="lang-php">system(string $command, int &amp;$result_code = null): string|false
 </code></pre>
 <p>执行 <code>command</code> 参数所指定的命令，并且输出执行结果<br><code>result_code</code> 外部命令执行后的返回状态将会被设置到此变量中<br>成功则返回命令输出的最后一行，失败则返回 <code>false</code></p>
 <h1 id="strcmp"><a href="#strcmp" class="headerlink" title="strcmp"></a>strcmp</h1><p><a href="https://www.php.net/manual/zh/function.strcmp.php">手册</a></p>
-<pre><code class="php">strcmp(string $string1, string $string2): int
+<pre><code class="lang-php">strcmp(string $string1, string $string2): int
 </code></pre>
 <p>该比较区分大小写</p>
 <p>如果 <code>string1</code> 小于 <code>string2</code> 返回 <code>-1</code>；如果 <code>string1</code> 大于 <code>string2</code> 返回 <code>1</code>；如果两者相等，返回 <code>0</code></p>
 <p>挨个比较ascii码</p>
-<h2 id="绕过-1"><a href="#绕过-1" class="headerlink" title="绕过"></a>绕过</h2><pre><code class="php">strcmp(&quot;foo&quot;, array()) =&gt; NULL + PHP Warning
+<h2 id="绕过-1"><a href="#绕过-1" class="headerlink" title="绕过"></a>绕过</h2><pre><code class="lang-php">strcmp(&quot;foo&quot;, array()) =&gt; NULL + PHP Warning
 strcmp(&quot;foo&quot;, new stdClass) =&gt; NULL + PHP Warning
 strcmp(function()&#123;&#125;, &quot;&quot;) =&gt; NULL + PHP Warning
 </code></pre>
 <p>strcmp()函数传入数组会返回<code>NULL</code> 在php 中 <code>NULL==0</code></p>
 <h1 id="eregi-or-ereg"><a href="#eregi-or-ereg" class="headerlink" title="eregi or ereg"></a>eregi or ereg</h1><p><a href="http://php.adamharvey.name/manual/zh/function.eregi.php">手册</a></p>
 <p><code>eregi</code> — <strong>不区分</strong>大小写的正则表达式匹配</p>
-<pre><code class="php">eregi ( string $pattern , string $string [, array &amp;$regs ] ) : int
+<pre><code class="lang-php">eregi ( string $pattern , string $string [, array &amp;$regs ] ) : int
 </code></pre>
 <p>本函数和 <code>ereg()</code> 完全相同，只除了在匹配字母字符时忽略大小写的区别</p>
 <p>以(不)区分大小写的方式在 <code>string</code> 中寻找与给定的正则表达式 <code>pattern</code> 所匹配的子串</p>
@@ -561,7 +560,7 @@ strcmp(function()&#123;&#125;, &quot;&quot;) =&gt; NULL + PHP Warning
 <p>如果在 <code>string</code> 中找到 <code>pattern</code> 模式的匹配则返回 所匹配字符串的长度，如果没有找到匹配或出错则返回 <code>FALSE</code>。如果没有传递入可选参数 <code>regs</code> 或者所匹配的字符串长度为 <code>0</code>，则本函数返回 <code>1</code></p>
 <h2 id="绕过-2"><a href="#绕过-2" class="headerlink" title="绕过"></a>绕过</h2><p>两者存在<code>%00</code>截断类似于<code>\0</code>截断</p>
 <h1 id="preg-match"><a href="#preg-match" class="headerlink" title="preg_match()"></a>preg_match()</h1><p><a href="https://www.php.net/manual/zh/function.preg-match.php">php</a></p>
-<pre><code class="php">preg_match(
+<pre><code class="lang-php">preg_match(
     string $pattern,
     string $subject,
     array &amp;$matches = null,
@@ -571,29 +570,28 @@ strcmp(function()&#123;&#125;, &quot;&quot;) =&gt; NULL + PHP Warning
 </code></pre>
 <p>搜索<code>subject</code>与<code>pattern</code>给定的正则表达式的一个匹配<br><code>matches</code><br>如果提供了参数<code>matches</code>，它将被填充为搜索结果。 <code>$matches[0]</code>将包含完整模式匹配到的文本， <code>$matches[1]</code> 将包含第一个捕获子组匹配到的文本，以此类推</p>
 <h2 id="无字母数字webshell"><a href="#无字母数字webshell" class="headerlink" title="无字母数字webshell"></a>无字母数字webshell</h2><p><a href="https://xz.aliyun.com/t/8107">参考</a></p>
-<pre><code class="php">&lt;?php
+<pre><code class="lang-php">&lt;?php
 if(!preg_match(&#39;/[a-z0-9]/is&#39;,$_GET[&#39;shell&#39;])) &#123;
   eval($_GET[&#39;shell&#39;]);
 &#125;
 </code></pre>
 <p>对于类似与以上正则匹配进行绕过</p>
 <h3 id="PHP中的短标签"><a href="#PHP中的短标签" class="headerlink" title="PHP中的短标签"></a>PHP中的短标签</h3><p><code>&lt;??&gt;</code>相当于对<code>&lt;?php&gt;</code>的替换。而<code>&lt;?=?&gt;</code>则是相当于<code>&lt;? echo&gt;</code></p>
-<pre><code class="php">&lt;?= &#39;111&#39;?&gt;
+<pre><code class="lang-php">&lt;?= &#39;111&#39;?&gt;
 </code></pre>
 <p>PHP中，反引号可以起到命令执行的效果</p>
-<pre><code class="php">&lt;?php
+<pre><code class="lang-php">&lt;?php
 $_=`whoami`;
 echo $_;
 </code></pre>
 <p>如果我们利用上面短标签的写法，可以把代码简写</p>
-<pre><code class="php">&lt;?= `whoami`?&gt;
+<pre><code class="lang-php">&lt;?= `whoami`?&gt;
 </code></pre>
 <h1 id="临时文件泄露"><a href="#临时文件泄露" class="headerlink" title="临时文件泄露"></a>临时文件泄露</h1><h2 id="vim-临时文件泄露"><a href="#vim-临时文件泄露" class="headerlink" title="vim 临时文件泄露"></a>vim 临时文件泄露</h2><pre><code>http://node4.anna.nssctf.cn:28196/.index.swp
+</code></pre><p>得到之后使用<code>vim</code>即可恢复</p>
+<pre><code class="lang-shell">vim -r .index.swp
 </code></pre>
-<p>得到之后使用<code>vim</code>即可恢复</p>
-<pre><code class="shell">vim -r .index.swp
-</code></pre>
-<h1 id="preg-replace与代码执行"><a href="#preg-replace与代码执行" class="headerlink" title="preg_replace与代码执行"></a>preg_replace与代码执行</h1><pre><code class="php">preg_replace(
+<h1 id="preg-replace与代码执行"><a href="#preg-replace与代码执行" class="headerlink" title="preg_replace与代码执行"></a>preg_replace与代码执行</h1><pre><code class="lang-php">preg_replace(
     string|array $pattern,
     string|array $replacement,
     string|array $subject,
@@ -602,10 +600,10 @@ echo $_;
 ): string|array|null
 </code></pre>
 <p>搜索 <code>subject</code> 中匹配 <code>pattern</code> 的部分，以 <code>replacement</code> 进行替换。</p>
-<p><code>replacement</code> 中可以包含后向引用<code>\\n</code>或<code> $n</code>，语法上首选后者。 每个这样的引用将被匹配到的第 <code>n </code>个捕获子组捕获到的文本替换。 <code>n </code>可以是<code>0-99</code>，<code>\\0</code> 和 <code>$0</code> 代表完整的模式匹配文本。捕获子组的序号计数方式为：代表捕获子组的左括号从左到右， 从1开始数。如果要在 <code>replacement</code> 中使用反斜线，必须使用 4 个(“\\“，译注：因为这首先是 PHP 的字符串，经过转义后，是两个，再经过正则表达式引擎后才被认为是一个原文反斜线)。</p>
+<p><code>replacement</code> 中可以包含后向引用<code>\\n</code>或<code>$n</code>，语法上首选后者。 每个这样的引用将被匹配到的第 <code>n</code>个捕获子组捕获到的文本替换。 <code>n</code>可以是<code>0-99</code>，<code>\\0</code> 和 <code>$0</code> 代表完整的模式匹配文本。捕获子组的序号计数方式为：代表捕获子组的左括号从左到右， 从1开始数。如果要在 <code>replacement</code> 中使用反斜线，必须使用 4 个(“\\\\”，译注：因为这首先是 PHP 的字符串，经过转义后，是两个，再经过正则表达式引擎后才被认为是一个原文反斜线)。</p>
 <p><a href="https://err0r.top/article/preg_replace/">参考</a></p>
-<p>preg_replace &#x2F;e 模式下的代码执行问题</p>
-<pre><code class="php">function complex($re, $str) &#123;
+<p>preg_replace /e 模式下的代码执行问题</p>
+<pre><code class="lang-php">function complex($re, $str) &#123;
     return preg_replace(&#39;/(&#39; . $re . &#39;)/ei&#39;,&#39;strtolower(&quot;\\1&quot;)&#39;,$str);
 &#125;
 
@@ -616,17 +614,16 @@ foreach($_GET as $re =&gt; $str) &#123;
 </code></pre>
 <p>preg_replace 函数在匹配到符号正则的字符串时，会将替换字符串（也就是上图 preg_replace 函数的第二个参数）当做代码来执行</p>
 <p>而这里面第二个参数含有<code>\1</code>那么他会将被匹配到的第 1 个捕获子组捕获到的文本替换,总之就是<code>\1</code>也被替换了，导致的命令执行<br>又因为特殊字符<code>.</code>会被替换成<code>_</code>所以我们这里传参是<code>\S*=</code>别问为啥是<code>\S</code>我不到啊<br>payload ： <code>\S*=$&#123;phpinfo()&#125;</code></p>
-<p>什么要匹配到<code> &#123;$&#123;phpinfo()&#125;&#125;</code> 或者 <code>$&#123;phpinfo()&#125;</code> ，才能执行 phpinfo 函数，这是一个小坑。这实际上是 PHP可变变量 的原因。在PHP中双引号包裹的字符串中可以解析变量，而单引号则不行。<code> $&#123;phpinfo()&#125;</code> 中的 <code>phpinfo()</code> 会被当做变量先执行，执行后，即变成 <code>$&#123;1&#125;</code> (phpinfo()成功执行返回true)。</p>
+<p>什么要匹配到<code>&#123;$&#123;phpinfo()&#125;&#125;</code> 或者 <code>$&#123;phpinfo()&#125;</code> ，才能执行 phpinfo 函数，这是一个小坑。这实际上是 PHP可变变量 的原因。在PHP中双引号包裹的字符串中可以解析变量，而单引号则不行。<code>$&#123;phpinfo()&#125;</code> 中的 <code>phpinfo()</code> 会被当做变量先执行，执行后，即变成 <code>$&#123;1&#125;</code> (phpinfo()成功执行返回true)。</p>
 <h1 id="escapeshellarg-和escapeshellcmd-同时使用导致的绕过"><a href="#escapeshellarg-和escapeshellcmd-同时使用导致的绕过" class="headerlink" title="escapeshellarg()和escapeshellcmd()同时使用导致的绕过"></a>escapeshellarg()和escapeshellcmd()同时使用导致的绕过</h1><p>escapeshellarg() 将给字符串增加一个单引号并且能引用或者转义任何已经存在的单引号，这样以确保能够直接将一个字符串传入 shell 函数，并且还是确保安全的</p>
 <p>escapeshellcmd() 对字符串中可能会欺骗 shell 命令执行任意命令的字符进行转义。 此函数保证用户输入的数据在传送到 exec() 或 system() 函数，或者 执行操作符 之前进行转义。</p>
-<p>反斜线（\）会在以下字符之前插入：&amp;#;&#96;|*?~&lt;&gt;^()[]{}$\、\x0A 和 \xFF。 ‘ 和 “ 仅在不配对儿的时候被转义。在 Windows 平台上，所有这些字符以及 % 和 ! 字符前面都有一个插入符号（^）。</p>
+<p>反斜线（\）会在以下字符之前插入：&amp;#;`|*?~&lt;&gt;^()[]{}$\、\x0A 和 \xFF。 ‘ 和 “ 仅在不配对儿的时候被转义。在 Windows 平台上，所有这些字符以及 % 和 ! 字符前面都有一个插入符号（^）。</p>
 <p>它们组合使用时就会造成漏洞(顺序不能改变)，就借用一个大佬的例子，通俗易懂。</p>
 <pre><code>传入的参数是：172.17.0.2&#39; -v -d a=1
 经过escapeshellarg处理后变成了&#39;172.17.0.2&#39;\&#39;&#39; -v -d a=1&#39;，即先对单引号转义，再用单引号将左右两部分括起来从而起到连接的作用。
 经过escapeshellcmd处理后变成&#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;，这是因为escapeshellcmd对\以及最后那个不配对儿的引号进行了转义：http://php.net/manual/zh/function.escapeshellcmd.php
 最后执行的命令是curl &#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;，由于中间的\\被解释为\而不再是转义字符，所以后面的&#39;没有被转义，与再后面的&#39;配对儿成了一个空白连接符。所以可以简化为curl 172.17.0.2\ -v -d a=1&#39;，即向172.17.0.2\发起请求，POST 数据为a=1&#39;。
-</code></pre>
-<p>也就是说，escapeshellcmd()函数转义了用于转义单引号的斜杠，导致这个单引号与后面的单引号形成了空白连接符就能执行命令了。</p>
+</code></pre><p>也就是说，escapeshellcmd()函数转义了用于转义单引号的斜杠，导致这个单引号与后面的单引号形成了空白连接符就能执行命令了。</p>
 <h2 id="nmap构造命令"><a href="#nmap构造命令" class="headerlink" title="nmap构造命令"></a>nmap构造命令</h2><p>system函数里拼接了nmap的指令字符串。nmap中的-oG参数可以将代码与命令写到文件中，比如<code>nmap &lt;?php phpinfo();?&gt; -oG 1.php</code>，就是将这个<code>phpinfo()</code>;语句写在了1.php里内了。</p>
 
         </div>

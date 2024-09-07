@@ -470,8 +470,8 @@
         
         <div class="entry-content">
           <p><a href="https://segmentfault.com/a/1190000018991087#item-4">抄的这篇</a></p>
-<h1 id="file-协议"><a href="#file-协议" class="headerlink" title="file:&#x2F;&#x2F; 协议"></a>file:&#x2F;&#x2F; 协议</h1><p>要求:<br>  allow_url_fopen:off&#x2F;on<br>  allow_url_include :off&#x2F;on</p>
-<p>用于访问本地文件系统，在CTF中通常用来读取本地文件的且不受allow_url_fopen与allow_url_include的影响。<br>include()&#x2F;require()&#x2F;include_once()&#x2F;require_once()参数可控的情况下，如导入为非.php文件，则仍按照php语法进行解析，这是include()函数所决定的。<br>说明：<br>file:&#x2F;&#x2F; 文件系统是 PHP 使用的默认封装协议，展现了本地文件系统。当指定了一个相对路径（不以&#x2F;, ,\或 Windows 盘符开头的路径）提供的路径将基于当前的工作目录。在很多情况下是脚本所在的目录，除非被修改了。使用 CLI 的时候，目录默认是脚本被调用时所在的目录。在某些函数里，例如 fopen() 和 file_get_contents()，include_path 会可选地搜索，也作为相对的路径。<br>用法：</p>
+<h1 id="file-协议"><a href="#file-协议" class="headerlink" title="file:// 协议"></a>file:// 协议</h1><p>要求:<br>  allow_url_fopen:off/on<br>  allow_url_include :off/on</p>
+<p>用于访问本地文件系统，在CTF中通常用来读取本地文件的且不受allow_url_fopen与allow_url_include的影响。<br>include()/require()/include_once()/require_once()参数可控的情况下，如导入为非.php文件，则仍按照php语法进行解析，这是include()函数所决定的。<br>说明：<br>file:// 文件系统是 PHP 使用的默认封装协议，展现了本地文件系统。当指定了一个相对路径（不以/, ,\或 Windows 盘符开头的路径）提供的路径将基于当前的工作目录。在很多情况下是脚本所在的目录，除非被修改了。使用 CLI 的时候，目录默认是脚本被调用时所在的目录。在某些函数里，例如 fopen() 和 file_get_contents()，include_path 会可选地搜索，也作为相对的路径。<br>用法：</p>
 <pre><code>/path/to/file.ext
 relative/path/to/file.ext
 fileInCwd.ext
@@ -480,124 +480,140 @@ C:\path\to\winfile.ext
 \\smbserver\share\path\to\winfile.ext
 file:///path/to/file.ext
 http://127.0.0.1/phpinfo.txt
-</code></pre>
-<h1 id="php-协议"><a href="#php-协议" class="headerlink" title="php:&#x2F;&#x2F; 协议"></a>php:&#x2F;&#x2F; 协议</h1><p>条件：</p>
-<p>allow_url_fopen:off&#x2F;on<br>allow_url_include :仅<code>php://input</code> <code>php://stdin</code> <code>php://memory</code> <code>php://temp</code> 需要on</p>
-<p>作用：<br>php:&#x2F;&#x2F; 访问各个输入&#x2F;输出流（I&#x2F;O streams），在CTF中经常使用的是php:&#x2F;&#x2F;filter和php:&#x2F;&#x2F;input，php:&#x2F;&#x2F;filter用于读取源码，php:&#x2F;&#x2F;input用于执行php代码。</p>
-<p>php:&#x2F;&#x2F;filter参数详解</p>
+</code></pre><h1 id="php-协议"><a href="#php-协议" class="headerlink" title="php:// 协议"></a>php:// 协议</h1><p>条件：</p>
+<p>allow_url_fopen:off/on<br>allow_url_include :仅<code>php://input</code> <code>php://stdin</code> <code>php://memory</code> <code>php://temp</code> 需要on</p>
+<p>作用：<br>php:// 访问各个输入/输出流（I/O streams），在CTF中经常使用的是php://filter和php://input，php://filter用于读取源码，php://input用于执行php代码。</p>
+<p>php://filter参数详解</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">php:&#x2F;&#x2F;filter 参数</th>
-<th align="center">描述</th>
+<th style="text-align:center">php://filter 参数</th>
+<th style="text-align:center">描述</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">resource&#x3D;&lt;要过滤的数据流&gt;</td>
-<td align="center">必须项。它指定了你要筛选过滤的数据流。</td>
+<tbody>
+<tr>
+<td style="text-align:center">resource=&lt;要过滤的数据流&gt;</td>
+<td style="text-align:center">必须项。它指定了你要筛选过滤的数据流。</td>
 </tr>
 <tr>
-<td align="center">read&#x3D;&lt;读链的过滤器&gt;</td>
-<td align="center">可选项。可以设定一个或多个过滤器名称，以管道符分隔</td>
+<td style="text-align:center">read=&lt;读链的过滤器&gt;</td>
+<td style="text-align:center">可选项。可以设定一个或多个过滤器名称，以管道符分隔</td>
 </tr>
 <tr>
-<td align="center">write&#x3D;&lt;写链的过滤器&gt;</td>
-<td align="center">可选项。可以设定一个或多个过滤器名称，以管道符分隔</td>
+<td style="text-align:center">write=&lt;写链的过滤器&gt;</td>
+<td style="text-align:center">可选项。可以设定一个或多个过滤器名称，以管道符分隔</td>
 </tr>
 <tr>
-<td align="center">&lt;; 两个链的过滤器&gt;</td>
-<td align="center">任何没有以 read&#x3D; 或 write&#x3D; 作前缀的筛选器列表会视情况应用于读或写链。</td>
+<td style="text-align:center">&lt;; 两个链的过滤器&gt;</td>
+<td style="text-align:center">任何没有以 read= 或 write= 作前缀的筛选器列表会视情况应用于读或写链。</td>
 </tr>
-</tbody></table>
-<h2 id="可用的过滤器列表（4类）"><a href="#可用的过滤器列表（4类）" class="headerlink" title="可用的过滤器列表（4类）"></a>可用的过滤器列表（4类）</h2><table>
-<thead>
-<tr>
-<th align="center">字符串过滤器</th>
-<th align="center">作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">string.rot13</td>
-<td align="center">等同于<code>str_rot13()</code>，rot13变换</td>
-</tr>
-<tr>
-<td align="center">string.toupper</td>
-<td align="center">等同于<code>strtoupper()</code>，转大写字母</td>
-</tr>
-<tr>
-<td align="center">string.tolower</td>
-<td align="center">等同于<code>strtolower()</code>，转小写字母</td>
-</tr>
-<tr>
-<td align="center">string.strip_tags</td>
-<td align="center">等同于<code>strip_tags()</code>，去除html、PHP语言标签</td>
-</tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<h2 id="可用的过滤器列表（4类）"><a href="#可用的过滤器列表（4类）" class="headerlink" title="可用的过滤器列表（4类）"></a>可用的过滤器列表（4类）</h2><div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">转换过滤器</th>
-<th align="center">作用</th>
+<th style="text-align:center">字符串过滤器</th>
+<th style="text-align:center">作用</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">convert.base64-encode &amp; convert.base64-decode</td>
-<td align="center">等同于base64_encode()和base64_decode()，base64编码解码</td>
+<tbody>
+<tr>
+<td style="text-align:center">string.rot13</td>
+<td style="text-align:center">等同于<code>str_rot13()</code>，rot13变换</td>
 </tr>
 <tr>
-<td align="center">convert.quoted-printable-encode &amp; convert.quoted-printable-decode	quoted-printable</td>
-<td align="center">字符串与 8-bit 字符串编码解码</td>
+<td style="text-align:center">string.toupper</td>
+<td style="text-align:center">等同于<code>strtoupper()</code>，转大写字母</td>
 </tr>
-</tbody></table>
+<tr>
+<td style="text-align:center">string.tolower</td>
+<td style="text-align:center">等同于<code>strtolower()</code>，转小写字母</td>
+</tr>
+<tr>
+<td style="text-align:center">string.strip_tags</td>
+<td style="text-align:center">等同于<code>strip_tags()</code>，去除html、PHP语言标签</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">压缩过滤器</th>
-<th align="center">作用</th>
+<th style="text-align:center">转换过滤器</th>
+<th style="text-align:center">作用</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">zlib.deflate &amp; zlib.inflate</td>
-<td align="center">在本地文件系统中创建 gzip 兼容文件的方法，但不产生命令行工具如 gzip的头和尾信息。只是压缩和解压数据流中的有效载荷部分。</td>
+<tbody>
+<tr>
+<td style="text-align:center">convert.base64-encode &amp; convert.base64-decode</td>
+<td style="text-align:center">等同于base64_encode()和base64_decode()，base64编码解码</td>
 </tr>
 <tr>
-<td align="center">bzip2.compress &amp; bzip2.decompress</td>
-<td align="center">同上，在本地文件系统中创建 bz2 兼容文件的方法。</td>
+<td style="text-align:center">convert.quoted-printable-encode &amp; convert.quoted-printable-decode    quoted-printable</td>
+<td style="text-align:center">字符串与 8-bit 字符串编码解码</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">加密过滤器</th>
-<th align="center">作用</th>
+<th style="text-align:center">压缩过滤器</th>
+<th style="text-align:center">作用</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">mcrypt.*</td>
-<td align="center">libmcrypt 对称加密算法</td>
+<tbody>
+<tr>
+<td style="text-align:center">zlib.deflate &amp; zlib.inflate</td>
+<td style="text-align:center">在本地文件系统中创建 gzip 兼容文件的方法，但不产生命令行工具如 gzip的头和尾信息。只是压缩和解压数据流中的有效载荷部分。</td>
 </tr>
 <tr>
-<td align="center">mdecrypt.*</td>
-<td align="center">libmcrypt 对称解密算法</td>
+<td style="text-align:center">bzip2.compress &amp; bzip2.decompress</td>
+<td style="text-align:center">同上，在本地文件系统中创建 bz2 兼容文件的方法。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">加密过滤器</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">mcrypt.*</td>
+<td style="text-align:center">libmcrypt 对称加密算法</td>
+</tr>
+<tr>
+<td style="text-align:center">mdecrypt.*</td>
+<td style="text-align:center">libmcrypt 对称解密算法</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>eg<br><code>php://filter/read=convert.base64-encode/resource=[文件名]</code>读取文件源码</p>
 <p><code>php://input + [POST DATA]</code>执行php代码</p>
-<h1 id="data-协议"><a href="#data-协议" class="headerlink" title="data:&#x2F;&#x2F; 协议"></a>data:&#x2F;&#x2F; 协议</h1><p>条件：</p>
+<h1 id="data-协议"><a href="#data-协议" class="headerlink" title="data:// 协议"></a>data:// 协议</h1><p>条件：</p>
 <p>allow_url_fopen:on<br>allow_url_include :on</p>
-<p>作用：自PHP&gt;&#x3D;5.2.0起，可以使用data:&#x2F;&#x2F;数据流封装器，以传递相应格式的数据。通常可以用来执行PHP代码。<br>用法：</p>
+<p>作用：自PHP&gt;=5.2.0起，可以使用data://数据流封装器，以传递相应格式的数据。通常可以用来执行PHP代码。<br>用法：</p>
 <pre><code>data://text/plain,
 data://text/plain;base64,
-</code></pre>
-<p>示例：</p>
+</code></pre><p>示例：</p>
 <pre><code>data://text/plain,
 
 http://127.0.0.1/include.php?file=data://text/plain,&lt;?php%20phpinfo();?&gt;
-</code></pre>
-<p>data:&#x2F;&#x2F;text&#x2F;plain;base64,</p>
+</code></pre><p>data://text/plain;base64,</p>
 <pre><code>http://127.0.0.1/include.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b
 </code></pre>
-
         </div>
         <!-- .entry-content -->
         <div class="single-reward">

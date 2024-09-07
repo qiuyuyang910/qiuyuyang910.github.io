@@ -470,7 +470,7 @@
         
         <div class="entry-content">
           <h1 id="Webshell-pro"><a href="#Webshell-pro" class="headerlink" title="Webshell_pro"></a>Webshell_pro</h1><p>在流量包中提取到加密脚本，再编写解密脚本</p>
-<pre><code class="python">import base64
+<pre><code class="lang-python">import base64
 from Crypto.Util.number import long_to_bytes
 import libnum
 from Crypto.PublicKey import RSA
@@ -497,7 +497,7 @@ def dec_replace(base64_str):
     base64_str = base64_str.replace(&quot;e5Lg^FM5EQYe5!yF&amp;62%V$UG*B*RfQeM&quot;,&quot;/&quot;)
     base64_str = base64_str.replace(&quot;n6&amp;B8G6nE@2tt4UR6h3QBt*5&amp;C&amp;pVu8W&quot;,&quot;+&quot;)
     return base64_str.replace(&quot;JXWUDuLUgwRLKD9fD6&amp;VY2aFeE&amp;r@Ff2&quot;,&quot;=&quot;)
-    
+
 def encrypt(plain_text):
     # 私钥加密
     cipher_text = b&quot;&quot;
@@ -526,20 +526,19 @@ if __name__ == &#39;__main__&#39;:
 </code></pre>
 <p>发现加密的flag</p>
 <blockquote>
-<p>U2FsdGVkX1+SslS2BbHfe3c4&#x2F;t&#x2F;KxLaM6ZFlOdbtfMHnG8lepnhMnde40tNOYjSvoErLzy0csL7c5d4TlMntBQ&#x3D;&#x3D;</p>
+<p>U2FsdGVkX1+SslS2BbHfe3c4/t/KxLaM6ZFlOdbtfMHnG8lepnhMnde40tNOYjSvoErLzy0csL7c5d4TlMntBQ==</p>
 </blockquote>
 <p>根据<code>小明的日记.txt</code>的提示发现是pbe加密，密码为<code>Password-based-encryption</code></p>
 <p>解密可得flag</p>
-<p><img src="https://i0.hdslb.com/bfs/article/7cfce7d0927ef18e54e394a81351fb2d290349942.png"></p>
-<h1 id="world-execute-me"><a href="#world-execute-me" class="headerlink" title="world.execute.me"></a>world.execute.me</h1><p>先分析workflows<br><img src="https://i0.hdslb.com/bfs/article/d4b631a9e7467071101f74bcd44f1ed9290349942.png"></p>
+<p><img src="https://i0.hdslb.com/bfs/article/7cfce7d0927ef18e54e394a81351fb2d290349942.png" alt=""></p>
+<h1 id="world-execute-me"><a href="#world-execute-me" class="headerlink" title="world.execute.me"></a>world.execute.me</h1><p>先分析workflows<br><img src="https://i0.hdslb.com/bfs/article/d4b631a9e7467071101f74bcd44f1ed9290349942.png" alt=""></p>
 <p>发现只要<br>创建issue</p>
 <pre><code>Question:121212afaf
 echo $HEART
-</code></pre>
-<p>即可获得</p>
-<h1 id="ex1t"><a href="#ex1t" class="headerlink" title="ex1t"></a>ex1t</h1><p><img src="https://i0.hdslb.com/bfs/article/67c020023996856526c66568edaad051290349942.png"><br>这题考察的是python 绕过’’’过滤python 处理字符串的过程是先用 line-delimiter 分开 然后每行再视为一个 C nullterminated string 进行处理<br>所以 字符会影响这一过程 所以我们只需要将’’’中的一个’替换为’\x00\n 即可</p>
+</code></pre><p>即可获得</p>
+<h1 id="ex1t"><a href="#ex1t" class="headerlink" title="ex1t"></a>ex1t</h1><p><img src="https://i0.hdslb.com/bfs/article/67c020023996856526c66568edaad051290349942.png" alt=""><br>这题考察的是python 绕过’’’过滤python 处理字符串的过程是先用 line-delimiter 分开 然后每行再视为一个 C nullterminated string 进行处理<br>所以 字符会影响这一过程 所以我们只需要将’’’中的一个’替换为’\x00\n 即可</p>
 <p>一开始没看懂，gpt解释</p>
-<pre><code class="text">这段话是在描述 Python 如何处理字符串，尤其是处理多行字符串或者涉及到特殊字符的字符串。
+<pre><code class="lang-text">这段话是在描述 Python 如何处理字符串，尤其是处理多行字符串或者涉及到特殊字符的字符串。
 
 Python 在处理字符串时，会先用 line-delimiter（通常是换行符 `\n`）将字符串分割成多行。然后，每一行都会被视为一个 C null-terminated string 进行处理。C null-terminated string 是 C 语言中的一种字符串表示方式，其中字符串的结束被一个空字符（`\0`）标记。
 
@@ -551,7 +550,7 @@ Python 在处理字符串时，会先用 line-delimiter（通常是换行符 `\n
 </code></pre>
 <p>这里考察了\0是作为python字符串的末尾，于c相似。在替换的时候\0会影响正常替换，而写进文件后\0又会被忽略</p>
 <p>playload</p>
-<pre><code class="python">from pwn import *
+<pre><code class="lang-python">from pwn import *
 conn = remote(&#39;node.nkctf.yuzhian.com.cn&#39;, 31303)
 context.log_level=&quot;debug&quot;
 #io = process([&#39;python3&#39;,&quot;server.py&quot;])
@@ -563,7 +562,7 @@ conn.interactive()
 <h2 id="breakpoint"><a href="#breakpoint" class="headerlink" title="breakpoint()"></a>breakpoint()</h2><p>用于在python代码中打点，有了他就可以在命令行中输python代码从而得到shell</p>
 <h1 id="My-First-CMS"><a href="#My-First-CMS" class="headerlink" title="My First CMS"></a>My First CMS</h1><p>后台</p>
 <blockquote>
-<p>&#x2F;admin&#x2F;login.php<br>bp爆破密码<br>Extensions &gt; User Defined Tags存在rce</p>
+<p>/admin/login.php<br>bp爆破密码<br>Extensions &gt; User Defined Tags存在rce</p>
 </blockquote>
 <p><code>system(&quot;ls&quot;);</code>可执行代码</p>
 

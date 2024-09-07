@@ -470,7 +470,7 @@
         
         <div class="entry-content">
           <p><a href="https://blog.csdn.net/Manuffer/article/details/120738755">参考</a><br>无参数RCE，其实就是通过没有参数的函数达到命令执行的目的。<br>没有参数的函数什么意思？一般该类题目代码如下(或类似)：</p>
-<pre><code class="php">&lt;?php
+<pre><code class="lang-php">&lt;?php
     if(&#39;;&#39; === preg_replace(&#39;/[a-z,_]+\((?R)?\)/&#39;, NULL, $_GET[&#39;exp&#39;]))&#123;
               eval($_GET[&#39;exp&#39;]);
     &#125;
@@ -486,11 +486,11 @@
 <p><code>end()</code>将 array 的内部指针移动到最后一个单元并返回其值</p>
 <p>回忆一下之前的<code>payload：?exp=eval(implode(getallheaders()));</code>，设想下：<code>current()</code>是取出二维数组中的第一个（指针指向的那个）一维数组，用<code>end()</code>就可以取出这个一维数组中的最后那个值，加上之前的payload你能想到什么？<br>新<code>payload：?exp=eval(end(current(get_defined_vars())));&amp;shell=phpinfo();</code><br>用这个payload的话就可以执行shell的命令了</p>
 <p>session_id()</p>
-<p><code>session_id()</code>可以用来获取&#x2F;设置当前会话 ID。<br>那么可以用这个函数来获取cookie中的<code>phpsessionid</code>了，并且这个值我们是可控的。<br>但其有限制：</p>
+<p><code>session_id()</code>可以用来获取/设置当前会话 ID。<br>那么可以用这个函数来获取cookie中的<code>phpsessionid</code>了，并且这个值我们是可控的。<br>但其有限制：</p>
 <p>文件会话管理器仅允许会话 ID 中使用以下字符：a-z A-Z 0-9 ,（逗号）和 - （减号）</p>
 <p>解决方法：将参数转化为16进制传进去，之后再用<code>hex2bin()</code>函数转换回来就可以了。</p>
 <p>所以，payload可以为：<code>?exp=eval(hex2bin(session_id()));</code><br>但session_id必须要开启session才可以使用，所以我们要先使用session_start。<br>最后，payload：<code>?exp=eval(hex2bin(session_id(session_start())));</code></p>
-<h1 id="配合使用的函数"><a href="#配合使用的函数" class="headerlink" title="配合使用的函数"></a>配合使用的函数</h1><p>getchwd() 函数返回当前工作目录。<br>scandir() 函数返回指定目录中的文件和目录的数组。<br>dirname() 函数返回路径中的目录部分。<br>chdir() 函数改变当前的目录。<br>readfile() 输出一个文件。<br>current() 返回数组中的当前单元, 默认取第一个值。<br>pos() current() 的别名。<br>next() 函数将内部指针指向数组中的下一个元素，并输出。<br>end() 将内部指针指向数组中的最后一个元素，并输出。<br>array_rand() 函数返回数组中的随机键名，或者如果您规定函数返回不只一个键名，则返回包含随机键名的数组。<br>array_flip() array_flip() 函数用于反转&#x2F;交换数组中所有的键名以及它们关联的键值。<br>array_slice() 函数在数组中根据条件取出一段值，并返回。<br>array_reverse() 函数返回翻转顺序的数组。<br>chr() 函数从指定的 ASCII 值返回字符。<br>hex2bin() — 转换十六进制字符串为二进制字符串。<br>getenv() 获取一个环境变量的值(在7.1之后可以不给予参数)。<br>localeconv() 函数返回一包含本地数字及货币格式信息的数组。</p>
+<h1 id="配合使用的函数"><a href="#配合使用的函数" class="headerlink" title="配合使用的函数"></a>配合使用的函数</h1><p>getchwd() 函数返回当前工作目录。<br>scandir() 函数返回指定目录中的文件和目录的数组。<br>dirname() 函数返回路径中的目录部分。<br>chdir() 函数改变当前的目录。<br>readfile() 输出一个文件。<br>current() 返回数组中的当前单元, 默认取第一个值。<br>pos() current() 的别名。<br>next() 函数将内部指针指向数组中的下一个元素，并输出。<br>end() 将内部指针指向数组中的最后一个元素，并输出。<br>array_rand() 函数返回数组中的随机键名，或者如果您规定函数返回不只一个键名，则返回包含随机键名的数组。<br>array_flip() array_flip() 函数用于反转/交换数组中所有的键名以及它们关联的键值。<br>array_slice() 函数在数组中根据条件取出一段值，并返回。<br>array_reverse() 函数返回翻转顺序的数组。<br>chr() 函数从指定的 ASCII 值返回字符。<br>hex2bin() — 转换十六进制字符串为二进制字符串。<br>getenv() 获取一个环境变量的值(在7.1之后可以不给予参数)。<br>localeconv() 函数返回一包含本地数字及货币格式信息的数组。</p>
 
         </div>
         <!-- .entry-content -->
@@ -519,9 +519,26 @@
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/posts/d87f7e0c.html" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdmirror.com/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                test</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
         
           
-            <div class="post-nepre full next">
+            <div class="post-nepre half next">
           
             <a href="/posts/5a47ecbe.html" rel="next">
               <div class="background">

