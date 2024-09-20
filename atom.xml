@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-09-08T13:04:42.898Z</updated>
+  <updated>2024-09-20T09:43:47.636Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,81 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>web安全-实验1</title>
+    <link href="http://example.com/posts/75712516.html"/>
+    <id>http://example.com/posts/75712516.html</id>
+    <published>2024-09-20T09:41:34.000Z</published>
+    <updated>2024-09-20T09:43:47.636Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;1-实验目的&quot;&gt;&lt;a href=&quot;#1-实验目的&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ctf-crypto</title>
+    <link href="http://example.com/posts/15113d9a.html"/>
+    <id>http://example.com/posts/15113d9a.html</id>
+    <published>2024-09-18T10:55:22.000Z</published>
+    <updated>2024-09-20T09:42:21.290Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;AES加密&quot;&gt;&lt;a href=&quot;#AES加密&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>蜜罐部署</title>
+    <link href="http://example.com/posts/56c19477.html"/>
+    <id>http://example.com/posts/56c19477.html</id>
+    <published>2024-09-14T12:17:35.000Z</published>
+    <updated>2024-09-20T09:42:23.259Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;学校参加省护，老师教我部署一下蜜罐，正好乘机学习一下蜜罐部署&lt;/p&gt;
+&lt;h1 id=&quot;蜜罐平台选择&quot;&gt;&lt;a href=&quot;#蜜罐平台选择&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>现代密码学</title>
     <link href="http://example.com/posts/977ae6f1.html"/>
     <id>http://example.com/posts/977ae6f1.html</id>
     <published>2024-09-07T10:31:15.000Z</published>
-    <updated>2024-09-08T13:04:42.898Z</updated>
+    <updated>2024-09-15T08:43:03.584Z</updated>
     
     
       
@@ -207,7 +277,7 @@
     <link href="http://example.com/posts/68b6bccd.html"/>
     <id>http://example.com/posts/68b6bccd.html</id>
     <published>2024-03-11T15:46:50.000Z</published>
-    <updated>2024-05-12T04:56:34.779Z</updated>
+    <updated>2024-09-10T10:26:58.158Z</updated>
     
     
       
@@ -300,7 +370,7 @@
     <link href="http://example.com/posts/9a7e4e5d.html"/>
     <id>http://example.com/posts/9a7e4e5d.html</id>
     <published>2024-01-18T04:35:01.000Z</published>
-    <updated>2024-08-21T07:48:38.733Z</updated>
+    <updated>2024-09-14T09:10:04.558Z</updated>
     
     
       
@@ -412,76 +482,6 @@
     
     
     <category term="ctf" scheme="http://example.com/tags/ctf/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>pop链构造</title>
-    <link href="http://example.com/posts/aa5c80ac.html"/>
-    <id>http://example.com/posts/aa5c80ac.html</id>
-    <published>2023-12-04T14:10:33.000Z</published>
-    <updated>2024-04-30T15:47:32.718Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;注意&quot;&gt;&lt;a href=&quot;#注意&quot; class=&quot;headerlink&quot; title=&quot;注意&quot;&gt;&lt;/a&gt;注意&lt;/h1&gt;&lt;p&gt;php类名大小写不敏感&lt;/p&gt;
-&lt;h1 id=&quot;魔术方法&quot;&gt;&lt;a href=&quot;#魔术方法&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>红岩杯wp</title>
-    <link href="http://example.com/posts/7e270cae.html"/>
-    <id>http://example.com/posts/7e270cae.html</id>
-    <published>2023-11-11T15:43:39.000Z</published>
-    <updated>2023-11-11T18:08:46.350Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;web&quot;&gt;&lt;a href=&quot;#web&quot; class=&quot;headerlink&quot; title=&quot;web&quot;&gt;&lt;/a&gt;web&lt;/h1&gt;&lt;h2 id=&quot;ez-php&quot;&gt;&lt;a href=&quot;#ez-php&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>第一次ctf比赛wp</title>
-    <link href="http://example.com/posts/361e6105.html"/>
-    <id>http://example.com/posts/361e6105.html</id>
-    <published>2023-11-07T14:17:55.000Z</published>
-    <updated>2024-01-03T17:01:52.020Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;2023-dxs-web1&quot;&gt;&lt;a href=&quot;#2023-dxs-web1&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
     
   </entry>
   

